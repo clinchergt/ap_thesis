@@ -323,6 +323,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand{\abbrevname}{List of Abbreviations}
 \providecaptionname{english,british,american}{\abbrevname}{List of Abbreviations}
 \providecaptionname{ngerman,german,austrian,naustrian}{\abbrevname}{Abk\"urzungsverzeichnis}
+\providecaptionname{spanish}{\symbolsname}{Lista de abreviaciones}
 \NewDocumentEnvironment{abbreviations}{ m }{%
 	\ifbool{nolistspace}{\begingroup\singlespacing}{}
 	\ifbool{listtoc}{\addchap{\abbrevname}}{\addchap*{\abbrevname}}
@@ -343,6 +344,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand{\abstractname}{Abstract}
 \providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{by}
+\providecaptionname{spanish}{\byname}{por}
 \ifbool{consistentlayout}{
 	\DeclareDocumentEnvironment{abstract}{ O{} }{%
 		\addchap*{\abstractname}%
@@ -413,6 +415,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand{\acknowledgementname}{Acknowledgements}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish} {\acknowledgementname}{Acknowledgements} % Acknowledgement text for English countries
 \providecaptionname{german,ngerman,austrian,naustrian}{\acknowledgementname}{Danksagung} % Acknowledgement text for Germanic countries
+\providecaptionname{spanish}{\acknowledgementname}{Agradecimientos}
 
 \ifbool{consistentlayout}{
 	\DeclareDocumentEnvironment{acknowledgements}{}{%
@@ -439,6 +442,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand{\authorshipname}{Declaration of Authorship}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\authorshipname}{Declaration of Authorship} % Declaration of Authorship text for English countries
 \providecaptionname{german,ngerman,austrian,naustrian}{\authorshipname}{Eidesstattliche Erkl\"arung} % Declaration of Authorship text for Germanic countries
+\providecaptionname{spanish, nspanish}{\authorshipname}{Declaración de autoría} % Declaration of Authorship text for Germanic countries
 
 \ifbool{consistentlayout}{
 	\DeclareDocumentEnvironment{declaration}{}{
@@ -503,6 +507,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \newcommand{\symbolsname}{List of Symbols}
 \providecaptionname{english,british,american}{\symbolsname}{List of Symbols}
 \providecaptionname{ngerman,german,austrian,naustrian}{\symbolsname}{Symbolverzeichnis}
+\providecaptionname{spanish}{\symbolsname}{Lista de símbolos}
 
 \NewDocumentEnvironment{symbols}{ m }{%
 	\ifbool{nolistspace}{\begingroup\singlespacing}{}
