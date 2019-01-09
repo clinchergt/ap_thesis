@@ -53,9 +53,18 @@ La técnica de \emph{transfer learning} ha permitido muchos avances en el área 
 
 En el área de NLP han existido técnicas poderosas por décadas que abusan de algunas suposiciones que no siempre son ciertas y se basan en simples métodos estadísticos que asignan valores a características del texto. El campo también ha dependido de ingeniería de características en los datos, lo cual significa que hay esfuerzos activos serios en analizar cada sub-tarea a fondo y determinar cuáles serían los mejores determinantes de un resultado deseado, p.e. las carecterísticas principales que determinan la categoría que se le debe asignar un texto.
 
-En áreas como mercadeo y ciencias forenses hay una necesidad de identificar textos escritos por autores desconocidos, obtener características de los mismos, y poder categorizarlos de forma no manual. Esto con el fin de poder, en el caso de mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropriada. En el área forense con el fin de identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
+En áreas como mercadeo y ciencias forenses hay una necesidad de identificar textos escritos por autores desconocidos, obtener características de los mismos y poder categorizarlos de forma no manual. Esto con el fin de poder, en el caso de mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropriada. En el área forense con el fin de identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
 
+Habiendo planteado lo anterior, la necesidad de un sistema automatizado sea capaz de no sólo extraer información de un texto anónimo de forma precisa y confiable, sino de también hacerlo sin necesidad de hacer una ingeniería de características claves para cada posible parámetro que se quiera obtener de los textos.
 
+De esto sigue que los requisitos para este proyecto sean los siguientes:
+
+\begin{itemize}
+\item Permitir elegir datos a obtener de un texto anónimo (siempre y cuando se tenga la información disponible).
+\item Realizar el entrenamiento para obtener los datos de forma rápida y con demandas de hardware modestas.
+\item Una vez el entrenamiento esté completo, permitir realizar predicciones sobre textos anónimos con los datos a obtener elegidos.
+\item Permitir la automatización de predicciones ofreciendo un servicio web fácil de consultar.
+\end{itemize}
 
 
 
