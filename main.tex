@@ -24,14 +24,17 @@
 
 \documentclass[
 12pt, % The default document font size, options: 10pt, 11pt, 12pt
-oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
 spanish, % ngerman for German
+% Double spacing might be required for Galileo *CHECK*
 singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
 %draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
 %nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
-%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
 %toctotoc, % Uncomment to add the main table of contents to the table of contents
-%parskip, % Uncomment to add space between paragraphs
+%%%%% Required by Galileo Uni formatting
+parskip, % Uncomment to add space between paragraphs
+%%%%%
 %nohyperref, % Uncomment to not load the hyperref package
 headsepline, % Uncomment to get a line under the header
 %chapterinoneline, % Uncomment to place the chapter title next to the number on one line
@@ -69,7 +72,8 @@ headsepline, % Uncomment to get a line under the header
 
 \thesistitle{Aplicación de redes neurales recurrentes de aprendizaje profundo a
 perfilación de autores de textos anónimos} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-\supervisor{Ing. Alí \textsc{Lemus}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+%\supervisor{Ing. Alí \textsc{Lemus}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\supervisor{Ing. Ronald \textsc{López}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 \degree{Ingeniería de Sistemas, Informática y Ciencias de la Computación} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
 \author{Jacobo \textsc{Del Valle}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
@@ -144,37 +148,37 @@ los requerimientos para el título de \degreename}\\[0.3cm] % University require
 %	DECLARATION PAGE
 %----------------------------------------------------------------------------------------
 
-\begin{declaration}
-\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
-\noindent I, \authorname, declare that this thesis titled, \enquote{\ttitle} and the work presented in it are my own. I confirm that:
-
-\begin{itemize} 
-\item This work was done wholly or mainly while in candidature for a research degree at this University.
-\item Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
-\item Where I have consulted the published work of others, this is always clearly attributed.
-\item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
-\item I have acknowledged all main sources of help.
-\item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
-\end{itemize}
- 
-\noindent Signed:\\
-\rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
- 
-\noindent Date:\\
-\rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
-\end{declaration}
-
-\cleardoublepage
+%\begin{declaration}
+%\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
+%\noindent I, \authorname, declare that this thesis titled, \enquote{\ttitle} and the work presented in it are my own. I confirm that:
+%
+%\begin{itemize} 
+%\item This work was done wholly or mainly while in candidature for a research degree at this University.
+%\item Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
+%\item Where I have consulted the published work of others, this is always clearly attributed.
+%\item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
+%\item I have acknowledged all main sources of help.
+%\item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
+%\end{itemize}
+% 
+%\noindent Signed:\\
+%\rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
+% 
+%\noindent Date:\\
+%\rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
+%\end{declaration}
+%
+%\cleardoublepage
 
 %----------------------------------------------------------------------------------------
 %	QUOTATION PAGE
 %----------------------------------------------------------------------------------------
-
-\vspace*{0.2\textheight}
-
-\noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}\bigbreak
-
-\hfill Dave Barry
+%
+%\vspace*{0.2\textheight}
+%
+%\noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}\bigbreak
+%
+%\hfill Dave Barry
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE
@@ -182,7 +186,13 @@ los requerimientos para el título de \degreename}\\[0.3cm] % University require
 
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
+En tiempos de la expansión masiva del campo del aprendizaje profundo y las aplicaciones que cada vez son más, cada contribución y nueva aplicación al campo no sorprenden, mas son bienvenidas. Este trabajo intenta presentar la tarea del perfilamiento de autores como una tarea que puede ser abordad con aprendizaje profundo pero, sobre todo, que puede aplicarse el concepto de \emph{transfer learning} en el área de NLP y en esta tarea en específico de forma exitosa.\ldots
+
+En tiempos de la expansión masiva del campo del aprendizaje profundo y las aplicaciones que cada vez son más, cada contribución y nueva aplicación al campo no sorprenden, mas son bienvenidas. Este trabajo intenta presentar la tarea del perfilamiento de autores como una tarea que puede ser abordad con aprendizaje profundo pero, sobre todo, que puede aplicarse el concepto de \emph{transfer learning} en el área de NLP y en esta tarea en específico de forma exitosa.\ldots
+
+En tiempos de la expansión masiva del campo del aprendizaje profundo y las aplicaciones que cada vez son más, cada contribución y nueva aplicación al campo no sorprenden, mas son bienvenidas. Este trabajo intenta presentar la tarea del perfilamiento de autores como una tarea que puede ser abordad con aprendizaje profundo pero, sobre todo, que puede aplicarse el concepto de \emph{transfer learning} en el área de NLP y en esta tarea en específico de forma exitosa.\ldots
+
+En tiempos de la expansión masiva del campo del aprendizaje profundo y las aplicaciones que cada vez son más, cada contribución y nueva aplicación al campo no sorprenden, mas son bienvenidas. Este trabajo intenta presentar la tarea del perfilamiento de autores como una tarea que puede ser abordad con aprendizaje profundo pero, sobre todo, que puede aplicarse el concepto de \emph{transfer learning} en el área de NLP y en esta tarea en específico de forma exitosa.\ldots
 \end{abstract}
 
 %----------------------------------------------------------------------------------------
@@ -191,7 +201,11 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 
 \begin{acknowledgements}
 \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+Hay muchas personas a quienes agradecer y aunque tal vez no las logre mencionar a todas aca, principalmente quiero decir que le agradezco a todas las personas que en algún momento me apoyaron durante la carrera o durante la elaboración de este trabajo.
+
+Primero debo agradecerle a mis compañeros en la carrera sin quienes no hubiera llegado a donde estoy. En particular a personas como\ldots
+
+Debo agradecerles también a mis supervisores\ldots
 \end{acknowledgements}
 
 %----------------------------------------------------------------------------------------
@@ -207,14 +221,14 @@ The acknowledgments and the people to thank go here, don't forget to include you
 %%----------------------------------------------------------------------------------------
 %%	ABBREVIATIONS
 %%----------------------------------------------------------------------------------------
-%
-%\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
-%
-%\textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere\\
-%\textbf{WSF} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
-%
-%\end{abbreviations}
-%
+
+\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+
+\textbf{NLP} & \textbf{N}atural \textbf{L}anguage \textbf{P}rocessing\\
+\textbf{CV} & \textbf{C}computer \textbf{V}ision\\
+
+\end{abbreviations}
+
 %%----------------------------------------------------------------------------------------
 %%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
 %%----------------------------------------------------------------------------------------
@@ -248,7 +262,7 @@ The acknowledgments and the people to thank go here, don't forget to include you
 %	DEDICATION
 %----------------------------------------------------------------------------------------
 
-\dedicatory{For/Dedicated to/To my\ldots} 
+\dedicatory{Dedicado a mi familia, amigos y a la comunidad científica lingüística} 
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
@@ -258,11 +272,14 @@ The acknowledgments and the people to thank go here, don't forget to include you
 
 \pagestyle{thesis} % Return the page headers back to the "thesis" style
 
+% Custom indentation for Galileo University
+\setlength\parindent{2em}
+
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
 \include{Chapters/Chapter1}
-%\include{Chapters/Chapter2} 
+\include{Chapters/Chapter2} 
 %\include{Chapters/Chapter3}
 %\include{Chapters/Chapter4} 
 %\include{Chapters/Chapter5} 
