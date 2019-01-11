@@ -13,9 +13,21 @@ En el área de aprendizaje de máquina (profundo) existen dos tipos básicos de 
 
 Cuando los datos --- ya sea información tabulada, imágenes, textos --- no tienen ninguna categoría o ningún valor a predecir y lo que se desea es obtener información no específica, es decir sin tener alguna referencia, se trata de un aprendizaje no supervisado.
 
-Cuando los datos, por otro lado, tengan una clasificación, llamada etiqueta, asignada, la cual a futuro es el resultado a predecir, los métodos a utilizar son los del aprendizaje supervisado. Debido a que el problema a abordar en este trabajo es un problema de clasificación, el resto del fundamento teórico será basado en el contexto del aprendizaje supervisado.
+Si los datos, por otro lado, tengan una clasificación, llamada etiqueta, asignada, la cual a futuro es el resultado a predecir, los métodos a utilizar son los del aprendizaje supervisado. Debido a que el problema a abordar en este trabajo es un problema de clasificación, el resto del fundamento teórico será basado en el contexto del aprendizaje supervisado.
 
-El aprendizaje supervisado puede entonces ser descrito como una función $f : X \to Y$ donde $X$ representa los datos con los que se alimenta la función, y $Y$ el resultado a asignado o a predecir.
+El aprendizaje supervisado puede entonces ser descrito como una función $f : X \to Y$ donde $X$ representa los datos con los que se alimenta la función, es decir con los que se entrenará el modelo, y $Y$ el resultado a asignado o a predecir.
+
+Para ilustrar el proceso de aprendizaje de máquina profundo se utilizará un caso individual de la función en donde $y$ es el resultado deseado y $f(x) = \hat{y}$ es la función aplicada a un caso específico y $\hat{y}$ representa el resultado obtenido con la función el cual no necesariamente es el resultado deseado y esperado.
+
+\textbf{El objetivo.} En concreto, buscamos una función $f$ que sea la mejor candidata para poder predecir los resultados deseados. Si definimos una función de costo $L(\hat{y}, y)$ que representa, en un valor escalar, la diferencia cuantitativa entre la evaluación de una función $f$ candidata y el resultado real $y$ podemos concluir que el objetivo es encontrar una $f^*$ que cumpla con:
+
+$$f^* = \min_{f \in F} \frac{1}{n} \sum_{i = 0}^{n} L(f(x_i), y_i)$$
+
+Donde $n$ es el número de instancias de los datos para entrenar el modelo; $F$ siendo un conjunto de funciones candidatas.
+
+\textbf{Optimizando la función de costo.} Teniendo entonces una función a minimizar y una cantidad $n$ de datos sobre los cuales se deberá ir encontrando una función $f$ candidata cada vez mejor se recurre al método de el descenso de gradiente. Este método nos permite, utilizando propiedades básicas de las derivadas de las funciones, poco a poco avanzar hasta llegar a un mínimo de la función. Cada nueva función candidata entonces podrá ser derivada de la siguiente forma:
+
+$$ \ldots $$
 
 \section{Redes neuronales}
 
