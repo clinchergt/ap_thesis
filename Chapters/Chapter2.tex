@@ -21,13 +21,35 @@ Para ilustrar el proceso de aprendizaje de máquina profundo se utilizará un ca
 
 \textbf{El objetivo.} En concreto, buscamos una función $f$ que sea la mejor candidata para poder predecir los resultados deseados. Si definimos una función de costo $L(\hat{y}, y)$ que representa, en un valor escalar, la diferencia cuantitativa entre la evaluación de una función $f$ candidata y el resultado real $y$ podemos concluir que el objetivo es encontrar una $f^*$ que cumpla con:
 
-$$f^* = \min_{f \in F} \frac{1}{n} \sum_{i = 0}^{n} L(f(x_i), y_i)$$
+$$f^* = \min_{f \in F} \frac{1}{N} \sum_{i = 0}^{N} L(f(x_i), y_i)$$
 
 Donde $n$ es el número de instancias de los datos para entrenar el modelo; $F$ siendo un conjunto de funciones candidatas.
 
-\textbf{Optimizando la función de costo.} Teniendo entonces una función a minimizar y una cantidad $n$ de datos sobre los cuales se deberá ir encontrando una función $f$ candidata cada vez mejor se recurre al método de el descenso de gradiente. Este método nos permite, utilizando propiedades básicas de las derivadas de las funciones, poco a poco avanzar hasta llegar a un mínimo de la función. Cada nueva función candidata entonces podrá ser derivada de la siguiente forma:
+\textbf{Definiendo las funciones.} La base de todo modelo de aprendizaje profundo es una red neuronal --- cuyo comportamiento será definido en la siguiente sección junto con otros detalles --- y su comportamiento puede ser descrito de la siguiente forma:
 
-$$ \ldots $$
+$$ f(x_i) = w x_i + b $$
+
+Siendo $x_i$ la instancia $i$ con propósitos de entreno o de predicción. Esto nos dice que $w$ y $b$ serán los parámetros a modificar de una manera sistemática para encontrar la función $f^*$. Con fines de brevedad, la concatenación de $w$ y $b$ serán representados por $\theta$.
+
+La función de pérdida para una predicción obtenida toma la forma del error de la entropía cruzada, es decir:
+
+$$ L(\hat{y_i}, y_i) = y_i log\hat{y_i} + (1 - y_i)log(1 - \hat{y_i}) $$
+
+Teniendo ya la pérdida para una predicción se puede expandir esta idea para obtener la pérdida a través de un conjunto de datos, lo cual resultará muy útil cuando se deba entrenar. Para obtener una aproximación de la perdida sobre un conjunto de datos se podrá utilizar el promedio sobre las perdidas individuales de los datos evaluados:
+
+$$ L(\hat{y}, y) = - \frac{1}{N} \sum_{i = 1}^{N} [y_i log\hat{y_i} + (1 - y_i)log(1 - \hat{y_i})] $$
+
+\textbf{Optimizando la función de costo.} Teniendo entonces una función a minimizar y una cantidad $N$ de datos sobre los cuales se deberá ir encontrando una función $f$ candidata cada vez mejor se recurre al método de el descenso de gradiente. Este método nos permite, utilizando propiedades básicas de las derivadas de las funciones, poco a poco avanzar hasta llegar a un mínimo de la función. Cada nueva función candidata entonces podrá ser derivada de la siguiente forma:
+
+$$ f_i(x_i) = \theta_i x_i $$
+
+Donde
+
+$$ \theta_{i + 1} = \theta_{i} - \gamma \nabla L(\hat{y_i}, y_i) $$
+
+Este proceso de utilizar el descenso de gradiente a través de las instancias nos permite ir minimizando el error de la función hasta poder deducir la función que muestra el menor error.
+
+\textbf{La tasa de aprendizaje.} La velocidad de convergencia de este proceso dependerá en gran parte en $\gamma$ que representa la tasa de aprendizaje, es decir, es la ponderación que se le da al gradiente cuando se propone la nueva función. Un $\gamma$ muy alto arriesga una divergencia debido a que podría oscilar alrededor de un mínimo sin nunca poder converger en él. Un $\gamma$ muy bajo, por el otro lado, puede resultar en un aprendizaje muy lento, lo cual puede llevar a un resultado no óptimo. Este concepto será clave en capítulos posteriores de este trabajo.
 
 \section{Redes neuronales}
 
