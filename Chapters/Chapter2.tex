@@ -49,12 +49,14 @@ $$ \theta_{i + 1} = \theta_{i} - \gamma \nabla L(\hat{y_i}, y_i) $$
 
 Este proceso de utilizar el descenso de gradiente a través de las instancias nos permite ir minimizando el error de la función hasta poder deducir la función que muestra el menor error.
 
-\textbf{La tasa de aprendizaje.} La velocidad de convergencia de este proceso dependerá en gran parte en $\gamma$ que representa la tasa de aprendizaje, es decir, es la ponderación que se le da al gradiente cuando se propone la nueva función. Un $\gamma$ muy alto arriesga una divergencia debido a que podría oscilar alrededor de un mínimo sin nunca poder converger en él. Un $\gamma$ muy bajo, por el otro lado, puede resultar en un aprendizaje muy lento, lo cual puede llevar a un resultado no óptimo. Este concepto será clave en capítulos posteriores de este trabajo.
+\textbf{La tasa de aprendizaje.} La velocidad de convergencia de este proceso dependerá en gran parte en $\gamma$ que representa la tasa de aprendizaje, es decir, es la ponderación que se le da al gradiente cuando se propone la nueva función. Un $\gamma$ muy alto arriesga una divergencia debido a que podría oscilar alrededor de un mínimo sin nunca poder converger en él. Un $\gamma$ muy bajo, por el otro lado, puede resultar en un aprendizaje muy lento, lo cual puede llevar a un resultado no óptimo. Este concepto será importante en capítulos posteriores de este trabajo.
 
 \section{Redes neuronales}
 
-Las redes neuronales son el modelo base para el aprendizaje profundo.
+Las redes neuronales son el modelo base para el aprendizaje profundo. Con ayuda de el concepto de las redes neuronales especificaremos más acerca de la función $f$ que hasta ahora ha permanecido general, únicamente sabiendo que es derivable. Hay diferentes tipos de redes neurales en el campo y en este trabajo se abordarán únicamente las redes neuronales estándar y las recurrentes.
 
 \subsection{Redes neuronales estándar}
+
+\textbf{Inspiración.} Estas redes neuronales fueron basadas en comportamientos biológicos y reflejan un comportamiento similar a la comunicación de neuronas que se aprecia en la naturaleza. La entrada de datos en una neurona es procesada y alimentará a la siguiente neurona y así sucesivamente hasta haber recorrido toda la red.
 
 \subsection{Redes neuronales recurrentes}
