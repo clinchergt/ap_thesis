@@ -63,6 +63,60 @@ Las redes neuronales son el modelo base para el aprendizaje profundo. Con ayuda 
 	\label{fig:standardnn}
 \end{figure}
 
-\textbf{Inspiración.} Estas redes neuronales fueron basadas en comportamientos biológicos y reflejan un comportamiento similar a la comunicación de neuronas que se aprecia en la naturaleza. La entrada de datos en una neurona es procesada y alimentará a la siguiente neurona y así sucesivamente hasta haber recorrido toda la red. La redes neuronales no son sucesiones directas y lineales de neuronas; las redes están divididas en capas, las cuales pueden contener más de una unidad. En una red completamente interconecteda, como la que se aprecia en la figura \ref{fig:standardnn}, conecta a todas las unidades de una capa con todas las unidades de la siguiente.
+\textbf{Inspiración.} Estas redes neuronales fueron basadas en comportamientos biológicos y reflejan un comportamiento similar a la comunicación de neuronas que se aprecia en la naturaleza. La entrada de datos en una neurona es procesada y alimentará a la siguiente neurona y así sucesivamente hasta haber recorrido toda la red. La redes neuronales no son sucesiones directas y lineales de neuronas; las redes están divididas en capas, las cuales pueden contener más de una unidad. En una red completamente interconecteda, como la que se aprecia en la figura \ref{fig:standardnn}, conecta a todas las unidades de una capa con todas las unidades de la siguiente. Así como las neuronas en la naturaleza, las neuronas en una red neuronal tienen una unidad o célula principal, axones y su conexión es llamada sinapsis.
+
+\textbf{Propagación hacia adelante.} En las redes neurales es el proceso del flujo de la información a través de la red y sus funciones hasta obtener un resultado. En el caso de una red neuronal típica, este proceso significa que la salida de una neurona en una capa alimenta parcialemente a las de la capa siguiente. La función a utilizar por cada unidad individual es una regresión linear simple que puede ser descrita como $f(x) = W x$, es decir, una matriz de parámetros a multiplicarse con los datos de entrada a la neurona. Adicional a esto se maneja una función de activación para el resultado de esa multiplicación, la cual es una no linearalidad a cada elemento resultante (p.e. $\tanh$). De esto se concluye que para, por ejemplo, obtener el resultado de una neurona en la cuarta capa se tiene que
+\begin{equation}
+\label{eq:feedfwdeq}
+f(x) = W_4 \sigma(W_3 \sigma (W_2 \sigma(W_1 x)))
+\end{equation}
+
+Donde $W_4$ es una matriz de parámetros de la cuarta capa, $W_3$ es una matriz de parámetros de la tercera capa, y así sucesivamente, y $x$ representa los datos de entrada.
+
+\textbf{Propagación hacia atrás.} Ya que está presente un mecanismo para evaluar el conjunto de funciones que representa cada unidad de la red, debemos tener un mecanismo para optimizar los parámetros que definen cada función. La propagación hacia atrás se encarga de esto utilizando el concepto previamente descrito como el descenso de gradiente. Para realizar la propagación hacia atrás se aplica la regla de la cadena la cual establece que si $\frac{\partial f(g(x))}{\partial x} = \frac{\partial g}{\partial x} \frac{\partial f}{\partial g}$. Notemos que la función que se quiere derivar toma una forma similar a la que tenemos en la ecuación \ref{eq:feedfwdeq}, con la adición de que $g(x)$ es una función que anida aún más funciones. Para obtener la optimización de los parámetros podemos derivar en dirección hacia atrás propagando la mejora que se propone con el gradiente.
+
+%Figura demostrando fwd y back prop
+
 
 \subsection{Redes neuronales recurrentes}
+
+Este tipo de redes tienen la peculiaridad que se alimentan no solamente de los resultados de las funciones de activación de las capas anteriores sino también del resultado para la instancia previamente evaluada --- para datos evaluados en $t - 1$ la definición sería $h_t = f_{\theta}(h_{t-1}, x_t)$. Este tipo de estructura es aplicado a conjuntos de datos secuenciales como lo es el procesamiento de textos --- textos cuya representación consiste en una secuencia de palabras representadas de forma vectorial --- y procesamiento de secuencias de señales.
+
+Se debe aclarar para esta estructura de red neural también existen distintos tipos. El subtipo relevante para este trabajo de investigación es la red LSTM (Long Short Term Memory -- memoria corta a largo plazo). Estas tienen un dato en memoria en cada una de las unidades de la red. Los parámetros con los que se decide si se sobreescribe lo que está en memoria en esa celda en ese momento pueden ser entrenados también con el mecanismo de propagación hacia atrás.
+
+Los mecanismos de propagación hacia adelante y hacia atrás permanecen iguales pero se deberán tomar en cuenta adicionalmente las puertas (\textit{gates}) con sus funciones de activación. Estas son definidas como la función sigmoide, la cual es continua y tiene un contradominio de $[0,1]$ lo cual la hace derivable en todos sus puntos.
+
+% Figura con una LSTM y su descripcion
+
+\section{Generalización de una red neuronal}
+
+Una red neuronal aprende a elegir una función que minimice el costo de evaluar un conjunto de datos. Intuitivamente podemos ver que este proceso lleva a que la red aprenda características de los datos que está utilizando y poco a poco aprenda a predecir este conjunto de datos de manera más precisa. Las palabras claves son \textit{este conjunto de datos}, es decir se habla de que la red aprende sobre un conjunto limitado de datos y fuera de él no hay garantía de que sepa algo. Para que el modelo pueda generalizar lo aprendido con estos datos existen distintos mecanismos. En esta sección se explicarán dos de estos conceptos.
+
+\textbf{Cantidad de datos.} La cantidad de datos utilizados para entrenar un modelo influye mucho en su capacidad de generalizar. Mientras más datos se tengan, mayor será la posibilidad de generalizar, esto con la condición que la data sea diversa y representativa del problema real. La explicación de esto se puede ilustrar llevando el concepto a sus extremos y con un ejemplo sencillo. Suponiendo que se quiere aprender a definir el conectivo lógico \textbf{\textit{and}}. Si se provee solamente un ejemplo de cómo funciona este operador, la red no sabrá que hacer cuando los valores de entrada varíen. Por el otro lado si le alimentamos todas las combinaciones posibles, la red deberá ser capaz de aprender todo el contexto del problema.
+
+\textbf{Término de regularización.} Esta técnica es muy esencial cuando se lidia con modelos de aprendizaje profundo. Consisten en agregar un término de regularización a la función de predicción que se está optimizando. La función entonces tendrá la forma siguiente: %hacer referencia a la misma de antes
+
+$$f^* = \min_{f \in F} \frac{1}{N} \sum_{i} L(f(x_i), y_i) + \sum_{j} \lambda(w_j^2)$$
+
+Esto funciona ya que limita el crecimiento de los parámetros, el cual desenfrenado podría causar una explosión de gradiente. Esto tiene como consecuencia que el modelo sea incapaz de converger.
+
+\section{Proceso general al aplicar una red neuronal}
+
+Un proyecto de aprendizaje profundo con redes neuronales lleva por lo general el mismo conjunto de pasos para poder llegar a un resultado cercano a lo óptimo. Los pasos a seguir son los siguientes:
+
+\begin{itemize}
+\item \textbf{Obtención de datos:} Dependiendo del problema a resolver estos datos podrán tomar distintas formas y los métodos para obtenerlos podrán variar en gran forma. Para que una red neuronal pueda generalizar de forma exitosa lo aprendido durante la fase de entrenamiento es importante tener una muestra representativa del escenario real del problema a resolver y tener una cantidad grande de datos. Métodos comunes incluyen recolección y etiquetación manual, descarga de \textit{corpora} de internet, \textit{scraping} de la web.
+
+\item \textbf{Análisis y preparación de los datos:} Los datos obtenidos en el primer paso pueden llegar a tener características mínimas no deseadas, las cuales pueden añadir ruido a la representación que estos datos dan. Debido a esto es importante tratar los datos de manera que se eliminen datos que sesguen mucho la data, datos faltantes, datos con formato inconsistente, e incluso considerar la posibildad de eliminar características completas. En esta fase también se separarán los datos en distintos segmentos que después serán útiles para determinar la eficacia del modelo resultante. Estos segmentos son los datos de \textit{entrenamiento, validación} y \textit{prueba}. La proporción de cada uno de estos puede variar y lo recomendado es que la distribución de cada uno de ellos sea la misma. De no ser posible esto, hacer que al menos los segmentos de validación y prueba tengan la misma distribución.
+
+\item \textbf{Diseño de modelo:} En este campo hay una gran variedad de opciones, en especial si no se limitan estas opciones al aprendizaje profundo ya que existen herramientas de distintos tipos para poder modelar un sistema. En el caso del aprendizaje profundo también se deberán tomar decisiones importantes con respecto al modelo a utilizar. En concreto se deberá elegir el tipo de red neuronal a utilizar como también su estructura. En esta fase se definirán de forma preliminar detalles como el número de capas a utilizar en la red y el número de unidades por cada una de las capas.
+
+\item \textbf{Optimización de hiper-parámetros:} Esta fase estará muy relacionada a la siguiente ya que se utilizan los mismo mecanismos para determinar los resultados preliminares. Para elegir los mejores hiper-parámetros para un modelo en específico se deberá evaluar los datos variando sus valores y obteniendo resultados preliminares. Esto se deberá hacer utilizando una matriz aleatoria para los distintos hiper-parámetros con el fin de optimizar el tiempo de ejecución de esta fase.
+
+\item \textbf{Entrenamiento del modelo:} En esta fase se optimizarán los parámetros de la red para que esta sea capaz de modelar el problema y poder realizar predicciones. En esta fase se aplicarán de forma iterativa las fases de propagación hacia adelante y hacia atrás hasta llegar a una convergencia. Si se cuenta con tiempo limitado, se deberá elegir un resultado que sea suficientemente satisfactorio y se detendrá el entrenamiento en ese punto.
+
+\item \textbf{Validación de resultados:} Durante esta fase se hará uso de los datos segmentados para validación. Sobre estos datos se aplicará el modelo en su modalidad de propagación hacia adelante únicamente con lo que se obtendran predicciones las cuales se podrán comparar con los valores reales de los datos. El fin de evaluar el modelo en datos que no están presentes en los datos de entrenamiento es determinar el poder de generalización del modelo.
+
+\end{itemize}
+
+Los pasos de entrenamiento y validación de resultados podrán repetirse las veces que sean necesarias variando parámetros y evaluando los tipos de errores para mejorar los resultados.
