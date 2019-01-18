@@ -8,6 +8,14 @@ Un concepto esencial para este trabajo y para toda el área de aprendizaje profu
 
 \subsection{Concepto de transferencia}
 
+Las redes neuronales capturan información en sus diferentes capas, sin embargo el hecho de que distintas capas aprenden cosas diferentes y la forma en que difieren permite transferir conocimiento a través de redes entrenadas para diferentes tareas. En las primeras capas se aprende información bastante abstracta con respecto a la tarea y conforme se avanza en la profundidad de la red se vuelve más específica la inforamción que se va aprendiendo.
+
+% ilustracion de informacion que se aprende en un CNN
+
+\textbf{Ejemplo ilustrativo.} En una red neuronal cuya tarea es en el área de visión artificial las primeras capas comienzan a entender conceptos de orillas horizontales o verticales; las siguientes capas podrán entender qué son esquinas circunferencias; las siguientes capas podrán entender límites de objetos; etc.
+
+La información en las primeras capas de una red neuronal de visión artificial puede llegar a ser muy útil sin importar la tarea final o qué tan acotada esté. Por esta razón es posible tomar un modelo preentrenado en una tarea general, remover su capa final --- la cual determina el resultado final de esa tarea en específico --- y continuar con el proceso de entrenamiento con datos de la tarea más acotada y permitir que las nuevas capas no entrenadas aprovechen los conceptos de las capas anteriores para poder ellas tener le poder de predecir usando esa información los resultados correctos.
+
 
 
 \subsection{Aplicación en otras áreas}
