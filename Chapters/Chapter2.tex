@@ -73,20 +73,26 @@ f(x) = W_4 \sigma(W_3 \sigma (W_2 \sigma(W_1 x)))
 
 Donde $W_4$ es una matriz de parámetros de la cuarta capa, $W_3$ es una matriz de parámetros de la tercera capa, y así sucesivamente, y $x$ representa los datos de entrada.
 
+%Figura demostrando fwd y back prop
+\begin{figure}
+\includegraphics[scale=0.8]{Figures/backprop.pdf}
+\caption{En azul podemos ver la dirección del flujo de información durante la propagación hacia adelante. En rojo podemos ver que la dirección se invierte para la propagación hacia atrás y que lleva los gradientes necesarios para propagar el error después del entrenamiento.}
+\label{fig:backprop}
+\end{figure}
+
+
 \textbf{Propagación hacia atrás.} Ya que está presente un mecanismo para evaluar el conjunto de funciones que representa cada unidad de la red, debemos tener un mecanismo para optimizar los parámetros que definen cada función. La propagación hacia atrás se encarga de esto utilizando el concepto previamente descrito como el descenso de gradiente. Para realizar la propagación hacia atrás se aplica la regla de la cadena la cual establece que si $\frac{\partial f(g(x))}{\partial x} = \frac{\partial g}{\partial x} \frac{\partial f}{\partial g}$. Notemos que la función que se quiere derivar toma una forma similar a la que tenemos en la ecuación \ref{eq:feedfwdeq}, con la adición de que $g(x)$ es una función que anida aún más funciones. Para obtener la optimización de los parámetros podemos derivar en dirección hacia atrás propagando la mejora que se propone con el gradiente.
 
-%Figura demostrando fwd y back prop
-
-
 \subsection{Redes neuronales recurrentes}
+
+% Figura con una LSTM y su descripcion
+
 
 Este tipo de redes tienen la peculiaridad que se alimentan no solamente de los resultados de las funciones de activación de las capas anteriores sino también del resultado para la instancia previamente evaluada --- para datos evaluados en $t - 1$ la definición sería $h_t = f_{\theta}(h_{t-1}, x_t)$. Este tipo de estructura es aplicado a conjuntos de datos secuenciales como lo es el procesamiento de textos --- textos cuya representación consiste en una secuencia de palabras representadas de forma vectorial --- y procesamiento de secuencias de señales.
 
 Se debe aclarar para esta estructura de red neural también existen distintos tipos. El subtipo relevante para este trabajo de investigación es la red LSTM (Long Short Term Memory -- memoria corta a largo plazo). Estas tienen un dato en memoria en cada una de las unidades de la red. Los parámetros con los que se decide si se sobreescribe lo que está en memoria en esa celda en ese momento pueden ser entrenados también con el mecanismo de propagación hacia atrás.
 
 Los mecanismos de propagación hacia adelante y hacia atrás permanecen iguales pero se deberán tomar en cuenta adicionalmente las puertas (\textit{gates}) con sus funciones de activación. Estas son definidas como la función sigmoide, la cual es continua y tiene un contradominio de $[0,1]$ lo cual la hace derivable en todos sus puntos.
-
-% Figura con una LSTM y su descripcion
 
 \section{Generalización de una red neuronal}
 
