@@ -53,6 +53,12 @@ La técnica de \emph{transfer learning} ha permitido muchos avances en el área 
 
 En el área de NLP han existido técnicas poderosas por décadas que abusan de algunas suposiciones que no siempre son ciertas y se basan en simples métodos estadísticos que asignan valores a características del texto. El campo también ha dependido de ingeniería de características en los datos, lo cual significa que hay esfuerzos activos serios en analizar cada sub-tarea a fondo y determinar cuáles serían los mejores determinantes de un resultado deseado, p.e. las carecterísticas principales que determinan la categoría que se le debe asignar un texto.
 
+\begin{figure}
+\includegraphics[scale=1.0]{Figures/projectstruct.pdf}
+\caption{Estructura del proyecto planteado en este trabajo de investigación. La figura está diseñada para propósitos ilustrativos. \textit{LM} denota el modelo de lenguaje el cual es preentrenado con texto de wikipedia, lo cual es un paso previo.}
+\label{fig:projstruct}
+\end{figure}
+
 En áreas como mercadeo y ciencias forenses hay una necesidad de identificar textos escritos por autores desconocidos, obtener características de los mismos y poder categorizarlos de forma no manual. Esto con el fin de poder, en el caso de mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropriada. En el área forense con el fin de identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
 
 Habiendo planteado lo anterior, la necesidad de un sistema automatizado sea capaz de no sólo extraer información de un texto anónimo de forma precisa y confiable, sino de también hacerlo sin necesidad de hacer una ingeniería de características claves para cada posible parámetro que se quiera obtener de los textos.
@@ -65,6 +71,12 @@ De esto sigue que los requisitos para este proyecto sean los siguientes:
 \item Una vez el entrenamiento esté completo, permitir realizar predicciones sobre textos anónimos con los datos a obtener elegidos.
 \item Permitir la automatización de predicciones ofreciendo un servicio web fácil de consultar.
 \end{itemize}
+
+La figura \ref{fig:projstruct} muestra la estructura del proyecto planteado, el cual llenaría los requisitos expuestos en esta sección de forma ilustrativa. El flujo de la información tendría esa forma y las predicciones mostradas son ejemplos de posibilidades.
+
+\section{Resumen}
+
+El proyecto deberá tener la flexibilidad de poder adaptarse a las necesidades del caso de uso espcífico que se le dé y a la vez tener la capacidad predictiva de un modelo del estado del arte. El modelo utilizará tecnologías de aprendizaje profundo por ser la tecnología más prometedora en este campo.
 
 
 
