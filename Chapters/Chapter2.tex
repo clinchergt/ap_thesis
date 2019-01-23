@@ -128,3 +128,37 @@ Un proyecto de aprendizaje profundo con redes neuronales lleva por lo general el
 \end{itemize}
 
 Los pasos de entrenamiento y validación de resultados podrán repetirse las veces que sean necesarias variando parámetros y evaluando los tipos de errores para mejorar los resultados.
+
+\section{Definiciones varias}
+
+En esta sección se definirán conceptos varios que serán mencionado y utilizados en este trabajo. Las explicaciones varían en su profundidad dependiendo de la importancia y relevancia del concepto en el trabajo.
+
+\textbf{Época.} En inglés llamada \emph{epoch} es el nombre que se le da al proceso de iterar sobre todas las instancias de entrenamiento, tanto en propagación hacia adelante como hacia atrás. Generalmente un modelo se itera sobre varias épocas a través de los datos; una única vista a cada instancia de datos puede no ser suficiente para que el modelo aprenda las características que darán los mejores resultados.
+
+\textbf{Tipos de errores en clasificación.} Cuando se clasifica datos en clases existen dos tipos de errores posibles. Un falso positivo es un error tipo I, es decir se rechaza una hipótesis nula verdadera. Un error de tipo II por el contrario es un falso negativo, es decir no lograr rechazar una hipótesis nula falsa.
+
+\textbf{Desequilibrio de clases.} Cuando en un problema de clasificación uno de los resultados es mucho más común que el resto se dice que hay un problema de desequilibrio de clases. Esto puede llevar a complicaciones en la generalización del modelo o en la evaluación del desempeño del mismo.
+
+\textbf{Matriz de confusión.} En problemas de clasificación se tienen distintas medidas de las cuales la más común es la precisión del modelo. Esta medida puede no llegar a ser muy representativa del desempeño del modelo. Una situación en donde esto se podría manifestar es cuando los datos que representan el problema tienen un problema de desequilibrio de clases. Si la tasa de desequilibrio es demasiado alta, es posible predecir únicamente una clase con un modelo y obtener una precisión del modelo bastante elevada a pesar de que el modelo no está prediciendo nada. Debido a esto es importante tener en cuenta más herramientas de retroalimentación. Algunos ejemplos de ellas son:
+
+\begin{itemize}
+\item Exhaustividad
+\item Puntaje de $F_{\beta}$
+\item Matriz de confusión
+\item Curvas ROC
+\end{itemize}
+
+\begin{table}
+\centering
+\begin{tabular}{ r | c  r}
+ & \multicolumn{2}{ c }{Referencia} \\
+Predicción & 0 & 1 \\
+\hline
+0 & \textbf{1507} & 19 \\
+1 & 34 & \textbf{1201} \\
+\end{tabular}
+\caption{Ejemplo de una matriz de confusión mostrando distintos tipos de errores. Tabla sólo con propósitos ilustrativos. Los números resaltados representan la cantidad de predicciones correctas; las otras dos cifras serán los errores de tipo I y de tipo II.}
+\label{table:confmatrix}
+\end{table}
+
+\textbf{Matriz de confusión.} Cuando se lidia con clasificación, es una manera de representar los resultados y contrastarlos con valores reales de referencia. Con esta tabla se pueden hacer evaluaciones a primera vista de cómo se comporta un modelo.
