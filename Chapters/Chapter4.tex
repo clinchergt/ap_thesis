@@ -10,5 +10,41 @@
 
 El concepto de \emph{garbage in, garbage out} (basura para adentro, basura para afuera) es muy conocido e indica como un modelo, análisis, etc. es limitado en su capacidad por los datos que se usen para alimentarlo.
 
+En proyectos de aprendizaje artificial se dice que el 80\% del tiempo se deberá usar para la limpieza y tratado de datos. Esta proporción no se mantiene cuando se lidia con modelos de aprendizaje profundo en muchos casos pero el principio es el mismo: no se debe subestimar la importancia de los datos y su integridad.
 
-\section{Aprendizaje supervisado}
+
+\section{Pre-procesamiento de datos}
+
+\subsection{Datos tabulares}
+
+\begin{table}
+\centering
+\begin{tabular}{c c c c | c c}
+CORRELATIVO & Edad & Género & País & Sueldo & Moneda \\
+\hline
+1 & 24 & F & GT & 3500 & GTQ \\
+2 & 145 & M & Perú & 100500 & Soles \\
+3 & 35 & N/A & .es & 1.5 & \texteuro \\
+& & & & & \\
+$\vdots$ &  & $\ddots$ & & & $\vdots$ \\
+& & & & & \\
+2304 & 18 & F & GT & 2.8k & Q \\
+\end{tabular}
+\label{table:tabulares}
+\caption{Ejemplo de datos tabulares que alimentarán a un modelo ya sea de aprendizaje de máquina o de aprendizaje profundo. En la tabla se ilustran algunos errores de datos (campo \emph{edad}) y datos faltantes (en el campo \emph{Género}). También se aprecian discrepancias en el formato de algunos campos (campo de \emph{Moneda} y \emph{Sueldo}) y campos completamente inservibles para un modelo (campo \emph{CORRELATIVO}.}
+\end{table}
+
+La recolección de datos para la alimentación de modelos por lo general es un proceso que involucra obtener información de distintas fuentes con distintos formatos y distintos detalles que esperar. El pre-procesamiento de datos se encarga de darle una forma congruente a los datos para que estos puedan representar el problema de forma adecuada. Este proceso puede involucrar eliminar errores de formato, identificar datos atípicos y lidiar con ellos, identificar características valiosas para un modelo, etc. Estos pasos son más aparentes cuando se lidia con datos tabulares, es decir datos que están separados por categorías o columnas y deben ser tratados de esta manera tratando cada una como una variable.
+
+\subsection{Datos textuales}
+
+En NLP y en este trabajo se lidia con datos en forma de texto y no de forma tabular. Esto conlleva un conjunto de retos especiales a considerar. Surgen conceptos nuevos a considerar. En NLP los pasos que generalmente se realizan para limpiar los datos son los siguientes:
+
+\begin{itemize}
+\item \textbf{Tokenizar:}
+\item \textbf{Limitar vocabulario:}
+\item \textbf{Eliminar palabras con propósito gramático:}
+\item \textbf{Vectorizar}
+\end{itemize}
+
+
