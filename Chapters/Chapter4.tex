@@ -41,10 +41,22 @@ La recolección de datos para la alimentación de modelos por lo general es un p
 En NLP y en este trabajo se lidia con datos en forma de texto y no de forma tabular. Esto conlleva un conjunto de retos especiales a considerar. Surgen conceptos nuevos a considerar. En NLP los pasos que generalmente se realizan para limpiar los datos son los siguientes:
 
 \begin{itemize}
-\item \textbf{Tokenizar:}
-\item \textbf{Limitar vocabulario:}
-\item \textbf{Eliminar palabras con propósito gramático:}
-\item \textbf{Vectorizar}
+\item \textbf{Tokenizar.} Esta técnica de pre-procesamiento consiste en separar las cadenas de palabras --- textos --- en \emph{tokens}. Esto con el propósito de que el modelo sea capaz de digerir las cadenas de palabras por segmentos bien definidos. El delimitador de los tokens en los datos de entrada podrá ser algo simple como un caracter de espacio (' '). Existen también técnicas más elaboradas. Por ejemplo, tokenización basado en la morfología de un lenguaje.
+\item \textbf{Limitar vocabulario.} Como consecuencia de tener cantidades grandes de datos para la alimentación del modelo se puede terminar teniendo un vocabulario bastante numeroso. Este vocabulario está compuesto de todos los tokens únicos que se encontraron en los datos de entrada. Una técnica común para evitar utilizar tokens \emph{vistos} muy pocas veces en la data es limitar el número de tokens a utilizar. Se elige esa cantidad $n$ de datos a utilizar ordenando los tokens por su frecuencia y tomando los $n$ más comunes.
+\item \textbf{Eliminar palabras con propósito gramático.} En muchas tareas de clasificación en NLP dependen mucho del contenido de los textos. Una técnica común para poder enfatizar el valor semántico de los textos es eliminar tokens cuyo propósito es únicamente gramatical. Se podrían nombrar artículos y preposiciónes como ejemplo.
+\item \textbf{Vectorizar.} Una técnica muy valiosa que consiste en representar las cadenas de caracteres en vectores en un espacio de $n$ dimensión. Mientras más grande $n$, mejores las posibilidades de capturar más el significado de cada token o palabra. En modelos del estado del arte en NLP se utiliza una dimensionalidad generalmente de $n = 300$ o $n = 400$. Algunas técnicas de vectorización son capaces de capturar mucha información semántica, al grado de poder inferir información acerca de incluso tokens no antes vistos.
+\item \textbf{Zero padding.} Esta es una técnica utilizada para dar a los datos de entrada el mismo largo y permitir que el modelo no sufra por la variabilidad de longitud. Esta técnica es más común cuando se utilizan modelos de ML y no DL.
+\item \textbf{Tokens especiales.} Al aplicar técnicas como limitación de vocabulario o zero padding surge la necesidad de usar tokens especiales que le indican al modelo conceptos como un término no antes visto o el final de una secuencia. Estos tokens especiales generalmente son definidos por quien realiza el proceso de tokenización aunque también se pueden incluir previo a esta etapa. Estos tokens especiales generalmente son representados en este estilo \texttt{<unk>} donde \texttt{unk} es generalmente una abreviación del concepto del token especial. 
 \end{itemize}
+
+\section{Fuente de los datos}
+
+LEFTy es un proyecto multi-tarea, lo cual significa que las predicciones son de distintos conceptos. Esto generalmente lleva a utilizar datos distintos para cada tarea en específico. Gracias a la ventaja que la transferencia de aprendizaje provee --- capítulo \ref{Chapter3} --- la cantidad de datos necesaria para obtener buenos resultados no era excesiva y esto facilitó la busqueda de datos.
+
+Las fuentes de los datos para cada subtarea fueron los siguientes:
+
+\begin{comment}
+incluir fuentes del readme aca
+\end{comment}
 
 
