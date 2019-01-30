@@ -58,8 +58,14 @@ Las fuentes de los datos para cada subtarea fueron los siguientes:
 \begin{itemize}
 \item \textbf{Determinación de región.} Para esta tarea se utilizaron los datasets de DSLCC \parencite{tan:2014:BUCC} --- por sus siglas en inglés Differentiate Similar Languages Corpus Collection. Estos datos incluyen extractos de artículos de periodismo etiquetados por región y variante de español.
 
-\item \textbf{Determinación de género y edad.} El corpus de datos que se utilizó para estas dos tareas fue el mismo. El corpus es llamado \textit{SpanText} \parencite{villegas:2014:CACIC} y contiene textos escritos por personas hispanohablantes, cada uno etiquetado con su género y edad.
+\item \textbf{Determinación de género y edad.} El corpus de datos que se utilizó para estas dos tareas fue el mismo. El corpus es llamado \textit{SpanText} \parencite{villegas:2014:CACIC} y contiene textos escritos por personas hispanohablantes, cada uno etiquetado con su género y edad. Para estos datos se utilizaron solamente textos con una longitud mínima.
+
+\item \textbf{Datos de pre-entrenamiento.} Para la fase de pre-entrenamiento del modelo de lenguaje se utilizaron datos de \textit{Wikipedia}. Se descargó un \textit{dump} --- colección de datos --- de noviembre del 2018. De estos datos se filtraron los textos que tenían como mínimo $n$ cantidad de palabras. Luego de esto, se seleccionaron los primeros 100 millones de tokens.
 \end{itemize}
+
+\begin{comment}
+seguir aca con detalles de datos si es necesario
+\end{comment}
 
 
 
