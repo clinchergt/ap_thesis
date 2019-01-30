@@ -2,8 +2,44 @@
 
 \chapter{LEFTy}
 
-\label{Chapter5} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\label{Chapter5} % For referencing the chapter elsewhere, use \ref{Chapter5} 
 
-LEFTy es el nombre designado para referirse al trabajo actual.
+LEFTy --- por sus siglas en inglés: Language Efficient Text Portray --- es el nombre designado para referirse al trabajo actual. Esta solución propuesta emplea el concepto de \textit{transfer learning} para poder permitir entrenar con gran capacidad tareas que no tienen muchos ejemplos etiquetados. Utiliza una RNN como base del modelo y las características base obtenidas fueron:
 
-\section{Conceptos aplicados}
+\begin{itemize}
+\item \textbf{Edad.}
+\item \textbf{Género.}
+\item \textbf{Región de origen.}
+\end{itemize}
+
+\section{Pre-entrenamiento de modelo de lenguaje}
+
+La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar una especie de modelo de lenguaje. En el artículo original de ULMFiT se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. BERT por otro lado utiliza un Masked Language Model (MLM) el cual consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea.
+\begin{comment}
+agregar ulmfit howard & sr. agregar bert jacob et al. etc.
+\end{comment}
+
+\subsection{Modelo de lenguaje de Wikipedia}
+
+El diseño base para este modelo de lenguaje es una red denominada AWS LSTM
+\begin{comment}
+merity et al 2017
+\end{comment}
+la cual es una modificación agresiva al método de regularización llamado \textit{dropout}. Se instancian distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $w_f$ únicamente el cual le da escala a los pesos recomendados y definidos por ellos.
+
+En el capítulo \ref{Chapter4} se explica el pre-procesamiento que se le da a los datos de \textit{Wikipedia}.
+
+\subsection{Recursos utilizados para entrenamiento}
+
+Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com} los cuales son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar el siguiente hardware para el entrenamiento:
+\begin{itemize}
+\item nVIDIA V100 GPU
+\item 
+\end{itemize}
+
+Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómputo de la GPU. La \textbf{V} en el modelo V100 indica que es de la última generación a la fecha de esta tesis y provee una ventaja significativa comparada con una K80 o P100.
+
+\textbf{Costo de recursos.} El costo total resultante después de entrenar el modelo llego a \$ 58.50 USD. Esto fue cubierto por los créditos iniciales ofrecidos por Google. También se debe considerar que este paso se debe realizar \emph{una sola vez} para cada lenguaje. En caso de querer utilizar el modelo entrenado en este trabajo, se podrá hacerlo y se podrá aplicar a otros problemas de clasificación. El modelo se encuentra bajo dominio público en este dominio:
+
+
+
