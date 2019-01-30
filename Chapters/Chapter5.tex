@@ -14,32 +14,48 @@ LEFTy --- por sus siglas en inglés: Language Efficient Text Portray --- es el n
 
 \section{Pre-entrenamiento de modelo de lenguaje}
 
-La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar una especie de modelo de lenguaje. En el artículo original de ULMFiT se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. BERT por otro lado utiliza un Masked Language Model (MLM) el cual consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea.
-\begin{comment}
-agregar ulmfit howard & sr. agregar bert jacob et al. etc.
-\end{comment}
+La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar una especie de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. BERT \parencite{devlin2018bert} por otro lado utiliza un Masked Language Model (MLM) el cual consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea.
 
 \subsection{Modelo de lenguaje de Wikipedia}
 
-El diseño base para este modelo de lenguaje es una red denominada AWS LSTM
-\begin{comment}
-merity et al 2017
-\end{comment}
-la cual es una modificación agresiva al método de regularización llamado \textit{dropout}. Se instancian distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $w_f$ únicamente el cual le da escala a los pesos recomendados y definidos por ellos.
+El diseño base para este modelo de lenguaje es una red denominada AWD LSTM \parencite{merityRegOpt}.
+la cual es una modificación agresiva al método de regularización llamado \textit{dropout}. En el artículo se sugiere utilizar un concepto denominado \textit{DropConnect} y difiere en \textit{dropout} en que las funciones de activación no son las que toman el valor cero, sino los pesos. También se utilizan los conceptos de usar \textit{dropout} en la capa de vectorización de palabras --- esto no aporta a la regularización pero sí disminuye el tamaño de los vectores representantes de los vectores. Se instancian los distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $w_f$ únicamente el cual le da escala a los pesos recomendados y definidos por ellos.
 
-En el capítulo \ref{Chapter4} se explica el pre-procesamiento que se le da a los datos de \textit{Wikipedia}.
+En el capítulo \ref{Chapter4} se explica el pre-procesamiento que se le da a los datos de \textit{Wikipedia}. Se detallará ese proceso a continuación.
+
+Para realizar este procedimiento se utilizaron los recursos de \emph{Google Colaboratory} (Colab), los cuales ofrecen un ambiente de \textit{Notebooks} de IPython y la habilidad de ejecutar comandos de \*nix.
+
+\begin{figure}
+\includegraphics[scale=0.3]{Figures/wikidump.pdf}
+\caption{Estructura de datos resultante al extraer un archivo de \textit{Wikipedia}.}
+\end{figure}
+\label{fig:wikidump}
+
+
+\textbf{Obtención de datos.} El corpus de Wikipedia fue obtenido del sitio oficial (\url{https://dumps.wikimedia.org/eswiki/}). El corpus obtenido fue de noviembre 2018. Estos archivos tienen una estructura específica y la forma recomendada de extraer sus contenidos es utilizando \emph{WikiExtractor} (\url{https://github.com/attardi/wikiextractor}). Esta herramienta permite realizar una extracción que filtra por un parámetro de mínimo de longitud del artículo. Se utilizó este parámetro para filtrar todos los artículos con menos de 1000 palabras.
+
+Una vez finaliza la extracción del archivo --- la cual demora una cantidad no despreciable de horas --- se procede a leer y filtrar los documentos. En el caso de este trabajo se filtraron todos los documentos después de haber acumulado 100 millones de tokens en lo seleccionado. Se conservaron 10 millones de tokens adicionales para la validación de resultados.
+
+\textbf{Tokenización.} La herramienta utilizada para este proceso fue spaCy (\url{https://spacy.io/}). Esta herramienta tiene soporte para más de 34 idiomas, entre los cuales está incluído el español.
 
 \subsection{Recursos utilizados para entrenamiento}
 
-Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com} los cuales son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar el siguiente hardware para el entrenamiento:
+\textbf{Costo monetario.} Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com}) los cuales son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar una instance de cómputo \emph{n1-highmem-4} la cual cuenta con	el siguiente hardware para el entrenamiento:
 \begin{itemize}
+\item 4 vCPUs
+\item 26 GB de memoria (RAM)
 \item nVIDIA V100 GPU
-\item 
 \end{itemize}
 
 Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómputo de la GPU. La \textbf{V} en el modelo V100 indica que es de la última generación a la fecha de esta tesis y provee una ventaja significativa comparada con una K80 o P100.
 
-\textbf{Costo de recursos.} El costo total resultante después de entrenar el modelo llego a \$ 58.50 USD. Esto fue cubierto por los créditos iniciales ofrecidos por Google. También se debe considerar que este paso se debe realizar \emph{una sola vez} para cada lenguaje. En caso de querer utilizar el modelo entrenado en este trabajo, se podrá hacerlo y se podrá aplicar a otros problemas de clasificación. El modelo se encuentra bajo dominio público en este dominio:
+\textbf{Costo de recursos.} El costo total resultante después de entrenar un modelo inicial y funcional llegó a \$ 60.20 USD. Esto fue cubierto por los créditos iniciales ofrecidos por Google. También se debe considerar que este paso se debe realizar \emph{una sola vez} para cada lenguaje. En caso de querer utilizar el modelo entrenado en este trabajo, se podrá hacerlo y se podrá aplicar a otros problemas de clasificación. El modelo se encuentra bajo dominio público en este dominio:
+
+\textbf{Costo en tiempo.} Para entrenar los modelos de lenguaje con una estructura AWD LSTM, una época demoraba alrededor de una hora. Después de 4 épocas ya se aproximaban los resultados al estado del arte y puede decidirse si continuar o no.
+
+
+
+
 
 
 
