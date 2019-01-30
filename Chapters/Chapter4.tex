@@ -51,12 +51,15 @@ En NLP y en este trabajo se lidia con datos en forma de texto y no de forma tabu
 
 \section{Fuente de los datos}
 
-LEFTy es un proyecto multi-tarea, lo cual significa que las predicciones son de distintos conceptos. Esto generalmente lleva a utilizar datos distintos para cada tarea en específico. Gracias a la ventaja que la transferencia de aprendizaje provee --- capítulo \ref{Chapter3} --- la cantidad de datos necesaria para obtener buenos resultados no era excesiva y esto facilitó la busqueda de datos.
+LEFTy es un proyecto multi-tarea, lo cual significa que las predicciones son de distintos conceptos. Esto generalmente lleva a utilizar datos distintos para cada tarea en específico. Gracias a la ventaja que la transferencia de aprendizaje provee --- capítulo \ref{Chapter3} --- la cantidad de datos necesaria para obtener buenos resultados no era excesiva y esto facilitó la búsqueda de datos.
 
 Las fuentes de los datos para cada subtarea fueron los siguientes:
 
-\begin{comment}
-incluir fuentes del readme aca
-\end{comment}
+\begin{itemize}
+\item \textbf{Determinación de región.} Para esta tarea se utilizaron los datasets de DSLCC \parencite{tan:2014:BUCC} --- por sus siglas en inglés Differentiate Similar Languages Corpus Collection. Estos datos incluyen extractos de artículos de periodismo etiquetados por región y variante de español.
+
+\item \textbf{Determinación de género y edad.} El corpus de datos que se utilizó para estas dos tareas fue el mismo. El corpus es llamado \textit{SpanText} \parencite{villegas:2014:CACIC} y contiene textos escritos por personas hispanohablantes, cada uno etiquetado con su género y edad.
+\end{itemize}
+
 
 
