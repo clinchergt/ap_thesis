@@ -18,33 +18,63 @@ La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar una espe
 
 \subsection{Modelo de lenguaje de Wikipedia}
 
-El diseño base para este modelo de lenguaje es una red denominada AWD LSTM \parencite{merityRegOpt}.
-la cual es una modificación agresiva al método de regularización llamado \textit{dropout}. En el artículo se sugiere utilizar un concepto denominado \textit{DropConnect} y difiere en \textit{dropout} en que las funciones de activación no son las que toman el valor cero, sino los pesos. También se utilizan los conceptos de usar \textit{dropout} en la capa de vectorización de palabras --- esto no aporta a la regularización pero sí disminuye el tamaño de los vectores representantes de los vectores. Se instancian los distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $w_f$ únicamente el cual le da escala a los pesos recomendados y definidos por ellos.
+El diseño base para este modelo de lenguaje es una red denominada AWD LSTM \parencite{merityRegOpt}, la cual emplea una modificación agresiva al método de regularización \textit{dropout}. En el artículo se sugiere utilizar un concepto denominado \textit{DropConnect} y difiere en \textit{dropout} en que las funciones de activación no son las que toman el valor cero, sino los pesos. También se utilizan los conceptos de usar \textit{dropout} en la capa de vectorización de palabras --- esto no aporta a la regularización pero sí disminuye el tamaño de los vectores representantes de los vectores. Se instancian los distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $r_f$ únicamente el cual le da escala a los pesos recomendados y definidos por ellos.
 
 En el capítulo \ref{Chapter4} se explica el pre-procesamiento que se le da a los datos de \textit{Wikipedia}. Se detallará ese proceso a continuación.
 
 Para realizar este procedimiento se utilizaron los recursos de \emph{Google Colaboratory} (Colab), los cuales ofrecen un ambiente de \textit{Notebooks} de IPython y la habilidad de ejecutar comandos de \*nix.
 
 \begin{figure}
-\includegraphics[scale=0.3]{Figures/wikidump.pdf}
+\centering
+\includegraphics[scale=0.7]{Figures/wikidump.pdf}
 \caption{Estructura de datos resultante al extraer un archivo de \textit{Wikipedia}.}
-\end{figure}
 \label{fig:wikidump}
+\end{figure}
 
 
-\textbf{Obtención de datos.} El corpus de Wikipedia fue obtenido del sitio oficial (\url{https://dumps.wikimedia.org/eswiki/}). El corpus obtenido fue de noviembre 2018. Estos archivos tienen una estructura específica y la forma recomendada de extraer sus contenidos es utilizando \emph{WikiExtractor} (\url{https://github.com/attardi/wikiextractor}). Esta herramienta permite realizar una extracción que filtra por un parámetro de mínimo de longitud del artículo. Se utilizó este parámetro para filtrar todos los artículos con menos de 1000 palabras.
+\textbf{Obtención de datos.} El corpus de Wikipedia fue obtenido del sitio oficial (\url{https://dumps.wikimedia.org/eswiki/}). El corpus obtenido fue de noviembre 2018. Estos archivos tienen una estructura específica y la forma recomendada de extraer sus contenidos es utilizando \emph{WikiExtractor} (\url{https://github.com/attardi/wikiextractor}). Esta herramienta permite realizar una extracción que filtra por un parámetro de mínimo de longitud del artículo. Se utilizó este parámetro para filtrar todos los artículos con menos de 10,000 caracteres.
 
 Una vez finaliza la extracción del archivo --- la cual demora una cantidad no despreciable de horas --- se procede a leer y filtrar los documentos. En el caso de este trabajo se filtraron todos los documentos después de haber acumulado 100 millones de tokens en lo seleccionado. Se conservaron 10 millones de tokens adicionales para la validación de resultados.
 
-\textbf{Tokenización.} La herramienta utilizada para este proceso fue spaCy (\url{https://spacy.io/}). Esta herramienta tiene soporte para más de 34 idiomas, entre los cuales está incluído el español.
+\begin{table}
+\begin{tabular}{| l | l |}
+
+\hline
+\textbf{Cadena de caracteres} & \textbf{Resultado tokenizado} \\
+\hline
+Hola, buenos días. & \texttt{xxbos xxmaj hola , buenos días} \\
+HOLA!!! qué bueno verte & \texttt{xxbox xxmaj hola xxrep 3 ! qué bueno verte} \\
+Mis audífonos son Sennheiser & \texttt{xxbos xxmaj mis audífonos son xxunk} \\
+\hline
+
+\end{tabular}
+\caption{Muestras de tokenización utilizando \textit{spaCy} y técnicas de \textit{fastai}}
+\label{tab:tokens}
+\end{table}
+
+\textbf{Tokenización.} La herramienta utilizada para este proceso fue spaCy (\url{https://spacy.io/}). Esta herramienta tiene soporte para más de 34 idiomas, entre los cuales está incluído el español. Además de esta herramienta se emplean técnicas adicionales como codificar caracteres repetidos o codificar palabras en mayúsculas.
+
+\textbf{Definición de vocabulario.} Como se puede apreciar en el cuadro \ref{tab:tokens}, unos tokens son codificados como \texttt{xxunk}, esto es debido a la limitación de palabras únicas a codificar. El vocabulario fue limitado a 30,000 tokens únicos.
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{Figures/lrfinder.png}
+\caption{Ilustración de progreso de la función \texttt{lr\_find} de \textit{fast.ai}. Al momento de divergir el método deja de aumentar $\gamma$ y devuelve los resultados.}
+\label{fig:lrfind}
+\end{figure}
+
+\textbf{Entrenamiento.} Luego tener los datos en el formato adecuado para entrenar el modelo se aplican las técnicas descritas en el capítulo \ref{Chapter3} sobre una red AWD LSTM. Previo a esto se encuentra un $ \gamma $ ideal y eso se hace aprovechando el método \texttt{lr\_find} (figura \ref{fig:lrfind}) de la librería de \emph{fastai} (\url{https://github.com/fastai/fastai}) que emplea el método descrito por \textcite{smith2017convergence}. Se aumenta $\gamma$ a medida que se recorren los ejemplos a entrenar. Si en algún momento diverge el aprendizaje se detiene el método y se imprime la gráfica. Se deberá querer elegir un $\gamma$ que no tenga riesgo de divergir el aprendizaje y que tampoco disminuya la velocidad del proceso.
 
 \subsection{Recursos utilizados para entrenamiento}
 
-\textbf{Costo monetario.} Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com}) los cuales son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar una instance de cómputo \emph{n1-highmem-4} la cual cuenta con	el siguiente hardware para el entrenamiento:
+\textbf{Costo monetario.} Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com}) los cuales son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar una instance de cómputo \emph{n1-highmem-4} (\url{https://cloud.google.com/compute/docs/machine-types}) la cual cuenta con	el siguiente hardware para el entrenamiento:
+
+%\pagebreak
+
 \begin{itemize}
-\item 4 vCPUs
+\item Intel Xeon (Skylake) 4 vCPUs
 \item 26 GB de memoria (RAM)
-\item nVIDIA V100 GPU
+\item nVIDIA V100 GPU -- 16 GB de memoria
 \end{itemize}
 
 Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómputo de la GPU. La \textbf{V} en el modelo V100 indica que es de la última generación a la fecha de esta tesis y provee una ventaja significativa comparada con una K80 o P100.
