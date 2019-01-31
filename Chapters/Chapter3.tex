@@ -4,15 +4,11 @@
 
 \label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter1} 
 
-Un concepto esencial para este trabajo y para toda el área de aprendizaje profundo es la capacidad de transferir aprendizaje adquirido previamente de un problema poco acotado y poder lograr aprovechar este aprendizaje en problemas más acotados permitiendo así que las demandas de recursos como datos y tiempo de ejecución tengan más holgura.
+Un concepto esencial para este trabajo y para toda el área de aprendizaje profundo es la capacidad de transferir aprendizaje adquirido previamente de un problema poco acotado y poder lograr aprovechar este aprendizaje en problemas más acotados permitiendo así que las demandas de recursos como datos y tiempo de ejecución tengan más holgura. Se obtienen mejores resultados transfiriendo aprendizaje de un modelo que cuando se inicializan los pesos de los parámetros de al red aleatoriamente \parencite{Erhan:2010:WUP}.
 
 \section{Concepto de transferencia}
 
-Las redes neuronales capturan información en sus diferentes capas, sin embargo el hecho de que distintas capas aprenden cosas diferentes y la forma en que difieren permite transferir conocimiento a través de redes entrenadas para diferentes tareas. En las primeras capas se aprende información bastante abstracta con respecto a la tarea y conforme se avanza en la profundidad de la red se vuelve más específica la información que se va aprendiendo
-\begin{comment}
-YOsinki et al. 2014
-\end{comment}
-.
+Las redes neuronales capturan información en sus diferentes capas \parencite{yosinski:2014}, sin embargo el hecho de que distintas capas aprenden cosas diferentes y la forma en que difieren permite transferir conocimiento a través de redes entrenadas para diferentes tareas. En las primeras capas se aprende información bastante abstracta con respecto a la tarea y conforme se avanza en la profundidad de la red se vuelve más específica la información que se va aprendiendo.
 
 \begin{figure}
 \includegraphics[scale=1]{Figures/learnbylayer.pdf}
@@ -28,7 +24,7 @@ La información en las primeras capas de una red neuronal de visión artificial 
 
 \section{Aplicación en otras áreas}
 %Incluir trabajos relacionados
-Para tener el contexto acerca de este concepto crucial para este trabajo debemos explorar otras áreas del aprendizaje profundo, en particular el área de visión artificial (computer vision en inglés). Este campo fue el que llevó a la explosión del aprendizaje profundo en el 2012 cuando una red denominada AlexNet dominó la competencia de ImageNet.
+Para tener el contexto acerca de este concepto crucial para este trabajo debemos explorar otras áreas del aprendizaje profundo, en particular el área de visión artificial (computer vision en inglés). Este campo fue el que llevó a la explosión del aprendizaje profundo en el 2012 cuando una red denominada AlexNet dominó la competencia de clasificar el dataset ImageNet \parencite{deng2009imagenet}.
 
 \textbf{ImageNet.} Este proyecto es una colección masiva de imágenes que están debidamente etiquetadas con cuadros encerrando los objetos detectados en una imagen. Debido a la cantidad exagerada de categorías y objetos encontrados en las imágenes y también la cantidad en sí de imágenes, se organiza un concurso de software todos los años para determinar cuál modelo es el mejor en visión artificial. Cuando en el 2012 una red de aprendizaje profundo ganó el concurso se generó motivación en explorar este campo más a fondo.
 
@@ -40,21 +36,17 @@ En CV existen muchas más tareas más acotadas que ver. Para estas sería muy ú
 
 \section{Aplicación en NLP}
 
-Hasta el año 2018 no se había aplicado la transferencia de aprendizaje en el área de NLP, pero eso cambió después de trabajos pioneros
-\begin{comment}
-referencias a papers de ELMo, ULMFiT y BERT
-\end{comment}
-la técnica muestra promesa. Se podría decir que el momento ImageNet ha llegado a NLP y el progreso ha sido de crecimiento explosivo.
+Hasta el año 2018 no se había aplicado la transferencia de aprendizaje en el área de NLP, pero eso cambió después de trabajos pioneros \parencite{peters:2018, howard2018, devlin2018bert} la técnica muestra promesa. Se podría decir que el momento ImageNet ha llegado a NLP y el progreso ha sido de crecimiento explosivo.
 
-La tarea general en NLP para tener un modelo base ha sido la tarea del modelo de lenguaje. Un modelo de lenguaje es el que intenta predecir la próxima palabra tomando en cuenta las palabras mandadas como argumento al modelo. En textos de temas específicos esto podrá resultar ser un tanto más fácil debido al vocabulario más limitado y por tener acotado el tema. Idealmente para poder tener una generalización poderosa y que puede aportar en tareas de muy distintos campos, se debe tener un modelo de lenguaje aprendido de un corpus de datos amplio y la cantidad de textos deberá ser masiva.
+La tarea general en NLP para tener un modelo base ha sido la tarea del modelo de lenguaje \parencite{howard2018}. Un modelo de lenguaje es el que intenta predecir la próxima palabra tomando en cuenta las palabras mandadas como argumento al modelo. En textos de temas específicos esto podrá resultar ser un tanto más fácil debido al vocabulario más limitado y por tener acotado el tema. Idealmente para poder tener una generalización poderosa y que puede aportar en tareas de muy distintos campos, se debe tener un modelo de lenguaje aprendido de un corpus de datos amplio y la cantidad de textos deberá ser masiva.
 
-Un corpus que cumple con los requisitos mencionados sería la versión de Wikipedia en el lenguaje deseado. La enciclopedia virtual abarca muchos temas y tiene una diversidad incomparable de vocabulario. Este incluso deberá ser limitado a una canitdad $T$ de tokens.
+Un corpus que cumple con los requisitos mencionados sería la versión de Wikipedia en el lenguaje deseado. La enciclopedia virtual abarca muchos temas y tiene una diversidad incomparable de vocabulario. Este incluso deberá ser limitado a una cantidad $T$ de tokens. En futuros trabajos se deberá explorar la posibilidad de utilizar distintos corpora.
 
-El modelo de lenguaje es entrenado usando redes neuronales recurrentes en alguna variante que se considere prudente. Una red LSTM o una QRNN son ideales para propósitos de este trabajo y han mostrado los mejores resultados del estado del arte en modelos de lenguaje.
+El modelo de lenguaje es entrenado usando redes neuronales recurrentes en alguna variante que se considere prudente. Una red LSTM o una QRNN \parencite{bradbury2016} son ideales para propósitos de este trabajo y han mostrado los mejores resultados del estado del arte en modelos de lenguaje.
 
 \subsection{ULMFiT}
 
-Esta técnica expuesta originalmente por Jeremy Howard en su curso de aprendizaje profundo fue publicado para plantear el algoritmo de forma más formal y con estudios de ablación demostrar que cada aspecto de los pasos es esencial para obtener los mejores resultados. La técnica de ULMFiT se divide en dos fases las cuales se explicarán a continuación.
+Esta técnica expuesta originalmente por \textcite{howard2018} en su curso de aprendizaje profundo fue publicado para plantear el algoritmo de forma más formal y con estudios de ablación demostrar que cada aspecto de los pasos es esencial para obtener los mejores resultados. La técnica de ULMFiT se divide en dos fases \parencite{howard2018} las cuales se explicarán a continuación.
 
 \subsubsection{Afinación de modelo de lenguaje}
 \label{lmftune}
@@ -84,6 +76,6 @@ Para el afinamiento de este modelo se aplican los conceptos desarrollados en la 
 
 \subsection{Modelo de lenguaje bidireccional}
 
-Existe la posibilidad de volver el modelo de lenguaje en un modelo bidireccional. Esto se puede hacer de forma manual al revertir el orden de los textos en el corpus y entrenar de la misma forma. Al tener ambos modelos listos se pueden promediar los resultados de las predicciones de cada modelo para obtener una predicción final.
+Existe la posibilidad de volver el modelo de lenguaje en un modelo bidireccional \parencite{howard2018}. Esto se puede hacer de forma manual al revertir el orden de los textos en el corpus y entrenar de la misma forma. Al tener ambos modelos listos se pueden promediar los resultados de las predicciones de cada modelo para obtener una predicción final.
 
 

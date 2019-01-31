@@ -9,7 +9,7 @@ En este capítulo se planteará y se explicará la base teórica del campo del a
 
 \section{Aprendizaje supervisado}
 
-En el área de aprendizaje de máquina (profundo) existen dos tipos básicos de problemas. El tipo se determina dependiendo de el tipo de datos a utilizar para el entrenamiento del modelo.
+En el área de aprendizaje de máquina (profundo) existen dos tipos básicos de problemas. El tipo se determina dependiendo de el tipo de datos a utilizar para el entrenamiento del modelo \parencite{schmidhuber2015deep}.
 
 Cuando los datos --- ya sea información tabulada, imágenes, textos --- no tienen ninguna categoría o ningún valor a predecir y lo que se desea es obtener información no específica, es decir sin tener alguna referencia, se trata de un aprendizaje no supervisado.
 
@@ -83,7 +83,7 @@ Donde $W_4$ es una matriz de parámetros de la cuarta capa, $W_3$ es una matriz 
 \end{figure}
 
 
-\textbf{Propagación hacia atrás.} Ya que está presente un mecanismo para evaluar el conjunto de funciones que representa cada unidad de la red, debemos tener un mecanismo para optimizar los parámetros que definen cada función. La propagación hacia atrás se encarga de esto utilizando el concepto previamente descrito como el descenso de gradiente. Para realizar la propagación hacia atrás se aplica la regla de la cadena la cual establece que si $\frac{\partial f(g(x))}{\partial x} = \frac{\partial g}{\partial x} \frac{\partial f}{\partial g}$. Notemos que la función que se quiere derivar toma una forma similar a la que tenemos en la ecuación \ref{eq:feedfwdeq}, con la adición de que $g(x)$ es una función que anida aún más funciones. Para obtener la optimización de los parámetros podemos derivar en dirección hacia atrás propagando la mejora que se propone con el gradiente.
+\textbf{Propagación hacia atrás} \parencite{rumelhart1986learning}. Ya que está presente un mecanismo para evaluar el conjunto de funciones que representa cada unidad de la red, debemos tener un mecanismo para optimizar los parámetros que definen cada función. La propagación hacia atrás se encarga de esto utilizando el concepto previamente descrito como el descenso de gradiente. Para realizar la propagación hacia atrás se aplica la regla de la cadena la cual establece que si $\frac{\partial f(g(x))}{\partial x} = \frac{\partial g}{\partial x} \frac{\partial f}{\partial g}$. Notemos que la función que se quiere derivar toma una forma similar a la que tenemos en la ecuación \ref{eq:feedfwdeq}, con la adición de que $g(x)$ es una función que anida aún más funciones. Para obtener la optimización de los parámetros podemos derivar en dirección hacia atrás propagando la mejora que se propone con el gradiente.
 
 \subsection{Redes neuronales recurrentes}
 
