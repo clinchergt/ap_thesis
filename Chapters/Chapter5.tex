@@ -65,6 +65,52 @@ Mis audífonos son Sennheiser & \texttt{xxbos xxmaj mis audífonos son xxunk} \\
 
 \textbf{Entrenamiento.} Luego tener los datos en el formato adecuado para entrenar el modelo se aplican las técnicas descritas en el capítulo \ref{Chapter3} sobre una red AWD LSTM. Previo a esto se encuentra un $ \gamma $ ideal y eso se hace aprovechando el método \texttt{lr\_find} (figura \ref{fig:lrfind}) de la librería de \emph{fastai} (\url{https://github.com/fastai/fastai}) que emplea el método descrito por \textcite{smith2017convergence}. Se aumenta $\gamma$ a medida que se recorren los ejemplos a entrenar. Si en algún momento diverge el aprendizaje se detiene el método y se imprime la gráfica. Se deberá querer elegir un $\gamma$ que no tenga riesgo de divergir el aprendizaje y que tampoco disminuya la velocidad del proceso.
 
+\subsubsection{Resultados}
+
+Para medir y reportar errores sobre LMs se utiliza la métrica de \textit{perplexity} \parencite{jurafsky2014speech}, la cual es análoga a la entropía. La entropía representa la cantidad de información que se tiene; \textit{perplexity} se puede ver como la cantidad de opciones que se tiene. ¿Qué significa esto? Que mientras menos opciones considere nuestro LM, más estable es y por lo tanto que modela mejor el lenguaje. Se calcula de la siguiente manera:
+
+$$ perplexity = e^{loss} $$
+
+En nuestro caso, se utiliza el valor de pérdida de los datos de validación.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Modelo & Error en validación & \textit{Perplexity } \\
+\hline
+AWD LSTM & 3.140521 & \textbf{23.1038} \\
+QRNN & 3.193912 & 24.2884 \\
+\hline
+\end{tabular}
+\caption{Resultados de los modelos entrenados. La métrica que se utiliza para comparar entre los modelos es \textit{perplexity} la cual indica y representa qué tantas opciones se tienen para la siguiente palabra.}
+\label{tab:modresults}
+\end{table}
+
+Se entrenaron dos modelos de RNN, uno fue basado directamente de la arquitectura y estrategias de AWD LSTM  y el otro modelo basado en la arquitectura QRNN. Los resultados se muestran en la tabla \ref{tab:modresults}. Sin embargo esta tabla no cuenta la historia completa. El modelo QRNN demoró menos en su entrenamiento de forma no insignificante tomando 13\% menos en entrenarse con resultados muy comparables a los de la red AWD LSTM.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Modelo & \textit{Perplexity} \\
+\hline
+Transformer-XL \parencite{dai2019} & \textbf{18.3} \\
+\hline
+AWD LSTM (propio) & \textbf{23.1038} \\
+QRNN (propio) & 24.2884 \\
+Activation Mem. \parencite{rae2018} & 29.2 \\
+RNN \parencite{goldszmidt2018} & N/A (38\% prec.) \\
+RNN \parencite{ingham2018} & 36.1473 \\
+\hline
+
+\end{tabular}
+\caption{Comparación de LMs con modelos del estado del arte en inglés y modelos de referencia para el español. Menor \textit{perplexity} es mejor.}
+\label{tab:lmcomp}
+\end{table}
+
+En la tabla \ref{tab:lmcomp} se aprecian distintos LMs los cuales fueron entrenados en distintos datasets. El modelo Transformer-XL \parencite{dai2019} utiliza la nueva tendencia de finales del 2018 y principios de 2019 de usar transformadores en lugar de RNNs, así como lo hace BERT. El modelo de \textit{Activation Memory} \parencite{rae2018} es un modelo de referencia que utiliza la arquitectura de una RNN simplificando un sub-conjunto de sus parámetros. Los otros dos modelos han sido modelos previamente entrenados con el propósito de ser usados para tareas clasificación en español con ULMFiT.
+
 \subsection{Recursos utilizados para entrenamiento}
 
 \textbf{Costo monetario.} Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com}) los cuales son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar una instance de cómputo \emph{n1-highmem-4} (\url{https://cloud.google.com/compute/docs/machine-types}) la cual cuenta con	el siguiente hardware para el entrenamiento:
