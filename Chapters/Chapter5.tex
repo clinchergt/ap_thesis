@@ -77,7 +77,7 @@ En nuestro caso, se utiliza el valor de pérdida de los datos de validación.
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
-Modelo & Error en validación & \textit{Perplexity } \\
+Modelo & Error en validación & \textit{Perplexity} \\
 \hline
 AWD LSTM & 3.140521 & \textbf{23.1038} \\
 QRNN & 3.193912 & 24.2884 \\
@@ -93,7 +93,7 @@ Se entrenaron dos modelos de RNN, uno fue basado directamente de la arquitectura
 \centering
 \begin{tabular}{|l|l|}
 \hline
-Modelo & \textit{Perplexity} \\
+\textbf{Modelo} & \textbf{\textit{Perplexity}} \\
 \hline
 Transformer-XL \parencite{dai2019} & \textbf{18.3} \\
 \hline
@@ -105,15 +105,16 @@ RNN \parencite{ingham2018} & 36.1473 \\
 \hline
 
 \end{tabular}
-\caption{Comparación de LMs con modelos del estado del arte en inglés y modelos de referencia para el español. Menor \textit{perplexity} es mejor.}
+\caption{Comparación de LMs con modelos del estado del arte en inglés y modelos de referencia para el español. Menor \textit{perplexity} es mejor. Separamos el modelo \textit{Transformer-XL} ya que utiliza otra arquitectura y está presente en la tabla solamente como referencia al mejor resultado al momento haber escrito este trabajo.}
 \label{tab:lmcomp}
 \end{table}
 
-En la tabla \ref{tab:lmcomp} se aprecian distintos LMs los cuales fueron entrenados en distintos datasets. El modelo Transformer-XL \parencite{dai2019} utiliza la nueva tendencia de finales del 2018 y principios de 2019 de usar transformadores en lugar de RNNs, así como lo hace BERT. El modelo de \textit{Activation Memory} \parencite{rae2018} es un modelo de referencia que utiliza la arquitectura de una RNN simplificando un sub-conjunto de sus parámetros. Los otros dos modelos han sido modelos previamente entrenados con el propósito de ser usados para tareas clasificación en español con ULMFiT.
+En la tabla \ref{tab:lmcomp} se aprecian distintos LMs los cuales fueron entrenados en distintos datasets. El modelo Transformer-XL \parencite{dai2019} utiliza la nueva tendencia de finales del 2018 y principios de 2019 de usar transformadores en lugar de RNNs, así como propone Google con BERT. El modelo de \textit{Activation Memory} \parencite{rae2018} es un modelo de referencia que utiliza la arquitectura de una RNN simplificando un sub-conjunto de sus parámetros. Los otros dos modelos han sido modelos previamente entrenados con el propósito de ser usados para tareas clasificación en español con ULMFiT.
 
 Aunque hay argumentos en contra de usar \textit{perplexity} para comparar LMs de distintos lenguajes o que usan distintos vocabularios \parencite{chen1998evaluation}, se debe tener un marco de referencia. Los modelos con propósitos de usar ULMFiT fueron entrenados de una forma muy similar al propio y son las comparaciones más directas por ser LMs del idioma español.
 
-\subsection{Recursos utilizados para entrenamiento}
+
+\subsubsection{Recursos utilizados para entrenamiento}
 
 \textbf{Costo monetario.} Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com}) los cuales son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar una instance de cómputo \emph{n1-highmem-4} (\url{https://cloud.google.com/compute/docs/machine-types}) la cual cuenta con	el siguiente hardware para el entrenamiento:
 
@@ -131,6 +132,14 @@ Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómpu
 
 \textbf{Costo en tiempo.} Para entrenar los modelos de lenguaje con una estructura AWD LSTM, una época demoraba alrededor de una hora. Después de 4 épocas ya se aproximaban los resultados al estado del arte y puede decidirse si continuar o no.
 
+\subsection{Modelos clasificadores}
+
+Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para poder afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM.
+
+
+\section{Resultados}
+
+Se ha dicho que para esta tarea técnicas de aprendizaje profundo no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de aprendizaje profundo tiene al aprender la cantidad de parámetros inmesa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje.
 
 
 
