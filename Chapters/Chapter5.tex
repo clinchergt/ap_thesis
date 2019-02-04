@@ -141,11 +141,11 @@ Al tener el LM afinado se procede a entrenar un clasificador. Este proceso es de
 \begin{figure}
 \centering
 \includegraphics[scale=1]{Figures/clas_lrfinder.png}
-\caption{Evolución de la pérdida conforme se cambia la tasa de aprendizaje en el clasificador Al igual que con el LM, se deberá elegir un valor óptimo para mayor eficiencia.}
+\caption{Evolución de la pérdida conforme se cambia la tasa de aprendizaje en el clasificador. Al igual que con el LM, se deberá elegir un valor óptimo para mayor eficiencia.}
 \label{fig:claslr}
 \end{figure}
 
-Primero se eligió un pero para los parámetros de \textit{dropout} y después se eligió un $\gamma$ óptimo (figura \ref{fig:claslr}).
+Primero se eligió un peso para los parámetros de \textit{dropout} y después se eligió un $\gamma$ óptimo (figura \ref{fig:claslr}).
 
 \begin{figure}
 \centering
@@ -158,9 +158,9 @@ El entrenamiento de un clasificador con pocos datos no deberá tomar mucho tiemp
 
 \section{Resultados}
 
-Se ha dicho que para RNNs y técnicas de aprendizaje profundo no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de aprendizaje profundo tiene al aprender la cantidad de parámetros inmesa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
+Se ha dicho que para RNNs y técnicas de aprendizaje profundo no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de aprendizaje profundo tiene al aprender la cantidad de parámetros inmensa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
 
-Muchos datos de referencia provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea de perfilamiento. Algunas comparaciones no directas serán realizadas con resultados de la tarea de DSLCC \parencite{zampieri2017}.
+Muchos datos de referencia provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea del trazo de perfiles de autores. Algunas comparaciones no directas serán realizadas con resultados de la tarea de DSLCC \parencite{zampieri2017}.
 
 
 
