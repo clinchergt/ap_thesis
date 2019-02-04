@@ -109,7 +109,7 @@ RNN \parencite{ingham2018} & 36.1473 \\
 \label{tab:lmcomp}
 \end{table}
 
-En la tabla \ref{tab:lmcomp} se aprecian distintos LMs los cuales fueron entrenados en distintos datasets. El modelo Transformer-XL \parencite{dai2019} utiliza la nueva tendencia de finales del 2018 y principios de 2019 de usar transformadores en lugar de RNNs, así como propone Google con BERT. El modelo de \textit{Activation Memory} \parencite{rae2018} es un modelo de referencia que utiliza la arquitectura de una RNN simplificando un sub-conjunto de sus parámetros. Los otros dos modelos han sido modelos previamente entrenados con el propósito de ser usados para tareas clasificación en español con ULMFiT.
+En la tabla \ref{tab:lmcomp} se aprecian distintos LMs los cuales fueron entrenados en distintos datasets. El modelo Transformer-XL \parencite{dai2019} utiliza la nueva tendencia de finales del 2018 y principios de 2019 de usar transformadores en lugar de RNNs, así como propone Google con BERT. El modelo de \textit{Activation Memory} \parencite{rae2018} es un modelo de referencia que utiliza la arquitectura de una RNN simplificando un sub-conjunto de sus parámetros. Los otros dos modelos han sido modelos previamente entrenados con el propósito de ser usados para tareas clasificación en español con ULMFiT. Los datos presentados para los modelos propios fueron el valor de pérdida en un set de validación de 100 millones de tokens elegidos al azar de \textit{Wikiepedia}.
 
 Aunque hay argumentos en contra de usar \textit{perplexity} para comparar LMs de distintos lenguajes o que usan distintos vocabularios \parencite{chen1998evaluation}, se debe tener un marco de referencia. Los modelos con propósitos de usar ULMFiT fueron entrenados de una forma muy similar al propio y son las comparaciones más directas por ser LMs del idioma español.
 
@@ -134,12 +134,33 @@ Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómpu
 
 \subsection{Modelos clasificadores}
 
-Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para poder afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM.
+Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para poder afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM y se afina el modelo para textos de este dominio específico.
 
+Al tener el LM afinado se procede a entrenar un clasificador. Este proceso es descrito en la sección \ref{sec:nlpprocess}. Muchos de los pasos fueron descritos en capítulos pasados --- p.e. la elección del modelo.
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{Figures/clas_lrfinder.png}
+\caption{Evolución de la pérdida conforme se cambia la tasa de aprendizaje en el clasificador Al igual que con el LM, se deberá elegir un valor óptimo para mayor eficiencia.}
+\label{fig:claslr}
+\end{figure}
+
+Primero se eligió un pero para los parámetros de \textit{dropout} y después se eligió un $\gamma$ óptimo (figura \ref{fig:claslr}).
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{Figures/clas_epochs.png}
+\caption{Avance de pérdida conforme avanzan las épocas de entrenamiento. Menor es mejor.}
+\label{fig:clasepochs}
+\end{figure}
+
+El entrenamiento de un clasificador con pocos datos no deberá tomar mucho tiempo y los resultados deberán ser satisfactorios aplicando los temas expuestos en este trabajo. En la figura \ref{fig:clasepochs} se puede apreciar como la evolución de pérdida avanza lentamente a través de las épocas y converge en un valor después de un número de épocas relativamente bajo.
 
 \section{Resultados}
 
 Se ha dicho que para RNNs y técnicas de aprendizaje profundo no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de aprendizaje profundo tiene al aprender la cantidad de parámetros inmesa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
+
+Muchos datos de referencia provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea de perfilamiento. Algunas comparaciones no directas serán realizadas con resultados de la tarea de DSLCC \parencite{zampieri2017}.
 
 
 
