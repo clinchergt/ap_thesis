@@ -105,7 +105,7 @@ RNN \parencite{ingham2018} & 36.1473 \\
 \hline
 
 \end{tabular}
-\caption{Comparación de LMs con modelos del estado del arte en inglés y modelos de referencia para el español. Menor \textit{perplexity} es mejor. Separamos el modelo \textit{Transformer-XL} ya que utiliza otra arquitectura y está presente en la tabla solamente como referencia al mejor resultado al momento haber escrito este trabajo.}
+\caption{Comparación de LMs con modelos del estado del arte en inglés y modelos de referencia para el español. Menor \textit{perplexity} es mejor. Separamos el modelo \textit{Transformer-XL} ya que utiliza otra arquitectura y está presente en la tabla solamente como referencia al mejor resultado al momento de haber escrito este trabajo.}
 \label{tab:lmcomp}
 \end{table}
 
@@ -134,9 +134,29 @@ Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómpu
 
 \subsection{Modelos clasificadores}
 
+El conjunto de datos principales que se utilizó fue el de PAN17 \parencite{rangel2017overview}. Este conjunto de datos no es típico ya que consta de tuits de un grupo de usuarios. Cada uno de estos tuits --- 100 por usuario --- tiene asociado su usuario el cual tiene las etiquetas de edad y región asignadas. Por lo tanto se puede abordar el problema de distintas formas; se puede tomar cada tuit individual y predecir el género y la región individualmente, sumando después las probabilidades para obtener un veredicto final para el autor o se pueden concatenar los tuits del autor y realizar una solo predicción sobre ese texto completo del autor. Para este trabajo se utilizó cada tuit individual con el fin de poder tener un alcance mayor sobre la tarea de perfilación de autores sobre textos informales.
+
+\begin{table}
+\centering
+\rowcolors{1}{gray!25}{white}
+\begin{tabular}{| p{3cm} | p{9.5cm} |}
+\hline
+\textbf{Estado del texto} & \textbf{Resultado} \\
+\hline
+Original & \texttt{\#igualdaddegenero y \#mediosdecomunicacion http://t.me/ssbM} \\
+Sin normalizar & \texttt{xxunk xxunk y xxunk xxunk xxunk} \\
+Normalizado & \texttt{xxhashtag igualdad enero y xxhashtag medios comunica xxurl} \\
+\hline
+\end{tabular}
+\caption{Ejemplificación de normalización de textos informales obtenidos del dataset PAN17 para la tarea de perfilación de autores. El proceso de normalización permite extraer información de los \textit{tokens} que son menciones de usuario y \textit{hashtags}. En la tabla se aprecia un ejemplo real con drásticos cambios dependiendo de procesamiento.}
+\label{tab:pan17preproc}
+\end{table}
+
+El procesamiento constó de normalizar los \textit{tokens} especiales de los textos (ver tabla \ref{tab:pan17preproc}); en particular se normalizaron las menciones de usuario y los \textit{hashtags}. Este proceso consistió en ordenar los \textit{tokens} del vocabulario del modelo pre-entrenado de \textit{Wikipedia} y buscar las instancias encontradas en los \textit{tokens} de interés. Luego de haber hecho esto, anteponer un \textit{token} especial que indique que se encontraba ahí originalmente, por ejemplo \texttt{xxhashtag}.
+
 Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para poder afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM y se afina el modelo para textos de este dominio específico.
 
-Al tener el LM afinado se procede a entrenar un clasificador. Este proceso es descrito en la sección \ref{sec:nlpprocess}. Muchos de los pasos fueron descritos en capítulos pasados --- p.e. la elección del modelo.
+Al tener el LM afinado se procede a entrenar un clasificador. Este proceso es descrito en la sección \ref{sec:nlpprocess}. Muchos de los pasos fueron descritos en capítulos pasados --- por ejemplo la elección de la arquitectura del modelo. Muchas decisiones tomadas para este trabajo fueron basadas en la literatura disponible del campo y citadas acordemente.
 
 \begin{figure}
 \centering
