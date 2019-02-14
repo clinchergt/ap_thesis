@@ -58,17 +58,26 @@ LEFTy es un proyecto multi-tarea, lo cual significa que las predicciones son de 
 Las fuentes de los datos para cada subtarea fueron los siguientes:
 
 \begin{itemize}
-\item \textbf{Determinación de región.} Para esta tarea se utilizaron los datasets de DSLCC \parencite{tan:2014:BUCC} --- por sus siglas en inglés Differentiate Similar Languages Corpus Collection. Estos datos incluyen extractos de artículos de periodismo etiquetados por región y variante de español.
+%\item \textbf{Determinación de región.} Para esta tarea se utilizaron los datasets de DSLCC \parencite{tan:2014:BUCC} --- por sus siglas en inglés Differentiate Similar Languages Corpus Collection. Estos datos incluyen extractos de artículos de periodismo etiquetados por región y variante de español.
 
 \item \textbf{Determinación de género y edad.} El corpus de datos que se utilizó para estas dos tareas fue el mismo. El corpus es llamado \textit{SpanText} \parencite{villegas:2014:CACIC} y contiene textos escritos por personas hispanohablantes, cada uno etiquetado con su género y edad. Para estos datos se utilizaron solamente textos con una longitud mínima.
 
-\item \textbf{Determinación de genero y edad en textos informales.} Adicional a las fuentes de datos mencionadas arriba se utilizaron los datos de una competencia de perfilamiento de autores, en específico utilizando textos informales. La competencia es llamada PAN en su edición del 2017 (\url{https://pan.webis.de/clef17/pan17-web/author-profiling.html}). Los datos han sido utilizados con el permiso de los organizadores de la competencia de PAN17 \parencite{rangel2017proceedings}.
+\item \textbf{Determinación de género y región en textos informales.} Adicional a las fuentes de datos mencionadas arriba se utilizaron los datos de una competencia de perfilamiento de autores, en específico utilizando textos informales. La competencia es llamada PAN en su edición del 2017 (\url{https://pan.webis.de/clef17/pan17-web/author-profiling.html}). Los datos han sido utilizados con el permiso de los organizadores de la competencia de PAN17 \parencite{rangel2017proceedings}. Estos datos no han sido pre-procesados de ninguna forma y la única garantía que se tiene es hay una cantidad mínima de tuits por autor y una cantidad mínima de autores por género y región. El conjunto de datos se encuentra dividido entre conjuntos de datos para entrenamiento y para prueba de desempeño.
 
 \item \textbf{Datos de pre-entrenamiento.} Para la fase de pre-entrenamiento del modelo de lenguaje se utilizaron datos de \textit{Wikipedia}. Se descargó un \textit{dump} --- colección de datos --- de noviembre del 2018. De estos datos se filtraron los textos que tenían como mínimo $n$ cantidad de palabras. Luego de esto, se seleccionaron los primeros 100 millones de \textit{tokens}, esto para simular una distribución de artículos similar a \textit{WikiText-103} \parencite{merity2016pointer} la cual fue propuesta como una muestra más realista de los textos de \textit{Wikipedia}.
 \end{itemize}
 
+\section{Distribución de los datos}
+
+En esta sección se expondrá un análisis exploratorio de los datos. Esto con el fin de poder apreciar con qué información se contará, también ayudará a poder tomar decisiones informadas más adelante acerca de los modelos a utilizar. Este tipo de análisis es superficial y deberá mostrar únicamente características principales de los datos y sus distribuciones.
+
+\subsection{Textos informales (PAN'17)}
+
+\subsection{Textos formales (SpanText)}
+
 \begin{comment}
 seguir aca con detalles de datos si es necesario
+graficas de los datos
 \end{comment}
 
 
