@@ -14,7 +14,7 @@ LEFTy --- por sus siglas en inglés: Language Efficient Text Portray --- es el n
 
 \section{Pre-entrenamiento de modelo de lenguaje}
 
-La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar una especie de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. BERT \parencite{devlin2018bert} por otro lado utiliza un Masked Language Model (MLM) el cual consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea.
+La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar un tipo de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. BERT \parencite{devlin2018bert} por otro lado utiliza un Masked Language Model (MLM) el cual consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea. En este trabajo se utiliza un modelo estándar de lenguaje, es decir se predice el próximo token basado en los tokens anteriores como entrada.
 
 \subsection{Modelo de lenguaje de Wikipedia}
 
@@ -32,9 +32,9 @@ Para realizar este procedimiento se utilizaron los recursos de \emph{Google Cola
 \end{figure}
 
 
-\textbf{Obtención de datos.} El corpus de Wikipedia fue obtenido del sitio oficial (\url{https://dumps.wikimedia.org/eswiki/}). El corpus obtenido fue de noviembre 2018. Estos archivos tienen una estructura específica y la forma recomendada de extraer sus contenidos es utilizando \emph{WikiExtractor} (\url{https://github.com/attardi/wikiextractor}). Esta herramienta permite realizar una extracción que filtra por un parámetro de mínimo de longitud del artículo. Se utilizó este parámetro para filtrar todos los artículos con menos de 10,000 caracteres.
+\textbf{Obtención de datos.} El corpus de Wikipedia fue obtenido del sitio oficial (\url{https://dumps.wikimedia.org/eswiki/}). El corpus obtenido fue del mes de noviembre del año 2018. Estos archivos tienen una estructura específica y la forma recomendada de extraer sus contenidos es utilizando \emph{WikiExtractor} (\url{https://github.com/attardi/wikiextractor}). Esta herramienta permite realizar una extracción que filtra por un parámetro de mínimo de longitud del artículo. Se utilizó este parámetro para filtrar todos los artículos con menos de 10,000 caracteres.
 
-Una vez finaliza la extracción del archivo --- la cual demora una cantidad no despreciable de horas --- se procede a leer y filtrar los documentos. En el caso de este trabajo se filtraron todos los documentos después de haber acumulado 100 millones de tokens en lo seleccionado. Se conservaron 10 millones de tokens adicionales para la validación de resultados.
+Una vez finaliza la extracción del archivo --- la cual demora una cantidad no despreciable de horas --- se procede a leer y filtrar los documentos. En el caso de este trabajo se ignoraron todos los documentos después de haber acumulado 100 millones de tokens en los textos procesados. Se conservaron 10 millones de tokens adicionales para la validación de resultados.
 
 \begin{table}
 \begin{tabular}{| l | l |}
@@ -52,9 +52,9 @@ Mis audífonos son Sennheiser & \texttt{xxbos xxmaj mis audífonos son xxunk} \\
 \label{tab:tokens}
 \end{table}
 
-\textbf{Tokenización.} La herramienta utilizada para este proceso fue spaCy (\url{https://spacy.io/}). Esta herramienta tiene soporte para más de 34 idiomas, entre los cuales está incluído el español. Además de esta herramienta se emplean técnicas adicionales como codificar caracteres repetidos o codificar palabras en mayúsculas.
+\textbf{Tokenización.} La herramienta utilizada para este proceso fue spaCy (\url{https://spacy.io/}). Esta herramienta tiene soporte para más de 34 idiomas, entre los cuales se incluye el español. Además de esta herramienta se emplean técnicas adicionales como codificar caracteres repetidos o codificar palabras en mayúsculas --- ver tabla \ref{tab:tokens}.
 
-\textbf{Definición de vocabulario.} Como se puede apreciar en el cuadro \ref{tab:tokens}, unos tokens son codificados como \texttt{xxunk}, esto es debido a la limitación de palabras únicas a codificar. El vocabulario fue limitado a 30,000 tokens únicos.
+\textbf{Definición de vocabulario.} Unos tokens son codificados como \texttt{xxunk} (token desconocido), esto es debido a la limitación de palabras únicas a codificar. El vocabulario fue limitado a 30,000 tokens únicos.
 
 \begin{figure}
 \centering
@@ -63,7 +63,7 @@ Mis audífonos son Sennheiser & \texttt{xxbos xxmaj mis audífonos son xxunk} \\
 \label{fig:lrfind}
 \end{figure}
 
-\textbf{Entrenamiento.} Luego tener los datos en el formato adecuado para entrenar el modelo se aplican las técnicas descritas en el capítulo \ref{Chapter3} sobre una red AWD LSTM. Previo a esto se encuentra un $ \gamma $ ideal y eso se hace aprovechando el método \texttt{lr\_find} (figura \ref{fig:lrfind}) de la librería de \emph{fastai} (\url{https://github.com/fastai/fastai}) que emplea el método descrito por \textcite{smith2017convergence}. Se aumenta $\gamma$ a medida que se recorren los ejemplos a entrenar. Si en algún momento diverge el aprendizaje se detiene el método y se imprime la gráfica. Se deberá querer elegir un $\gamma$ que no tenga riesgo de divergir el aprendizaje y que tampoco disminuya la velocidad del proceso.
+\textbf{Entrenamiento.} Luego tener los datos en el formato adecuado para entrenar el modelo se aplican las técnicas descritas en el capítulo \ref{Chapter3} sobre una red AWD LSTM. Previo a esto se encuentra un $ \gamma $ ideal y eso se hace aprovechando el método \texttt{lr\_find} (figura \ref{fig:lrfind}) de la librería de \emph{fastai} (\url{https://github.com/fastai/fastai}) que emplea el método descrito por \textcite{smith2017convergence}. Se aumenta $\gamma$ a medida que se recorren los ejemplos a entrenar. Si en algún momento diverge el aprendizaje se detiene el método y se imprime la gráfica. Se deberá querer elegir un $\gamma$ que no tenga riesgo de divergir el aprendizaje y que tampoco disminuya la velocidad del proceso. La elección adecuada de este hiper-parámetro en esta etapa es crucial para obtener un modelo en un tiempo razonable, ya que este modelo es el más grande --- en términos de parámetros y datos a procesar --- que requerirá entrenamiento. Vale la pena enfatizar que este proceso se realiza una \emph{única} vez y la definición de modelos clasificadores en un futuro podrá hacer uso del modelo entrenado originalmente.
 
 \subsubsection{Resultados}
 
@@ -128,9 +128,9 @@ Aunque hay argumentos en contra de usar \textit{perplexity} para comparar LMs de
 
 Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómputo de la GPU. La \textbf{V} en el modelo V100 indica que es de la última generación a la fecha de esta tesis y provee una ventaja significativa comparada con una K80 o P100.
 
-\textbf{Costo de recursos.} El costo total resultante después de entrenar un modelo inicial y funcional llegó a \$ 60.20 USD. Esto fue cubierto por los créditos iniciales ofrecidos por Google. También se debe considerar que este paso se debe realizar \emph{una sola vez} para cada lenguaje. En caso de querer utilizar el modelo entrenado en este trabajo, se podrá hacerlo y se podrá aplicar a otros problemas de clasificación. El modelo se encuentra bajo dominio público en este dominio:
+\textbf{Costo de recursos.} El costo total resultante después de entrenar un modelo inicial y funcional llegó a \$ 60.20 USD. Esto fue cubierto por los créditos iniciales ofrecidos por Google. También se debe considerar que este paso se debe realizar \emph{una sola vez} para cada lenguaje. En caso de querer utilizar el modelo entrenado en este trabajo, se podrá hacerlo y se podrá aplicar a otros problemas de clasificación.
 
-\textbf{Costo en tiempo.} Para entrenar los modelos de lenguaje con una estructura AWD LSTM, una época demoraba alrededor de una hora. Después de 4 épocas ya se aproximaban los resultados al estado del arte y puede decidirse si continuar o no.
+\textbf{Costo en tiempo.} Para entrenar los modelos de lenguaje con una estructura AWD LSTM, una época se demora alrededor de una hora. Después de 4 épocas se aproximan los resultados al estado del arte y debe decidirse cuando detener el entrenamiento sin perder la generalidad del sistema.
 
 \subsection{Modelos clasificadores}
 
@@ -152,9 +152,9 @@ Normalizado & \texttt{xxhashtag igualdad enero y xxhashtag medios comunica xxurl
 \label{tab:pan17preproc}
 \end{table}
 
-El procesamiento constó de normalizar los \textit{tokens} especiales de los textos (ver tabla \ref{tab:pan17preproc}); en particular se normalizaron las menciones de usuario y los \textit{hashtags}. Este proceso consistió en ordenar los \textit{tokens} del vocabulario del modelo pre-entrenado de \textit{Wikipedia} y buscar las instancias encontradas en los \textit{tokens} de interés. Luego de haber hecho esto, anteponer un \textit{token} especial que indique que se encontraba ahí originalmente, por ejemplo \texttt{xxhashtag}.
+\textbf{Pre-procesamiento y tokenización.} El procesamiento constó de normalizar los \textit{tokens} especiales de los textos (ver tabla \ref{tab:pan17preproc}); en particular se normalizaron las menciones de usuario y los \textit{hashtags}. Este proceso consistió en ordenar los \textit{tokens} del vocabulario del modelo pre-entrenado de \textit{Wikipedia} y buscar las instancias encontradas en los \textit{tokens} de interés. Luego de haber hecho esto, anteponer un \textit{token} especial que indique que se encontraba ahí originalmente, por ejemplo \texttt{xxhashtag}. Se tokenizan los datos de la misma manera en que se tokenizaron los datos en la fase de modelo de lenguaje; utilizando \textit{spaCy}.
 
-\textbf{Afinación de LM.} Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para poder afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM y se afina el modelo para textos de este dominio específico. Sobre la métrica de \textit{perplexity} o la precisión no se pone mayor importancia, lo importante será que la estructura general de los textos y el vocabulario que se use refleje los datos reales.
+\textbf{Afinación de LM.} Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para poder afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM y se afina el modelo para textos de este dominio específico. Sobre la métrica de \textit{perplexity} o la precisión no se pone mayor énfasis, lo importante será que la estructura general de los textos y el vocabulario que se use refleje los datos reales del problema específico.
 
 \begin{comment}
 resultados en afinamiento de lm aca. grafica? tabla?
@@ -169,7 +169,7 @@ resultados en afinamiento de lm aca. grafica? tabla?
 \label{fig:claslr}
 \end{figure}
 
-Primero se eligió un peso para los parámetros de \textit{dropout} y después se eligió un $\gamma$ óptimo basado en la herramienta de \texttt{lr\_find} (figura \ref{fig:claslr}).
+\textbf{Entrenamiento del clasificador.} Antes de comenzar con el entrenamiento se deben elegir los hiper-parámetros adecuados. Primero se eligió un peso para los parámetros de \textit{dropout} (basado en pruebas empíricas) y después se eligió un $\gamma$ óptimo basado en la herramienta de \texttt{lr\_find} (figura \ref{fig:claslr}). Los valores elegidos fueron \texttt{dropout = 0.3} y un $\gamma$ inicial con valor de \texttt{1e-2}. Se habla de un $\gamma$ inicial ya que en el entrenamiento del modelo clasificador se aplica el concepto de usar un $\gamma$ cíclico \parencite{smith2017convergence} abordado en el capítulo \ref{Chapter3}.
 
 \begin{figure}
 \centering
@@ -190,10 +190,57 @@ grafica de overfitting
 
 Se ha dicho que para RNNs y técnicas de aprendizaje profundo no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de aprendizaje profundo tiene al aprender la cantidad de parámetros inmensa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
 
-Los datos y resultados de referencia provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea del trazo de perfiles de autores. Debido a que los conjuntos de datos de pruebas son los mismos, las comparaciones se podrán hacer de forma directa.
+Los datos y resultados en referencia a predicción de región y género provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea del trazo de perfiles de autores. Debido a que los conjuntos de datos de pruebas son los mismos, las comparaciones se podrán hacer de forma directa. Se realiza una comparación con datos exclusivamente del idioma español.
 
+Para estos resultados se utiliza la métrica usada en la competencia PAN17 la cuál es:
 
+% \: es un espacio de mediana distancia
 
+$$ Acc_{cat} = \frac{Predicciones\: correctas}{Total\: de\: predicciones} $$
 
+Donde $cat$ es la categoría sobre la cual se está prediciendo. Las predicciones son aplicadas sobre los datos de validación, los cuales fueron segmentados por el equipo organizador de PAN17 los cuales cuenta con 2,800 autores, cada uno asociado a 100 tuits.
+
+\subsection{Predicción de género}
+
+La predicción de género sobre un texto anónimo se realizó basado en datos de tuits. La clasificación se llevó a cabo en dos niveles. Se realizó una predicción a nivel de tuit individual y una predicción a nivel de autor.
+
+\begin{table}
+\centering
+\begin{tabular}{r | c c}
+\multicolumn{3}{c}{\textbf{Referencia}} \\
+\textbf{Predicción} & Femenino & Masculino \\
+\hline
+Femenino & 83110 & 49573 \\
+Masculino & 56890 & 90427 \\
+\end{tabular}
+\caption{Matriz de confusión de resultados sobre predicción de género en tuits individuales.}
+\label{tab:gender_indvtweet}
+\end{table}
+
+En la tabla \ref{tab:gender_indvtweet} se aprecian los resultados de las predicciones sobre tuits individuales. La evaluación de la métrica sería entonces:
+
+$$ Acc_{gender} = \frac{173,537}{280,000} = 0\text{.}6198 $$
+
+\begin{table}
+\centering
+\begin{tabular}{r| c c}
+\multicolumn{3}{c}{\textbf{Referencia}} \\
+\textbf{Predicción} & Femenino & Masculino \\
+\hline
+Femenino & 963 & 283 \\
+Masculino & 437 & 1117 \\
+\end{tabular}
+\caption{Matriz de confusión de resultados de predicciones por autor.}
+\label{tab:gender_authtweet}
+\end{table}
+
+La predicción sobre los autores es basada en las predicciones sobre tuits individuales. Esto resulta en una suma ponderada de las predicciones individuales descrita como
+\[ \phantom{,}\hat{p}_a (\mathbf{X}) = \max \sum_{n = 1}^{100} p(X_n), \]
+donde $\mathbf{X}$ representa una matriz de probabilidades; las filas representan tuits individuales y las columnas las probabilidades de que el tuit pertenezca a la categoría de esa columna (p.e. el género femenino).
+
+Dada la anterior tenemos la tabla \ref{tab:gender_authtweet} y un resultado de
+\[ \phantom{.}Acc_{region} = 0\text{.}7429. \]
+
+La sumatoria ponderada resulta en un sistema similar a un ensamble de modelos los cuales toman prioridad según la confianza que tengan en su predicción. Debido a esto, el resultado aumenta en la métrica considerablemente.
 
 
