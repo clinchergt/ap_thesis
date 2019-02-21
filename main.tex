@@ -58,7 +58,13 @@ table,
 
 \usepackage{comment}
 
+\usepackage{arydshln} % Dashed lines in tables
+
 \setcounter{secnumdepth}{3} % Para que las subsubsections tengan número
+
+\makeatletter
+\newcommand{\tblshort}{\let\blx@imc@ifciteseen\@firstoftwo}
+\makeatother
 
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS

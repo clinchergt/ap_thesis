@@ -190,7 +190,14 @@ grafica de overfitting
 
 Se ha dicho que para RNNs y técnicas de aprendizaje profundo no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de aprendizaje profundo tiene al aprender la cantidad de parámetros inmensa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
 
-Los datos y resultados en referencia a predicción de región y género provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea del trazo de perfiles de autores. Debido a que los conjuntos de datos de pruebas son los mismos, las comparaciones se podrán hacer de forma directa. Se realiza una comparación con datos exclusivamente del idioma español.
+Los datos y resultados en referencia a predicción de región y género provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea del trazo de perfiles de autores. Debido a que los conjuntos de datos de pruebas son los mismos, las comparaciones se podrán hacer de forma directa. Se realiza una comparación con datos exclusivamente del idioma español. Los modelos a comparar son los siguientes:
+
+\begin{itemize}
+\item TF-IDF + CNN \parencite{schaetti2017author}
+\item RNN \parencite{kodiyan2017author}
+\item AVG DNN \parencite{franco2017author}
+\item CNN + RNN + Attention \parencite{miura2017author}
+\end{itemize}
 
 Para estos resultados se utiliza la métrica usada en la competencia PAN17 la cuál es:
 
@@ -217,9 +224,9 @@ Masculino & 56890 & 90427 \\
 \label{tab:gender_indvtweet}
 \end{table}
 
-En la tabla \ref{tab:gender_indvtweet} se aprecian los resultados de las predicciones sobre tuits individuales. La evaluación de la métrica sería entonces:
+En la tabla \ref{tab:gender_indvtweet} se aprecian los resultados de las predicciones sobre tuits individuales. La evaluación de la métrica con estos datos sería entonces:
 
-$$ Acc_{gender} = \frac{173,537}{280,000} = 0\text{.}6198 $$
+$$ Acc_{gender\_idv} = \frac{173,537}{280,000} = 0\text{.}6198 $$
 
 \begin{table}
 \centering
@@ -239,8 +246,105 @@ La predicción sobre los autores es basada en las predicciones sobre tuits indiv
 donde $\mathbf{X}$ representa una matriz de probabilidades; las filas representan tuits individuales y las columnas las probabilidades de que el tuit pertenezca a la categoría de esa columna (p.e. el género femenino).
 
 Dada la anterior tenemos la tabla \ref{tab:gender_authtweet} y un resultado de
-\[ \phantom{.}Acc_{region} = 0\text{.}7429. \]
+\[ \phantom{.}Acc_{gender} = 0\text{.}7429. \]
 
 La sumatoria ponderada resulta en un sistema similar a un ensamble de modelos los cuales toman prioridad según la confianza que tengan en su predicción. Debido a esto, el resultado aumenta en la métrica considerablemente.
+
+\begin{table}
+\centering
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{p{9.5cm} p{3cm}}
+\textbf{Modelo} & \textbf{Resultado} \\
+\hline
+TF-IDF + CNN \tblshort\parencite{schaetti2017author} & 0.7150 \\
+RNN \tblshort\parencite{kodiyan2017author} & 0.7217 \\
+RNN + Transfer Learning (propio) & 0.7429 \\
+AVG DNN \tblshort\parencite{franco2017author} & \textbf{0.7721} \\
+\hdashline
+\rowcolor{white}
+CNN + RNN + Attention \tblshort\parencite{miura2017author} & \textbf{0.8118} \\
+
+\end{tabular}
+\caption{Comparación de modelos de aprendizaje profundo en la tarea de predicción de género --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no se puede hacer una comparación directa.}
+\label{tab:pan17gender}
+\end{table}
+
+Al comparar el modelo propio con los modelos de aprendizaje profundo presentados en la competencia PAN17 (tabla \ref{tab:pan17gender}) se puede apreciar que los resultados obtenidos son del estado del arte para RNN, siendo solamente superado por un AVG DNN y un ensamble de CNN, RNN y elementos de atención.
+
+\subsection{Predicción de región}
+
+La predicción de género sobre un texto anónimo se realizó basado en datos de tuits. La clasificación se llevó a cabo en dos niveles. Se realizó una predicción a nivel de tuit individual y una predicción a nivel de autor.
+
+\begin{table}
+\centering
+\begin{tabular}{r | c c c c c c c}
+\multicolumn{3}{c}{\textbf{Referencia}} \\
+\textbf{Predicción} & AR & CL & CO & MX & PE & ES & VZ\\
+\hline
+AR & 22610 & 3013 & 3147 & 2220 & 3783 & 2558 & 2188 \\
+CL & 3064 & 21058 & 2988 & 3034 & 3760 & 2599 & 2454 \\
+CO & 3435 & 2993 & 20007 & 4401 & 4251 & 2746 & 3696 \\
+MX & 2554 & 3429 & 3977 & 18803 & 4173 & 3681 & 3616 \\
+PE & 2992 & 3780 & 3544 & 3542 & 17812 & 2552 & 2605 \\
+ES & 3331 & 3565 & 3519 & 5131 & 3662 & 23722 & 3689 \\
+VZ & 2014 & 2162 & 2818 & 2869 & 2559 & 2142 & 21752 \\
+\end{tabular}
+\caption{Matriz de confusión de resultados sobre predicción de región en tuits individuales.}
+\label{tab:region_indvtweet}
+\end{table}
+
+En la tabla \ref{tab:region_indvtweet} se aprecian los resultados de las predicciones sobre tuits individuales. La evaluación de la métrica con estos datos sería entonces:
+
+$$ Acc_{region\_idv} = \frac{173,537}{280,000} = 0\text{.}6198 $$
+
+\begin{table}
+\centering
+\begin{tabular}{r| c c c c c c c}
+\multicolumn{3}{c}{\textbf{Referencia}} \\
+\textbf{Predicción} & AR & CL & CO & MX & PE & ES & VZ\\
+\hline
+AR & 381 & 5 & 7 & 5 & 14 & 1 & 7 \\
+CL & 2 & 370 & 2 & 3 & 4 & 1 & 1 \\
+CO & 2 & 3 & 367 & 10 & 9 & 3 & 8 \\
+MX & 3 & 5 & 4 & 364 & 9 & 3 & 9 \\
+PE & 4 & 7 & 8 & 3 & 353 & 3 & 4 \\
+ES & 5 & 5 & 8 & 13 & 4 & 388 & 17 \\
+VZ & 3 & 5 & 3 & 2 & 7 & 1 & 354 \\
+\end{tabular}
+\caption{Matriz de confusión de resultados de predicción de región por autor.}
+\label{tab:region_authtweet}
+\end{table}
+
+La predicción sobre los autores basada en la suma ponderada tenemos la tabla \ref{tab:region_authtweet} y un resultado de
+\[ \phantom{.}Acc_{region} = 0\text{.}9207. \]
+
+La sumatoria ponderada resulta en un resultado mucho mayor que el de las predicciones individuales. Esto puede deberse a dos cosas:
+
+\begin{itemize}
+\item Muchos tuits son muy limitados en su número de caracteres por lo que algunos no revelarán mucha información acerca del autor por sí solos.
+\item La cobertura de vocabulario con palabras regionales disminuye por lo que algunos tuits individuales con palabras claves no proveen mucha información.
+\end{itemize}
+
+\begin{table}
+\centering
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{p{9.5cm} p{3cm}}
+\textbf{Modelo} & \textbf{Resultado} \\
+\hline
+TF-IDF + CNN \tblshort\parencite{schaetti2017author} & \textbf{0.9336} \\
+RNN \tblshort\parencite{kodiyan2017author} & 0.9143 \\
+RNN + Transfer Learning (propio) & 0.9207 \\
+AVG DNN \tblshort\parencite{franco2017author} & 0.9000 \\
+\hdashline
+\rowcolor{white}
+CNN + RNN(Att.) \tblshort\parencite{miura2017author} & \textbf{0.9271} \\
+
+\end{tabular}
+\caption{Comparación de modelos de aprendizaje profundo en la tarea de predicción de región --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no es posible hacer una comparación directa.}
+\label{tab:pan17region}
+\end{table}
+
+Nuevamente se comparan los resultados con los modelos de aprendizaje profundo de PAN17 (tabla \ref{tab:pan17region}). Una combinación de TF-IDF y CNN \parencite{schaetti2017author} logró clasificar de la mejor manera; el modelo propio obtiene la segunda mejor precisión en modelos simples y la tercera considerando el ensamble de modelos CNN y RNN de \textcite{miura2017author}.
+
 
 
