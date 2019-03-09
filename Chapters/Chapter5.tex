@@ -190,6 +190,8 @@ grafica de overfitting
 
 Se ha dicho que para RNNs y técnicas de aprendizaje profundo no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de aprendizaje profundo tiene al aprender la cantidad de parámetros inmensa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
 
+\subsection{Predicción sobre textos informales}
+
 Los datos y resultados en referencia a predicción de región y género provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea del trazo de perfiles de autores. Debido a que los conjuntos de datos de pruebas son los mismos, las comparaciones se podrán hacer de forma directa. Se realiza una comparación con datos exclusivamente del idioma español. Los modelos a comparar son los siguientes:
 
 \begin{itemize}
@@ -207,7 +209,7 @@ $$ Acc_{cat} = \frac{Predicciones\: correctas}{Total\: de\: predicciones} $$
 
 Donde $cat$ es la categoría sobre la cual se está prediciendo. Las predicciones son aplicadas sobre los datos de validación, los cuales fueron segmentados por el equipo organizador de PAN17 los cuales cuenta con 2,800 autores, cada uno asociado a 100 tuits.
 
-\subsection{Predicción de género}
+\subsubsection{Predicción de género}
 
 La predicción de género sobre un texto anónimo se realizó basado en datos de tuits. La clasificación se llevó a cabo en dos niveles. Se realizó una predicción a nivel de tuit individual y una predicción a nivel de autor.
 
@@ -271,7 +273,7 @@ CNN + RNN + Attention \tblshort\parencite{miura2017author} & \textbf{0.8118} \\
 
 Al comparar el modelo propio con los modelos de aprendizaje profundo presentados en la competencia PAN17 (tabla \ref{tab:pan17gender}) se puede apreciar que los resultados obtenidos son del estado del arte para RNN, siendo solamente superado por un AVG DNN y un ensamble de CNN, RNN y elementos de atención.
 
-\subsection{Predicción de región}
+\subsubsection{Predicción de región}
 
 La predicción de género sobre un texto anónimo se realizó basado en datos de tuits. La clasificación se llevó a cabo en dos niveles. Se realizó una predicción a nivel de tuit individual y una predicción a nivel de autor.
 
@@ -357,6 +359,49 @@ El corpus de \textit{SpanText} está compuesto por un dos subconjuntos de datos:
 \item \textbf{Dataset desbalanceado}. Este dataset se creó con el propósito de emular la distribución encontrada en los datos de la competencia PAN y así permitir una comparación más directa en términos de resultados \parencite{villegas:2014:CACIC}.
 \end{itemize}
 
-Los mejores resultados obtenidos por \citeauthor{villegas:2014:CACIC} fueron sobre el dataset desbalanceado por lo que sobre esos se hará la comparación con el modelo propio.
+\begin{table}
+\centering
+\begin{tabular}{l c c}
+
+\hline
+\textbf{Clase} & \textbf{Cantidad de textos} & \textbf{Longitud (palabras)} \\
+\hline
+10smale & 140 & 153 \\
+10sfemale & 60 & 130 \\
+20smale & 210 & 239\\
+20sfemale & 90 & 236 \\
+30smale & 350 & 267 \\
+30sfemale & 150 & 240 \\
+\hline
+
+\end{tabular}
+\caption{Distribución de datos usados para la tarea de clasificación de textos formales.}
+\label{tab:spantextdist}
+\end{table}
+
+Los mejores resultados obtenidos por \citeauthor{villegas:2014:CACIC} fueron sobre el dataset desbalanceado por lo que sobre esos se hará la comparación con el modelo propio. La distribución de los datos desbalanceados se muestra en la table \ref{tab:spantextdist}.
+
+\subsubsection{Resultados}
+
+La tarea definida en el artículo de \textit{SpanText} es la de la predicción ambos el género y la edad del autor del texto formal. La cantidad de textos por clase es bastante limitada así como la longitud promedio de los textos, lo cual aumenta la dificultad de la tarea para modelos de aprendizaje profundo.
+
+\begin{table}
+\centering
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{p{7cm} p{3cm}}
+\textbf{Modelo} & \textbf{Resultado} \\
+\hline
+LIBLINEAR; TF-IDF + words \tblshort\parencite{villegas:2014:CACIC} & 58.4 \\
+Naïve Bayes; boolean + words \tblshort\parencite{villegas:2014:CACIC} & 61.2 \\
+RNN + Transfer Learning (propio) & \textbf{71.0} \\
+
+\end{tabular}
+\caption{Comparación de modelos en la tarea de clasificación de SpanText. El único modelo de aprendizaje profundo es el propio.}
+\label{tab:spantextres}
+\end{table}
+
+Para la tarea de clasificación, \citeauthor{villegas:2014:CACIC} propusieron dos diferentes modelos de clasificación junto con distintas formas de representar los tokens de alimentación al modelo. Se eligieron los dos mejores modelos --- uno por el tipo de modelo \textit{LIBLINEAR} y otro para el tipo de modelo \textit{Naïve Bayes} --- para realizar la comparación con el modelo proprio. Los resultados se pueden apreciar en la tabla \ref{tab:spantextres}.
+
+
 
 
