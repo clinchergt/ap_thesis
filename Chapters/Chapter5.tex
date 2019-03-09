@@ -79,8 +79,8 @@ En nuestro caso, se utiliza el valor de pérdida de los datos de validación.
 \hline
 Modelo & Error en validación & \textit{Perplexity} \\
 \hline
-AWD LSTM & 3.140521 & \textbf{23.1038} \\
 QRNN & 3.193912 & 24.2884 \\
+AWD LSTM & 3.140521 & \textbf{23.1038} \\
 \hline
 \end{tabular}
 \caption{Resultados de los modelos entrenados. La métrica que se utiliza para comparar entre los modelos es \textit{perplexity} la cual indica y representa qué tantas opciones se tienen para la siguiente palabra.}
@@ -95,13 +95,17 @@ Se entrenaron dos modelos de RNN, uno fue basado directamente de la arquitectura
 \hline
 \textbf{Modelo} & \textbf{\textit{Perplexity}} \\
 \hline
-Transformer-XL \parencite{dai2019} & \textbf{18.3} \\
-\hline
-AWD LSTM (propio) & \textbf{23.1038} \\
-QRNN (propio) & 24.2884 \\
-Activation Mem. \parencite{rae2018} & 29.2 \\
 RNN \parencite{goldszmidt2018} & N/A (34\% prec.) \\
 RNN \parencite{ingham2018} & 36.1473 \\
+Activation Mem. \parencite{rae2018} & 29.2 \\
+\hline
+Transformer-XL \parencite{dai2019} & \textbf{18.3} \\
+\hline
+QRNN (propio) & 24.2884 \\
+AWD LSTM (propio) & \textbf{23.1038} \\
+
+
+
 \hline
 
 \end{tabular}
@@ -260,11 +264,12 @@ La sumatoria ponderada resulta en un sistema similar a un ensamble de modelos lo
 \hline
 TF-IDF + CNN \tblshort\parencite{schaetti2017author} & 0.7150 \\
 RNN \tblshort\parencite{kodiyan2017author} & 0.7217 \\
-RNN + Transfer Learning (propio) & 0.7429 \\
 AVG DNN \tblshort\parencite{franco2017author} & \textbf{0.7721} \\
 \hdashline
-\rowcolor{white}
+\rowcolor{gray!25}
 CNN + RNN + Attention \tblshort\parencite{miura2017author} & \textbf{0.8118} \\
+\hdashline
+RNN + Transfer Learning (propio) & 0.7429 \\
 
 \end{tabular}
 \caption{Comparación de modelos de aprendizaje profundo en la tarea de predicción de género --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no se puede hacer una comparación directa.}
@@ -335,11 +340,12 @@ La sumatoria ponderada resulta en un resultado mucho mayor que el de las predicc
 \hline
 TF-IDF + CNN \tblshort\parencite{schaetti2017author} & \textbf{0.9336} \\
 RNN \tblshort\parencite{kodiyan2017author} & 0.9143 \\
-RNN + Transfer Learning (propio) & 0.9207 \\
 AVG DNN \tblshort\parencite{franco2017author} & 0.9000 \\
 \hdashline
-\rowcolor{white}
+\rowcolor{gray!25}
 CNN + RNN(Att.) \tblshort\parencite{miura2017author} & \textbf{0.9271} \\
+\hdashline
+RNN + Transfer Learning (propio) & 0.9207 \\
 
 \end{tabular}
 \caption{Comparación de modelos de aprendizaje profundo en la tarea de predicción de región --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no es posible hacer una comparación directa.}
@@ -383,7 +389,7 @@ Los mejores resultados obtenidos por \citeauthor{villegas:2014:CACIC} fueron sob
 
 \subsubsection{Resultados}
 
-La tarea definida en el artículo de \textit{SpanText} es la de la predicción ambos el género y la edad del autor del texto formal. La cantidad de textos por clase es bastante limitada así como la longitud promedio de los textos, lo cual aumenta la dificultad de la tarea para modelos de aprendizaje profundo.
+La tarea definida en el artículo de \textit{SpanText} es la de la predicción ambos el género y la edad del autor del texto formal, esto significa que la precisión reportada es de la proporción de textos sobre los que se predijo ambas características. La cantidad de textos por clase es bastante limitada así como la longitud promedio de los textos, lo cual aumenta la dificultad de la tarea para modelos de aprendizaje profundo.
 
 \begin{table}
 \centering
@@ -396,7 +402,7 @@ Naïve Bayes; boolean + words \tblshort\parencite{villegas:2014:CACIC} & 61.2 \\
 RNN + Transfer Learning (propio) & \textbf{71.0} \\
 
 \end{tabular}
-\caption{Comparación de modelos en la tarea de clasificación de SpanText. El único modelo de aprendizaje profundo es el propio.}
+\caption{Comparación de modelos en la tarea de clasificación de SpanText. El único modelo de aprendizaje profundo es el propio. El resultado es la precisión de la predicción, por lo que un mayor resultado es mejor.}
 \label{tab:spantextres}
 \end{table}
 
