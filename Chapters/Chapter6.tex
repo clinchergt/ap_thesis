@@ -2,18 +2,44 @@
 
 \chapter{Conclusiones}
 
-\label{Chapter6} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\label{Chapter6} % For referencing the chapter elsewhere, use \ref{Chapter6}
+
+En este capítulo se presentan las conclusiones obtenidas a partir del trabajo de investigación y los resultados encontrados.
 
 \section{Conclusiones}
 
-Conclusiones del trabajo
+El campo de aprendizaje profundo ha mostrado mucha promesa en los últimos años, pero el área de NLP no ha mostrado tanta promesa sino hasta el último año. En este trabajo se busca fomentar y profundizar más la penetración que han tenido estas técnicas en el área tanto en sectores industriales como académicos.
+
+Para poder plantear las conclusiones de este trabajo se deberá recordar los objetivos principales mencionados al comienzo. Se pretendía plantear un sistema competitivo a niveles del estado del arte que no requiriera ingeniería de características sobre los textos; un modelo que no requiriera expertiz en el campo de la lingüística para poder se diseñado; un modelo que no necesitara tantos ejemplos de entrenamiento para poder generalizar y desempeñarse bien la tarea asignada. LEFTy cumple con estos objetivos de una forma elegante y novedosa aplicando \textit{transfer learning} a la tarea de perfilamiento de autores en el área de NLP.
+
+Este concepto permite abrir muchas puertas y se ha demostrado que esto no sólo aplica para el área de visión artificial con muchas publicaciones en el último año de laboratorios grandes como OpenAI, fastai, Google, Deep Mind, etc. La promesa que trae esta técnica a NLP permitiría aplicarse a una infinidad de tareas sin depender de muchos ejemplos, justo como se pudo apreciar con los resultados presentados sobre textos formales.
+
+Sin embargo, \textit{transfer learning} tiene compromisos que se deben tomar a pesar de todas las ventajas que provee. Una de ellas es no poder cambiar la estructura del modelo pre-entrenado de una manera muy significativa sin el riesgo de una pérdida catastrófica del aprendizaje general con el que se cuenta. Lo cual lleva también a la conclusión que se debe tener mucho cuidado al afinar un modelo general a una tarea específica en NLP ya que se tiene el mismo riesgo si se entrena de manera desenfrenada.
+
+En este trabajo se reiteran algunas técnicas de afinamiento de modelos, tanto para modelos de lenguaje como para modelos clasificadores de una tarea final, reproduciendo de manera parcial los resultados presentados por \citeauthor{howard2018}.
+
+Los resultados obtenidos en este trabajo compiten con los modelos del estado del arte y con gente que se ha dedicado por años al estudio de NLP, lingüística y su intersección como ciencias. Esto demuestra que no se debe ser persona experta para lograr aprovechar el poder del deep learning.
+
+Se presentó un modelo de lenguaje del idioma español el cual puede ser utilizado para una cantidad ilimitada de tareas y se hizo público para que pueda ser aprovechado por la comunidad científica en esta área; este ha sido descargado más de 30 veces al momento de la publicación de este trabajo.
+
+El modelo publicado también provee la ventaja de permitir una reducción de costos al entrenar modelos clasificadores futuros, ya que el mayor costo presentado en este trabajo fue el del entrenamiento del modelo de lenguaje general entrenado sobre datos de Wikipedia. Este hecho promete que el uso de aprendizaje profundo no sea prohibitivo para compañías e individuos que no tienen acceso a poder computacional masivo o incluso ilimitado como algunas compañías, lo cual se considera una contribución muy valiosa a la comunidad.
 
 \section{Trabajo futuro}
 
-Usar transformadores. Ya sea el nuevo Transformer-XL o BERT.
+Debido a que el desarrollo en esta área tiene un ritmo muy acelerado, durante la elaboración de este trabajo se realizaron más publicaciones con nuevos aportes a la comunidad científica que pueden ser de mucho valor para la aplicación específica descrita en este proyecto. A continuación se plantea el trabajo futuro a considerar:
 
-Refinar proceso de limpieza de datos. En particular detectar retuits, respuestas (ignorar mentions), etc.
+\begin{itemize}
 
-Concatenación de textos, no para avanzar la tarea específica sino el resultado para la métrica específica de PAN17.
+\item Considerar conjuntos de datos más grandes y más diversos ya que se han mostrado resultados prometedores basados en esta premisa \parencite{radford2019language}.
 
-Considerar un modelo multitask, es decir que la misma red tenga output de todas las características definidas(?).
+\item El uso de una nueva estructura llamada transformador ha tomado un auge en el año 2018 y 2019 y ha presentado nuevos resultados del estado del arte. En algunas ocasiones ha superado por un margen elevado al resultado a vencer. Esto indica que puede aportar mucho valor usar una estructura de trasnformador en lugar de una de LSTM. Los transformadores proveen ventajas como la posibilidad de ser entrenados en modalidades paralelas. Sin embargo, muchos resultados han necesitado de mucho poder computacional por lo que puede llegar a ser prohibitivo su uso.
+
+\item En este trabajo se mostró que el pre-procesamiento de los textos antes de ser alimentados al modelo no es perfecto, por lo que se deben explorar formas de refinar esto. En particular la normalización y conservación del aspecto semántico de los textos, especialmente los informales, requerirán de mayor esfuerzo y experimentación.
+
+\item Concatenación de textos, no para avanzar la tarea específica sino el resultado para la métrica específica de PAN17.
+
+\item Considerar un modelo multitask, es decir que la misma red tenga output de todas las características definidas(?).
+
+
+\end{itemize}
+
