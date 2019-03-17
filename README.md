@@ -23,6 +23,6 @@ originally created by Steve R. Gunn and modified into a template by Sunil Patel.
 - ~~Add really simple stupid explanation of DNNs to presentation~~
 - Add interesting bit about human performance on task, not what's usual
 to presentation
-- Add SpanText results comparison
+- ~Add SpanText results comparison~
 - 
 
