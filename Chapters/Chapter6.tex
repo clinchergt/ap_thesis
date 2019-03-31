@@ -26,21 +26,25 @@ El modelo publicado también provee la ventaja de permitir una reducción de cos
 
 \section{Trabajo futuro}
 
-Debido a que el desarrollo en esta área tiene un ritmo muy acelerado, durante la elaboración de este trabajo se realizaron más publicaciones con nuevos aportes a la comunidad científica que pueden ser de mucho valor para la aplicación específica descrita en este proyecto. A continuación se plantea el trabajo futuro a considerar:
+Las estrategias, técnicas y tecnologías utilizadas en este trabajo muestra un balance entre obtener resultados del estado del arte y realizar la tarea sin sobrellevar costos prohibitivos. Debido a esto, algunas técnicas no fueron utilizadas debido a limitaciones económicas o temporales y una sección de trabajo futuro es necesaria.
+
+Asimismo, debido a que el desarrollo en esta área tiene un ritmo muy acelerado, durante la elaboración de este trabajo se realizaron múltiples publicaciones con nuevos aportes a la comunidad científica que pueden ser de mucho valor para la aplicación específica descrita en este proyecto.
+
+A continuación se plantea el trabajo futuro a considerar:
 
 \begin{itemize}
 
-\item Considerar conjuntos de datos más grandes y más diversos ya que se han mostrado resultados prometedores basados en esta premisa \parencite{radford2019language}.
+\item La adición más simple que se podría hacer con el trabajo realizado es utilizar LSTMs bidireccionales. En este caso en particular significaría entrenar un modelo que evalúe los tuis con el orden inverso de las palabras y realizar un ensamble de los modelos resultantes.
+
+\item \textcite{radford2019language} han mostrado que utilizar textos más diversos y en mayores cantidades para el entrenamiento de modelos de lenguaje puede resultar en una ventaja adicional, no sólo en ese modelo en particular sino en las tareas específicas para las que después se utilizará el sistema pre-entrenado.
 
 \item El uso de una nueva estructura llamada transformador ha tomado un auge en el año 2018 y 2019 y ha presentado nuevos resultados del estado del arte. En algunas ocasiones ha superado por un margen elevado al resultado a vencer. Esto indica que puede aportar mucho valor usar una estructura de trasnformador en lugar de una de LSTM. Los transformadores proveen ventajas como la posibilidad de ser entrenados en modalidades paralelas. Sin embargo, muchos resultados han necesitado de mucho poder computacional por lo que puede llegar a ser prohibitivo su uso.
 
 \item En este trabajo se mostró que el pre-procesamiento de los textos antes de ser alimentados al modelo no es perfecto, por lo que se deben explorar formas de refinar esto. En particular la normalización y conservación del aspecto semántico de los textos, especialmente los informales, requerirán de mayor esfuerzo y experimentación.
 
-\item Concatenación de textos, no para avanzar la tarea específica sino el resultado para la métrica específica de PAN17.
+\item Para este trabajo se clasificaron los tuits individualmente, sin embargo existía la posibilidad de utilizar concatenación de textos y evaluar sobre el texto resultante para cada autor. Se podría usar este abordamiento al problema y evaluar si se obtiene mejor desempeño. Esto tendría el propósito de mejorar la posición en una competencia y no de avanzar el campo en esta tarea en específico.
 
-\item Considerar un modelo multitask, es decir que la misma red tenga output de todas las características definidas(?).
-
-\item Usar LSTMs bidireccionales.
+\item Muchos avances se han realizado en los últimos años con respecto a modelos multi-tarea (multitask) --- los cuales son modelos que tienen la capacidad de realizar múltiples predicciones, cada una de una tarea independiente. Tener solamente un modelo resultaría en menores tiempos de inferencia y menores requerimientos de memoria en el servidor donde se monte el sistema de predicción.
 
 
 \end{itemize}
