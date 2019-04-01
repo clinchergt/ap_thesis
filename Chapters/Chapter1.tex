@@ -51,34 +51,34 @@ La técnica de \emph{transfer learning} ha permitido muchos avances en el área 
 
 \section{Planteamiento del problema}
 
-En el área de NLP han existido técnicas poderosas por décadas que abusan de algunas suposiciones que no siempre son ciertas y se basan en simples métodos estadísticos que asignan valores a características del texto \parencite{Edmundson1969, kupiec1995trainable}. El campo también ha dependido de ingeniería de características en los datos, lo cual significa que hay esfuerzos activos serios en analizar cada sub-tarea a fondo y determinar cuáles serían los mejores determinantes de un resultado deseado, p.e. las características principales que determinan la categoría que se le debe asignar un texto \parencite{aggarwal2012mining}.
+En el área de NLP han existido técnicas poderosas por décadas que abusan de algunas suposiciones que no siempre reflejan la realidad y se basan en simples métodos estadísticos que asignan valores a características del texto \parencite{Edmundson1969, kupiec1995trainable}. El campo también ha dependido de ingeniería de características en los datos, lo cual significa que se realiza un esfuerzos activo y serio en analizar cada sub-tarea a fondo para determinar cuáles son los mejores determinantes de un resultado deseado, p.e. las características principales que determinan la categoría que se le debe asignar a un texto \parencite{aggarwal2012mining}.
 
 \begin{figure}
 \includegraphics[scale=1.0]{Figures/projectstruct.pdf}
-\caption{Estructura del proyecto planteado en este trabajo de investigación. La figura está diseñada para propósitos ilustrativos. \textit{LM} denota el modelo de lenguaje el cual es preentrenado con texto de wikipedia, lo cual es un paso previo.}
+\caption{Estructura del proyecto planteado en este trabajo de investigación. La figura está diseñada para propósitos ilustrativos. \textit{LM} denota el modelo de lenguaje el cual es pre-entrenado con texto de \textit{Wikipedia}, lo cual es un paso previo.}
 \label{fig:projstruct}
 \end{figure}
 
-En áreas como mercadeo y ciencias forenses hay una necesidad de identificar textos escritos por autores desconocidos, obtener características de los mismos y poder categorizarlos de forma no manual. Esto con el fin de poder, en el caso de mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropiada \parencite{aggarwal2012mining}. En el área forense con el fin de identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
+En campos como el mercadeo y las ciencias forenses hay una necesidad de identificar textos escritos a los cuales no se les ha atribuido un autor y obtener características de los mismos para poder categorizarlos de forma automática. Esto con el fin de poder, en el caso del mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropiada \parencite{aggarwal2012mining}; en el área forense con el fin de identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
 
 Existe fundamento lingüístico del hecho de poder identificar a una persona por su lenguaje, ya sea de manera escrita u oral \parencite{coulthard2004author, louwerse2004semantic}. El concepto de \textit{idiolecto} y \textit{sociolecto} nos permitirá poder realizar predicciones de manera precisa.
 
-Habiendo planteado lo anterior, la necesidad de un sistema automatizado sea capaz de no sólo extraer información de un texto anónimo de forma precisa y confiable, sino de también hacerlo sin necesidad de un agente experto y de hacer una ingeniería de características claves para cada posible parámetro que se quiera obtener de los textos.
+Después de analizar lo planteado anteriormente, se ve la necesidad de que un sistema automatizado sea capaz de no sólo extraer información de un texto anónimo de forma precisa y confiable, sino de también hacerlo sin necesidad de un agente experto o realizar una ingeniería de características claves para cada posible parámetro que se quiera obtener de los textos.
 
-De esto sigue que los requisitos para este proyecto sean los siguientes:
+A partir de esta conclusión los requisitos para este proyecto son los siguientes:
 
 \begin{itemize}
-\item Permitir elegir datos a obtener de un texto anónimo (siempre y cuando se tenga la información disponible).
+\item Permitir la categorización de textos a partir de diferentes características.
 \item Realizar el entrenamiento para obtener los datos de forma rápida y con demandas de hardware modestas.
 \item Una vez el entrenamiento esté completo, permitir realizar predicciones sobre textos anónimos con los datos a obtener elegidos.
 \item Permitir la automatización de predicciones ofreciendo un servicio web fácil de consultar.
 \end{itemize}
 
-La figura \ref{fig:projstruct} muestra la estructura del proyecto planteado, el cual llenaría los requisitos expuestos en esta sección de forma ilustrativa. El flujo de la información tendría esa forma y las predicciones mostradas son ejemplos de posibilidades.
+La figura \ref{fig:projstruct} muestra la estructura del proyecto planteado, el cual llenaría los requisitos expuestos en esta sección. El flujo de la información tendría la forma ilustrada en la figura y las predicciones mostradas son ejemplos de categorizaciones.
 
 \section{Resumen}
 
-El proyecto deberá tener la flexibilidad de poder adaptarse a las necesidades del caso de uso espcífico que se le dé y a la vez tener la capacidad predictiva de un modelo del estado del arte. El modelo utilizará tecnologías de aprendizaje profundo por ser la tecnología más prometedora en este campo.
+El proyecto deberá tener la flexibilidad de poder adaptarse a las necesidades del caso de uso específico que se le dé y a la vez tener la capacidad predictiva de un modelo del estado del arte. El modelo utilizará tecnologías de aprendizaje profundo por ser la tecnología más prometedora en este campo.
 
 
 
