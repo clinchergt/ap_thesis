@@ -22,6 +22,32 @@
 
 %----------------------------------------------------------------------------------------
 
+\section{Introducción}
+
+Los campos de \emph{\gls{machine learning}} (aprendizaje de máquinas) y \emph{\gls{deep learning}} (\gls{aprendizaje profundo}) \parencite{lecun2015deep} no son para nada nuevos, pero se han vuelto una gran sensación en los últimos años, cada vez ganando más popularidad. Los primeros conceptos desarrollados en el campo tienen décadas de antigüedad. La primer \gls{red neuronal} --- la base del modelo a utilizar en este trabajo y la base del campo del aprendizaje profundo --- fue planteada en los años 80. ¿Qué, entonces, ha cambiado en los últimos años que ha generado una explosión en el área? La disponibilidad de los datos y la accesibilidad a poder computacional \parencite{jordan2015machine}. Con el surgimiento y la penetración cada vez más alta del internet se han abierto las puertas a una cantidad de datos nunca antes vista.
+
+La revolución de los datos ha llevado a la comunidad científica y a las industrias a recolectar grandes cantidades de datos e información y organizarlos de forma que se puedan interpretar y se pueda obtener valor de la misma.
+
+Los sistemas de aprendizaje profundo necesitan pasar por una fase de aprendizaje (comúnmente llamada fase de \gls{entrenamiento}) y estos modelos tienen la característica de necesitar cantidades masivas de datos para poder generalizar bien lo aprendido en esta etapa. Esto combinado con la explosión de datos ha llevado a que el campo tenga un surgimiento en todas las áreas de software, mostrando mucha promesa en algunos campos en específico como \gls{cv} \parencite{hoo2016deep} y en NLP.
+
+Conforme ha avanzado el campo se ha determinado que para algunas tareas en específico no se cuenta con la cantidad necesaria para poder obtener un modelo competente. Esto ha llevado al desarrollo de una técnica llamada transfer learning que permite utilizar conocimiento previamente obtenido al resolver una tarea general y aplicarlo a una tarea relacionada mediante proceso de ajuste. Esta fase requiere de una cantidad de datos considerablemente menor a entrenar un modelo completamente desde cero.
+
+La técnica de transfer learning ha permitido muchos avances en el área de \gls{cv} específicamente \parencite{hoo2016deep}. Este trabajo intenta mostrar la habilidad que se tiene de aplicar este concepto en un área distinta, puntualmente el campo de NLP y específicamente en la tarea de \gls{perfilamiento de autores}.
+
+\section{Hipótesis}
+
+La hipotesis que este trabajo pretende abordar es la siguiente: \textbf{La aplicación de transfer learning en la tarea de perfilamiento de autores provee una ventaja en desempeño medible.} Esta se desglosa en los siguientes aspectos:
+
+\begin{itemize}
+\item \textbf{Aplicabilidad de deep learning en la tarea}. La hipótesis se basa en el hecho de que conceptos de deep learning sean aplicables a tareas del campo de NLP. En el campo de NLP se ha tenido mucha duda si deep learning tiene la capacidad de penetrar el campo con soluciones eficaces.
+
+\item \textbf{Transfer learning provee ventaja de desempeño en la tarea}. El hecho de mostrar que hay una ventaja implica poder medir de forma empírica los resultados obtenidos por diferentes técnicas. Con este fin, se utilizarán resultados publicados por investigadores de este campo y se usarán las mismas métricas para que los resultados sean directamente comparables.
+
+\item \textbf{Diferencia en cantidad de datos disponibles}. Se debe fundamentar que la cantidad de datos necesaria para el uso de deep learning es más elevado del que se necesita si se utiliza transfer learning.
+\end{itemize}
+
+%-----------------------------------------------------------------------------------------
+
 \section{Objetivo General}
 
 Aplicar conceptos del estado del arte a un problema que ha recibido poca atención en el área de \gls{procesamiento de lenguaje natural} (\gls{nlp}, por sus siglas en inglés). Esto con el propósito de mostrar la capacidad de las redes neuronales recurrentes (\glspl{rnn}) y \textit{\gls{transfer learning}} en la tarea específica.
@@ -36,18 +62,6 @@ Aplicar conceptos del estado del arte a un problema que ha recibido poca atenci�
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
-
-\section{Introducción}
-
-Los campos de \emph{\gls{machine learning}} (aprendizaje de máquinas) y \emph{\gls{deep learning}} (\gls{aprendizaje profundo}) \parencite{lecun2015deep} no son para nada nuevos, pero se han vuelto una gran sensación en los últimos años, cada vez ganando más popularidad. Los primeros conceptos desarrollados en el campo tienen décadas de antigüedad. La primer \gls{red neuronal} --- la base del modelo a utilizar en este trabajo y la base del campo del aprendizaje profundo --- fue planteada en los años 80. ¿Qué, entonces, ha cambiado en los últimos años que ha generado una explosión en el área? La disponibilidad de los datos y la accesibilidad a poder computacional \parencite{jordan2015machine}. Con el surgimiento y la penetración cada vez más alta del internet se han abierto las puertas a una cantidad de datos nunca antes vista.
-
-La revolución de los datos ha llevado a la comunidad científica y a las industrias a recolectar grandes cantidades de datos e información y organizarlos de forma que se puedan interpretar y se pueda obtener valor de la misma.
-
-Los sistemas de aprendizaje profundo necesitan pasar por una fase de aprendizaje (comúnmente llamada fase de \gls{entrenamiento}) y estos modelos tienen la característica de necesitar cantidades masivas de datos para poder generalizar bien lo aprendido en esta etapa. Esto combinado con la explosión de datos ha llevado a que el campo tenga un surgimiento en todas las áreas de software, mostrando mucha promesa en algunos campos en específico como \gls{cv} \parencite{hoo2016deep} y en NLP.
-
-Conforme ha avanzado el campo se ha determinado que para algunas tareas en específico no se cuenta con la cantidad necesaria para poder obtener un modelo competente. Esto ha llevado al desarrollo de una técnica llamada transfer learning que permite utilizar conocimiento previamente obtenido al resolver una tarea general y aplicarlo a una tarea relacionada mediante proceso de ajuste. Esta fase requiere de una cantidad de datos considerablemente menor a entrenar un modelo completamente desde cero.
-
-La técnica de transfer learning ha permitido muchos avances en el área de \gls{cv} específicamente \parencite{hoo2016deep}. Este trabajo intenta mostrar la habilidad que se tiene de aplicar este concepto en un área distinta, puntualmente el campo de NLP y específicamente en la tarea de \gls{perfilamiento de autores}.
 
 \section{Planteamiento del problema}
 
