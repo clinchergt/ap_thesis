@@ -15,7 +15,7 @@ En el área de aprendizaje (profundo) artificial existen dos tipos básicos de p
 
 Cuando los datos --- ya sea información tabulada, imágenes, textos --- no tienen ninguna categoría asociada o ningún valor a predecir y lo que se desea es obtener información no específica, es decir sin tener alguna referencia, se trata de un aprendizaje no supervisado.
 
-Si los datos, por otro lado, tienen una clasificación  --- llamada etiqueta --- asignada, la cual a futuro es el resultado a predecir, los métodos a utilizar son los del aprendizaje supervisado. Debido a que el problema a abordar en este trabajo es un problema de clasificación, el resto del fundamento teórico será basado en este tipo de contexto.
+Si los datos, por otro lado, tienen una clasificación  --- llamada etiqueta --- asignada, la cual a futuro es el resultado a predecir, los métodos a utilizar son los del \gls{aprendizaje supervisado}. Debido a que el problema a abordar en este trabajo es un problema de clasificación, el resto del fundamento teórico será basado en este tipo de contexto.
 
 El aprendizaje supervisado puede entonces ser descrito como una función $f : X \to Y$ donde $X$ representa los datos con los que se alimenta la función, es decir las características que utilizará el modelo para inferir, y $Y$ el resultado asignado o a predecir.
 
@@ -53,7 +53,7 @@ Donde
 
 Este proceso de utilizar el descenso de gradiente a través de las instancias nos permite  minimizar el error de la función hasta poder deducir la función que muestra el menor error, lo cual fue descrito como el objetivo principal.
 
-\textbf{La tasa de aprendizaje.} La velocidad de convergencia de este proceso dependerá en gran parte de $\gamma$ que representa la tasa de aprendizaje; específicamente es la ponderación que se le da al componente del gradiente cuando se propone la nueva función. Un $\gamma$ muy alto arriesga una divergencia debido a que podría oscilar alrededor de un mínimo sin nunca poder converger en él. Un $\gamma$ muy bajo, por el otro lado, puede resultar en un aprendizaje muy lento, lo cual puede llevar a un resultado no óptimo debido a limitaciones de recursos. Este concepto será importante en capítulos posteriores de este trabajo.
+\textbf{La \gls{tasa de aprendizaje}.} La velocidad de convergencia de este proceso dependerá en gran parte de $\gamma$ que representa la tasa de aprendizaje; específicamente es la ponderación que se le da al componente del gradiente cuando se propone la nueva función. Un $\gamma$ muy alto arriesga una divergencia debido a que podría oscilar alrededor de un mínimo sin nunca poder converger en él. Un $\gamma$ muy bajo, por el otro lado, puede resultar en un aprendizaje muy lento, lo cual puede llevar a un resultado no óptimo debido a limitaciones de recursos. Este concepto será importante en capítulos posteriores de este trabajo.
 
 \section{Redes neuronales}
 
@@ -101,7 +101,7 @@ Donde $\mathbf{W_4}$ es una matriz de parámetros de la cuarta capa, $\mathbf{W_
 
 Este tipo de redes tienen la peculiaridad que se alimentan no solamente de los resultados de las funciones de activación de las capas anteriores sino también del resultado de la instancia previamente evaluada; para datos evaluados en en un tiempo $t$ la definición sería $h_t = f_{\theta}(h_{t-1}, x_t)$. Este tipo de estructura de red neuronal es aplicado a conjuntos de datos secuenciales como lo es el procesamiento de textos --- textos cuya representación consiste en una secuencia de palabras representadas de forma vectorial --- y procesamiento de secuencias de señales.
 
-Se debe aclarar para esta estructura de red neuronal también existen distintas extensiones. El subtipo relevante para este trabajo de investigación es la red LSTM (Long Short Term Memory -- memoria corta a largo plazo). Estas redes tienen un dato en memoria en cada una de las unidades de la red. Los parámetros con los que se decide si se reemplaza lo que está en memoria en esa celda en ese momento son entrenados de la misma manera con el mecanismo de propagación hacia atrás.
+Se debe aclarar para esta estructura de red neuronal también existen distintas extensiones. El subtipo relevante para este trabajo de investigación es la red \gls{lstm} -- memoria corta a largo plazo. Estas redes tienen un dato en memoria en cada una de las unidades de la red. Los parámetros con los que se decide si se reemplaza lo que está en memoria en esa celda en ese momento son entrenados de la misma manera con el mecanismo de propagación hacia atrás.
 
 Los mecanismos de propagación hacia adelante y hacia atrás permanecen iguales pero se deberán tomar en cuenta adicionalmente las puertas (\textit{gates}) con sus funciones de activación. Estas son definidas como la función sigmoide, la cual es continua y tiene un contradominio de $[0,1]$ lo cual la hace derivable en todos sus puntos.
 
@@ -123,7 +123,7 @@ Esto funciona ya que limita el crecimiento de los parámetros, el cual desenfren
 Un proyecto de aprendizaje profundo con redes neuronales lleva por lo general el mismo conjunto de pasos para poder llegar a un resultado cercano a lo óptimo. Los pasos a seguir son los siguientes:
 
 \begin{itemize}
-\item \textbf{Obtención de datos:} Dependiendo del problema a resolver, estos datos podrán tomar distintas formas y los métodos para obtenerlos podrán variar en gran manera. Para que una red neuronal pueda generalizar de forma exitosa lo aprendido durante la fase de entrenamiento es importante tener una muestra representativa del escenario real del problema a resolver y tener una cantidad elevada de datos. Métodos comunes incluyen recolección y etiquetación manual, descarga de \textit{corpora} de internet y \textit{scraping} de la web.
+\item \textbf{Obtención de datos:} Dependiendo del problema a resolver, estos datos podrán tomar distintas formas y los métodos para obtenerlos podrán variar en gran manera. Para que una red neuronal pueda generalizar de forma exitosa lo aprendido durante la fase de entrenamiento es importante tener una muestra representativa del escenario real del problema a resolver y tener una cantidad elevada de datos. Métodos comunes incluyen recolección y etiquetación manual, descarga de \textit{corpora} de internet y \textit{\gls{scraping}} de la web.
 
 \item \textbf{Análisis y preparación de los datos:} Los datos obtenidos en el primer paso pueden llegar a tener características mínimas no deseadas, las cuales pueden añadir ruido a la representación que estos datos dan. Debido a esto es importante tratar los datos de manera que se eliminen datos que sesguen mucho los posibles modelos, datos faltantes, datos con formato inconsistente, e incluso considerar la posibildad de eliminar características completas. En esta fase también se separarán los datos en distintos segmentos que después serán útiles para determinar la eficacia del modelo resultante. Estos segmentos son los datos de \textit{entrenamiento}, \textit{validación} y \textit{prueba}. La proporción de cada uno de estos puede variar y lo recomendado es que la distribución de cada uno de ellos sea la misma. De no ser posible esto, hacer que al menos los segmentos de validación y prueba tengan la misma distribución.
 
@@ -149,12 +149,11 @@ En esta sección se definen conceptos varios que son mencionados y utilizados en
 
 \textbf{Desequilibrio de clases.} Cuando en un problema de clasificación uno de los resultados es mucho más común que el resto se dice que hay un problema de desequilibrio de clases. Esto puede llevar a complicaciones en la generalización del modelo o en la evaluación del desempeño del mismo.
 
-\textbf{Matriz de confusión.} En problemas de clasificación se tienen distintas medidas de las cuales la más común es la precisión del modelo. Esta medida puede no llegar a ser muy representativa del desempeño del modelo. Una situación en donde esto se podría manifestar es cuando los datos que representan el problema tienen un problema de desequilibrio de clases. Si la tasa de desequilibrio es demasiado alta, es posible predecir únicamente una clase con un modelo y obtener una precisión del modelo bastante elevada a pesar de que el modelo no está prediciendo nada. Debido a esto es importante tener en cuenta más herramientas de retroalimentación. Algunos ejemplos de ellas son:
+\textbf{\gls{matriz de confusion}.} En problemas de clasificación se tienen distintas medidas de las cuales la más común es la precisión del modelo. Esta medida puede no llegar a ser muy representativa del desempeño del modelo. Una situación en donde esto se podría manifestar es cuando los datos que representan el problema tienen un problema de desequilibrio de clases. Si la tasa de desequilibrio es demasiado alta, es posible predecir únicamente una clase con un modelo y obtener una precisión del modelo bastante elevada a pesar de que el modelo no está prediciendo nada. Debido a esto es importante tener en cuenta más herramientas de retroalimentación. Algunos ejemplos de ellas son:
 
 \begin{itemize}
 \item Exhaustividad
 \item Métrica de $F_{\beta}$
-\item Matriz de confusión
 \item Curvas ROC
 \end{itemize}
 

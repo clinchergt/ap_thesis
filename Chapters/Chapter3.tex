@@ -46,18 +46,18 @@ La tarea general en NLP para tener un modelo base ha sido la tarea del modelo de
 
 Un corpus que cumple con los requisitos mencionados sería la versión de Wikipedia en el lenguaje deseado. La enciclopedia virtual abarca muchos temas y tiene una diversidad incomparable de vocabulario. Este incluso deberá ser limitado a una cantidad $T$ de tokens. En futuros trabajos se deberá explorar la posibilidad de utilizar distintos corpora.
 
-El modelo de lenguaje es entrenado usando redes neuronales recurrentes en alguna variante que se considere prudente. Una red LSTM o una QRNN \parencite{bradbury2016} son ideales para propósitos de este trabajo y han mostrado los mejores resultados del estado del arte en modelos de lenguaje.
+El modelo de lenguaje es entrenado usando redes neuronales recurrentes en alguna variante que se considere prudente. Una red LSTM o una \gls{qrnn} \parencite{bradbury2016} son ideales para propósitos de este trabajo y han mostrado los mejores resultados del estado del arte en modelos de lenguaje.
 
 \subsection{ULMFiT}
 
-Esta técnica expuesta originalmente por \textcite{howard2018} en su curso de aprendizaje profundo fue publicado para plantear el algoritmo de forma más formal y con estudios de ablación demostrar que cada aspecto de los pasos es esencial para obtener los mejores resultados. La técnica de ULMFiT se divide en dos fases \parencite{howard2018} las cuales se explicarán a continuación.
+Esta técnica expuesta originalmente por \textcite{howard2018} en su curso de aprendizaje profundo fue publicado para plantear el algoritmo de forma más formal y con estudios de ablación demostrar que cada aspecto de los pasos es esencial para obtener los mejores resultados. La técnica de \gls{ulmfit} se divide en dos fases \parencite{howard2018} las cuales se explicarán a continuación.
 
 \subsubsection{Afinación de modelo de lenguaje}
 \label{lmftune}
 
 Esta fase de la técnica consiste en tomar el modelo de lenguaje general y afinarlo para que esté orientado a la tarea final específica con la que se trabajará. Esto se logra utilizando los datos de la tarea final para formar un texto sobre el cual se terminará de entrenar. Para lograr este afinamiento de la mejor manera se utilizan diferentes técnicas.
 
-\textbf{Afinamiento discriminatorio.} Esta técnica llamada \emph{discriminative fine-tuning} en el artículo original consta en usar una tasa de aprendizaje diferente a lo largo de las capas. Es decir, cada capa tiene asignada una tasa de aprendizaje distinta. Se define entonces que los parámetros serán divididos en ${\theta^1, \ldots, \theta^L}$ donde $L$ es el número de capas y $\theta^t$ es el conjunto de parámetros de la capa $l$. La actualización de los parámetros entonces, basado en la ecuación \ref{eq:sgdupdate}:
+\textbf{Afinamiento discriminatorio.} Esta técnica llamada \textit{fine-tuning} en el artículo original consta en usar una tasa de aprendizaje diferente a lo largo de las capas. Es decir, cada capa tiene asignada una tasa de aprendizaje distinta. Se define entonces que los parámetros serán divididos en ${\theta^1, \ldots, \theta^L}$ donde $L$ es el número de capas y $\theta^t$ es el conjunto de parámetros de la capa $l$. La actualización de los parámetros entonces, basado en la ecuación \ref{eq:sgdupdate}:
 
 \begin{equation}
 \label{eq:discupdate}

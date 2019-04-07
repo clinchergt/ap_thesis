@@ -24,12 +24,12 @@
 
 \section{Objetivo General}
 
-Aplicar conceptos del estado del arte a un problema que ha recibido poca atención en el área de procesamiento de lenguaje natural (NLP, por sus siglas en inglés). Esto con el propósito de mostrar la capacidad de las redes neuronales recurrentes (RNN) y \emph{transfer learning} en la tarea específica.
+Aplicar conceptos del estado del arte a un problema que ha recibido poca atención en el área de \gls{procesamiento de lenguaje natural} (\gls{nlp}, por sus siglas en inglés). Esto con el propósito de mostrar la capacidad de las redes neuronales recurrentes (\glspl{rnn}) y \textit{\gls{transfer learning}} en la tarea específica.
 
 \subsection{Objetivos específicos}
 
 \begin{itemize}
-\item Ser pionero en la aplicación de \emph{transfer learning} en la tarea específica de perfilamiento de autores en el área de procesamiento de lenguaje natural.
+\item Ser pionero en la aplicación de transfer learning en la tarea específica de perfilamiento de autores en el área de procesamiento de lenguaje natural.
 \item Exponer las ventajas y desventajas de utilizar esta tecnología en esta subtarea.
 \item Exponer como caso de uso la utilidad de esta aplicación en distintas áreas, como en el mercadeo.
 \item Contribuir a la academia en este campo con los resultados obtenidos
@@ -39,19 +39,19 @@ Aplicar conceptos del estado del arte a un problema que ha recibido poca atenci�
 
 \section{Introducción}
 
-Los campos de \emph{Machine Learning} (aprendizaje de máquinas) y \emph{Deep Learning} (aprendizaje profundo) \parencite{lecun2015deep} no son para nada nuevos, pero se han vuelto una gran sensación en los últimos años, cada vez ganando más popularidad. Los primeros conceptos desarrollados en el campo tienen décadas de antigüedad. La primer red neuronal --- la base del modelo a utilizar en este trabajo y la base del campo del aprendizaje profundo --- fue planteada en los años 90. ¿Qué, entonces, ha cambiado en los últimos años que ha generado una explosión en el área? La disponibilidad de los datos y la accesibilidad a poder computacional \parencite{jordan2015machine}. Con el surgimiento y la penetración cada vez más alta del internet se han abierto las puertas a una cantidad de datos nunca antes vista.
+Los campos de \emph{\gls{machine learning}} (aprendizaje de máquinas) y \emph{\gls{deep learning}} (\gls{aprendizaje profundo}) \parencite{lecun2015deep} no son para nada nuevos, pero se han vuelto una gran sensación en los últimos años, cada vez ganando más popularidad. Los primeros conceptos desarrollados en el campo tienen décadas de antigüedad. La primer \gls{red neuronal} --- la base del modelo a utilizar en este trabajo y la base del campo del aprendizaje profundo --- fue planteada en los años 80. ¿Qué, entonces, ha cambiado en los últimos años que ha generado una explosión en el área? La disponibilidad de los datos y la accesibilidad a poder computacional \parencite{jordan2015machine}. Con el surgimiento y la penetración cada vez más alta del internet se han abierto las puertas a una cantidad de datos nunca antes vista.
 
 La revolución de los datos ha llevado a la comunidad científica y a las industrias a recolectar grandes cantidades de datos e información y organizarlos de forma que se puedan interpretar y se pueda obtener valor de la misma.
 
-Los sistemas de aprendizaje profundo necesitan pasar por una fase de aprendizaje (comúnmente llamada fase de entrenamiento) y estos modelos tienen la característica de necesitar cantidades masivas de datos para poder generalizar bien lo aprendido en esta etapa. Esto combinado con la explosión de datos ha llevado a que el campo tenga un surgimiento en todas las áreas de software, mostrando mucha promesa en algunos campos en específico como \emph{Computer Vision} (visión de computadoras, CV) \parencite{hoo2016deep} y en NLP.
+Los sistemas de aprendizaje profundo necesitan pasar por una fase de aprendizaje (comúnmente llamada fase de \gls{entrenamiento}) y estos modelos tienen la característica de necesitar cantidades masivas de datos para poder generalizar bien lo aprendido en esta etapa. Esto combinado con la explosión de datos ha llevado a que el campo tenga un surgimiento en todas las áreas de software, mostrando mucha promesa en algunos campos en específico como \gls{cv} \parencite{hoo2016deep} y en NLP.
 
-Conforme ha avanzado el campo se ha determinado que para algunas tareas en específico no se cuenta con la cantidad necesaria para poder obtener un modelo competente. Esto ha llevado al desarrollo de una técnica llamada \emph{Transfer Learning} que permite utilizar un modelo previamente entrenado en una tarea más general que la deseada así como realizar ajustes específicos para una tarea de un dominio más acotado. Este proceso de ajuste requiere de una cantidad de datos considerablemente menor a entrenar un modelo completamente desde cero.
+Conforme ha avanzado el campo se ha determinado que para algunas tareas en específico no se cuenta con la cantidad necesaria para poder obtener un modelo competente. Esto ha llevado al desarrollo de una técnica llamada transfer learning que permite utilizar conocimiento previamente obtenido al resolver una tarea general y aplicarlo a una tarea relacionada mediante proceso de ajuste. Esta fase requiere de una cantidad de datos considerablemente menor a entrenar un modelo completamente desde cero.
 
-La técnica de \emph{transfer learning} ha permitido muchos avances en el área de CV específicamente \parencite{hoo2016deep}. Este trabajo intenta mostrar la habilidad que se tiene de aplicar este concepto en un área distinta, puntualmente el campo de NLP y específicamente en la tarea de perfilamiento de autores.
+La técnica de transfer learning ha permitido muchos avances en el área de \gls{cv} específicamente \parencite{hoo2016deep}. Este trabajo intenta mostrar la habilidad que se tiene de aplicar este concepto en un área distinta, puntualmente el campo de NLP y específicamente en la tarea de \gls{perfilamiento de autores}.
 
 \section{Planteamiento del problema}
 
-En el área de NLP han existido técnicas poderosas por décadas que abusan de algunas suposiciones que no siempre reflejan la realidad y se basan en simples métodos estadísticos que asignan valores a características del texto \parencite{Edmundson1969, kupiec1995trainable}. El campo también ha dependido de ingeniería de características en los datos, lo cual significa que se realiza un esfuerzos activo y serio en analizar cada sub-tarea a fondo para determinar cuáles son los mejores determinantes de un resultado deseado, p.e. las características principales que determinan la categoría que se le debe asignar a un texto \parencite{aggarwal2012mining}.
+En el área de NLP han existido técnicas poderosas por décadas que abusan de algunas suposiciones que no siempre reflejan la realidad y se basan en simples métodos estadísticos que asignan valores a características del texto \parencite{Edmundson1969, kupiec1995trainable}. El campo también ha dependido de \gls{ingenieria de caracteristicas} en los datos, lo cual significa que se realiza un esfuerzos activo y serio en analizar cada sub-tarea a fondo para determinar cuáles son los mejores determinantes de un resultado deseado, p.e. las características principales que determinan la categoría que se le debe asignar a un texto \parencite{aggarwal2012mining}.
 
 \begin{figure}
 \includegraphics[scale=1.0]{Figures/projectstruct.pdf}
@@ -59,9 +59,9 @@ En el área de NLP han existido técnicas poderosas por décadas que abusan de a
 \label{fig:projstruct}
 \end{figure}
 
-En campos como el mercadeo y las ciencias forenses hay una necesidad de identificar textos escritos a los cuales no se les ha atribuido un autor y obtener características de los mismos para poder categorizarlos de forma automática. Esto con el fin de poder, en el caso del mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropiada \parencite{aggarwal2012mining}; en el área forense con el fin de identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
+En campos como el mercadeo y las ciencias forenses hay una necesidad de identificar textos escritos a los cuales no se les ha atribuido un autor y obtener características de los mismos para poder catalogarlos de forma automática. Esto con el fin de poder, en el caso del mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropiada \parencite{aggarwal2012mining}; en el área forense con el fin de identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
 
-Existe fundamento lingüístico del hecho de poder identificar a una persona por su lenguaje, ya sea de manera escrita u oral \parencite{coulthard2004author, louwerse2004semantic}. El concepto de \textit{idiolecto} y \textit{sociolecto} nos permitirá poder realizar predicciones de manera precisa.
+Existe fundamento lingüístico del hecho de poder identificar a una persona por su lenguaje, ya sea de manera escrita u oral \parencite{coulthard2004author, louwerse2004semantic}. El concepto de \textit{\gls{idiolecto}} y \textit{\gls{sociolecto}} nos permitirá poder realizar predicciones de manera precisa.
 
 Después de analizar lo planteado anteriormente, se ve la necesidad de que un sistema automatizado sea capaz de no sólo extraer información de un texto anónimo de forma precisa y confiable, sino de también hacerlo sin necesidad de un agente experto o realizar una ingeniería de características claves para cada posible parámetro que se quiera obtener de los textos.
 

@@ -62,6 +62,8 @@ table,
 
 \setcounter{secnumdepth}{3} % Para que las subsubsections tengan número
 
+\usepackage[automake,toc]{glossaries}
+
 \makeatletter
 \newcommand{\tblshort}{\let\blx@imc@ifciteseen\@firstoftwo}
 \makeatother
@@ -106,6 +108,169 @@ table,
 %\hypersetup{urlcolor=blue} % URL color
 \hypersetup{colorlinks=false} % URL color
 }
+
+
+\makeglossaries
+%\GlsXtrEnablePreLocationTag{(p. }{(pp. }
+%\renewcommand{\GlsXtrFormatLocationList}[1]{#1)}
+%-------------------------------
+% 	GLOSSARY
+%-------------------------------
+\newglossaryentry{transfer learning}
+{
+    name={transfer learning},
+    description={También conocido como transferencia de aprendizaje, se refiere al concepto de aprovechar conocimiento previamente adquirido en un modelo y aplicarlo en una tarea diferente pero relacionada --- generalmente esta es una tarea más específica y/o acotada}
+}
+
+\newglossaryentry{procesamiento de lenguaje natural}
+{
+    name={Natural Language Processing},
+    description={ Es el campo de las ciencias de computación e inteligencia artificial que  maneja las interacciones entre computadoras y lenguajes naturales humanos, puntualmente en cómo procesar estos lenguajes}
+}
+
+\newglossaryentry{machine learning}
+{
+    name={machine learning},
+    description={ Es el campo que se encarga de estudiar algoritmos y modelos estadísticos y aplicarlos para resolver una tarea sin tener la necesidad de utilizar instrucciones explicitas relacionadas a la misma}
+}
+
+\newglossaryentry{aprendizaje profundo}
+{
+    name={aprendizaje profundo},
+    description={ ver deep learning}
+}
+
+\newglossaryentry{deep learning}
+{
+    name={deep learning},
+    description={ Conjunto de técnicas que buscan resolver tareas a partir del aprendizaje de representación de datos. Área caracterizada por el uso de redes neuronales de arquitectura profunda}
+}
+
+\newglossaryentry{red neuronal}
+{
+    name={red neuronal},
+    description={ Arquitectura que consta de unidades (neuronas) conectadas entre sí. Estas redes están ordenadas por capas, donde la capa de salida define a qué tipo de problema se pueden aplicar. Las redes neuronales se ha demostrado que son aproximadores universales}
+}
+
+\newglossaryentry{recurrent neural network}
+{
+    name={Recurrent Neural Networks},
+    description={ Tipo de arquitectura de red neuronal que permite tener un sentido de temporalidad o secuencia. Esta arquitectura es aplicada generalmente a problemas de lenguaje natural o procesamiento de señales}
+}
+
+\newglossaryentry{entrenamiento}
+{
+    name={entrenamiento},
+    description={ Fase de aprendizaje de algún modelo. En esta fase se alimentan ejemplos con su debido resultado esperado y permite que con la retroalimentación de una función de perdida o de error el modelo mejore su desempeño}
+}
+
+\newglossaryentry{computer vision}
+{
+    name={computer vision},
+    description={ El campo que se encarga del procesamiento de datos en formato de imagen}
+}
+
+\newglossaryentry{perfilamiento de autores}
+{
+    name={perfilamiento de autores},
+    description={ La tarea de extraer caraceterísticas de un autor basado en un texto escrito por el mismo}
+}
+
+\newglossaryentry{ingenieria de caracteristicas}
+{
+    name={ingeniería de características},
+    description={ Proceso de elección de características esenciales para resolver un problema. Generalmente realizado por un experto del campo}
+}
+
+\newglossaryentry{sociolecto}
+{
+    name={sociolecto},
+    description={ Conjunto de características de una variante de lenguaje que comparte un subconjunto de hablantes relacionados por estatus social, etc}
+}
+
+\newglossaryentry{idiolecto}
+{
+    name={idiolecto},
+    description={ Conjunto de características que identifican la variante de lenguaje para un individuo}
+}
+
+\newglossaryentry{aprendizaje supervisado}
+{
+    name={aprendizaje supervisado},
+    description={ Proceso a tomar cuando se tiene un conjunto de datos y un resultado esperado asociado a cada uno de ellos. Uno de los dos tipos principales de problema en machine learning}
+}
+
+\newglossaryentry{tasa de aprendizaje}
+{
+    name={tasa de aprendizaje},
+    description={ Ponderación que determina la magnitud en la que debe afectar el gradiente de una función de pérdida a los nuevos parámetros propuestos. Es responsable del ritmo y velocidad con la que se entrena una red neuronal}
+}
+
+\newglossaryentry{scraping}
+{
+    name={scraping},
+    description={ El proceso de obtención de datos, generalmente de una página web, a partir de información desplegada por otro programa}
+}
+
+\newglossaryentry{matriz de confusion}
+{
+    name={matriz de confusión},
+    text={Matriz de confusión},
+    description={ Forma de presentar los resultados de un modelo clasificador. Permite encontrar distintos de error de forma muy eficiente}
+}
+
+\newglossaryentry{ulmfit}
+{
+    name={ULMFiT},
+    description={ Universal Language Model Fine-tuning. Una técnica propuesta en el 2018 para poder afinar un modelo de lenguaje a una tarea diferente sin correr el riesgo de pérdida de conocimiento del modelo pre-entrenado}
+}
+
+\newglossaryentry{tokenizacion}
+{
+    name={tokenización},
+    description={ El proceso de separar texto plano en unidades discretas. Generalmente estas unidades representan palabras, raíces de palabras o caracteres}
+}
+
+\newglossaryentry{vocabulario}
+{
+    name={vocabulario},
+    description={ Conjunto de tokens que forman parte de los tokens conocidos por un modelo}
+}
+
+\newglossaryentry{spantext}
+{
+    name={SpanText},
+    description={ Proyecto propuesto por investigadores argentinos que consta de un conjunto de textos formales catalogados por edad y género}
+}
+
+\newglossaryentry{pan}
+{
+    name={PAN},
+    description={ Serie de eventos científicos y competencias que abordan tareas de naturaleza forense y de estilometría}
+}
+
+
+\newacronym{nlp}{NLP}{Natural Language Processing}
+\newacronym{rnn}{RNN}{Recurrent Neural Network}
+\newacronym{cnn}{CNN}{Convolutional Neural Network}
+\newacronym{cv}{CV}{Computer Vision}
+\newacronym{lstm}{LSTM}{Long Short Term Memory}
+\newacronym{qrnn}{QRNN}{Quasi-recurrent Neural Network}
+\newacronym{lefty}{LEFTy}{Language Efficient Text portray}
+\newacronym{mlm}{MLM}{Masked Language Model}
+\newacronym{awdlstm}{AWD LSTM}{Average-stochastic-gradient-descent Weight Dropped LSTM}
+\newacronym{bert}{BERT}{Bi-directional Encoder Representations from Transformers}
+\newacronym{lm}{LM}{Language Model}
+\newacronym{tfidf}{TF-IDF}{Term Frequency -- Inverse Document Frequency }
+
+
+\renewcommand*{\glossarypreamble}{%
+  \label{\currentglossary}%
+}
+
+\renewcommand{\glsnumberformat}[1]{%
+ (\ifthenelse{\DTLisSubString{#1}{\delimN}\OR\DTLisSubString{#1}{\delimR}}%
+  {pp. #1}{p. #1})}
 
 \begin{document}
 
@@ -285,6 +450,7 @@ Los resultados obtenidos con este proyecto alcanzan niveles del estado del arte 
 % Custom indentation for Galileo University
 \setlength\parindent{2em}
 
+
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
@@ -299,12 +465,12 @@ Los resultados obtenidos con este proyecto alcanzan niveles del estado del arte 
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
 
-%\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-%\include{Appendices/AppendixA}
+\include{Appendices/AppendixA}
 %\include{Appendices/AppendixB}
 %\include{Appendices/AppendixC}
 

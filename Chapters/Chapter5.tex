@@ -4,7 +4,7 @@
 
 \label{Chapter5} % For referencing the chapter elsewhere, use \ref{Chapter5} 
 
-LEFTy --- por sus siglas en inglés: Language Efficient Text Portray --- es el nombre designado para referirse al trabajo actual. Esta solución propuesta emplea el concepto de \textit{transfer learning} para poder permitir entrenar con gran capacidad tareas que no tienen muchos ejemplos etiquetados. Se propone este sistema para la tarea de perfilación de autores. Utiliza una RNN como base del modelo y las características base obtenidas fueron:
+\gls{lefty} es el nombre designado para referirse al trabajo actual. Esta solución propuesta emplea el concepto de \textit{transfer learning} para poder permitir entrenar con gran capacidad tareas que no tienen muchos ejemplos etiquetados. Se propone este sistema para la tarea de perfilación de autores. Utiliza una RNN como base del modelo y las características base obtenidas fueron:
 
 \begin{itemize}
 \item \textbf{Edad.}
@@ -14,11 +14,11 @@ LEFTy --- por sus siglas en inglés: Language Efficient Text Portray --- es el n
 
 \section{Pre-entrenamiento de modelo de lenguaje}
 
-La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar un tipo de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. BERT \parencite{devlin2018bert} por otro lado utiliza un Masked Language Model (MLM) el cual consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea. En este trabajo se utiliza un modelo estándar de lenguaje, es decir se predice el próximo token basado en los tokens anteriores como entrada.
+La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar un tipo de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. \gls{bert} \parencite{devlin2018bert} por otro lado utiliza un \gls{mlm} el cual consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea. En este trabajo se utiliza un modelo estándar de lenguaje, es decir se predice el próximo token basado en los tokens anteriores como entrada.
 
 \subsection{Modelo de lenguaje de Wikipedia}
 
-El diseño base para este modelo de lenguaje es una red denominada AWD LSTM \parencite{merityRegOpt}, la cual emplea una modificación agresiva al método de regularización \textit{dropout}. En el artículo se sugiere utilizar un concepto denominado \textit{DropConnect} y difiere en \textit{dropout} en que las funciones de activación no son las que toman el valor cero, sino los pesos. También se utilizan los conceptos de usar \textit{dropout} en la capa de vectorización de palabras --- esto no aporta a la regularización pero sí disminuye el tamaño de los vectores representantes de los vectores. Se instancian los distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $r_f$ únicamente el cual le da escala a los pesos recomendados y definidos por ellos.
+El diseño base para este modelo de lenguaje es una red denominada \gls{awdlstm} \parencite{merityRegOpt}, la cual emplea una modificación agresiva al método de regularización \textit{dropout}. En el artículo se sugiere utilizar un concepto denominado \textit{DropConnect} y difiere en \textit{dropout} en que las funciones de activación no son las que toman el valor cero, sino los pesos. También se utilizan los conceptos de usar \textit{dropout} en la capa de vectorización de palabras --- esto no aporta a la regularización pero sí disminuye el tamaño de los vectores representantes de los vectores. Se instancian los distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $r_f$ únicamente el cual le da escala a los pesos recomendados y definidos por ellos.
 
 En el capítulo \ref{Chapter4} se explica el pre-procesamiento que se le da a los datos de \textit{Wikipedia}. Se detallará ese proceso a continuación.
 
@@ -67,7 +67,7 @@ Mis audífonos son Sennheiser & \texttt{xxbos xxmaj mis audífonos son xxunk} \\
 
 \subsubsection{Resultados}
 
-Para medir y reportar errores sobre LMs se utiliza la métrica de \textit{perplexity} \parencite{jurafsky2014speech}, la cual es análoga a la entropía. La entropía representa la cantidad de información que se tiene; \textit{perplexity} se puede ver como la cantidad de opciones que se tiene. ¿Qué significa esto? Que mientras menos opciones considere nuestro LM, más estable es y por lo tanto que modela mejor el lenguaje. Se calcula de la siguiente manera:
+Para medir y reportar errores sobre \glspl{lm} se utiliza la métrica de \textit{perplexity} \parencite{jurafsky2014speech}, la cual es análoga a la entropía. La entropía representa la cantidad de información que se tiene; \textit{perplexity} se puede ver como la cantidad de opciones que se tiene. ¿Qué significa esto? Que mientras menos opciones considere nuestro LM, más estable es y por lo tanto que modela mejor el lenguaje. Se calcula de la siguiente manera:
 
 $$ perplexity = e^{loss} $$
 
@@ -199,7 +199,7 @@ Se ha dicho que para RNNs y técnicas de aprendizaje profundo no han tenido el m
 Los datos y resultados en referencia a predicción de región y género provienen del reporte de la competencia PAN17 \parencite{rangel2017overview} y proveen un contexto para la tarea del trazo de perfiles de autores. Debido a que los conjuntos de datos de pruebas son los mismos, las comparaciones se podrán hacer de forma directa. Se realiza una comparación con datos exclusivamente del idioma español. Los modelos a comparar son los siguientes:
 
 \begin{itemize}
-\item TF-IDF + CNN \parencite{schaetti2017author}
+\item \gls{tfidf} + \gls{cnn} \parencite{schaetti2017author}
 \item RNN \parencite{kodiyan2017author}
 \item AVG DNN \parencite{franco2017author}
 \item CNN + RNN + Attention \parencite{miura2017author}
