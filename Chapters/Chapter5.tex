@@ -192,7 +192,7 @@ grafica de overfitting
 
 \section{Resultados}
 
-Se ha dicho que para RNNs y técnicas de aprendizaje profundo no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de aprendizaje profundo tiene al aprender la cantidad de parámetros inmensa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
+Se ha dicho que para RNNs y técnicas de Deep Learning no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de Deep Learning tiene al aprender la cantidad de parámetros inmensa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
 
 \subsection{Predicción sobre textos informales}
 
@@ -272,15 +272,15 @@ CNN + RNN + Attention \tblshort\parencite{miura2017author} & \textbf{0.8118} \\
 RNN + Transfer Learning (propio) & 0.7429 \\
 
 \end{tabular}
-\caption{Comparación de modelos de aprendizaje profundo en la tarea de predicción de género --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no se puede hacer una comparación directa.}
+\caption{Comparación de modelos de Deep Learning en la tarea de predicción de género --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no se puede hacer una comparación directa.}
 \label{tab:pan17gender}
 \end{table}
 
-Al comparar el modelo propio con los modelos de aprendizaje profundo presentados en la competencia PAN17 (tabla \ref{tab:pan17gender}) se puede apreciar que los resultados obtenidos son del estado del arte para RNN, siendo solamente superado por un AVG DNN y un ensamble de CNN, RNN y elementos de atención.
+Al comparar el modelo propio con los modelos de Deep Learning presentados en la competencia PAN17 (tabla \ref{tab:pan17gender}) se puede apreciar que los resultados obtenidos son del estado del arte para RNN, siendo solamente superado por un AVG DNN y un ensamble de CNN, RNN y elementos de atención.
 
 \subsubsection{Predicción de región}
 
-La predicción de género sobre un texto anónimo se realizó basado en datos de tuits. La clasificación se llevó a cabo en dos niveles. Se realizó una predicción a nivel de tuit individual y una predicción a nivel de autor.
+La predicción de región sobre un texto anónimo se realizó basado en datos de tuits. Al igual que en la clasificación de género, se realiza una predicción a nivel de tuit individual y una predicción a nivel de autor.
 
 \begin{table}
 \centering
@@ -348,11 +348,11 @@ CNN + RNN(Att.) \tblshort\parencite{miura2017author} & \textbf{0.9271} \\
 RNN + Transfer Learning (propio) & 0.9207 \\
 
 \end{tabular}
-\caption{Comparación de modelos de aprendizaje profundo en la tarea de predicción de región --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no es posible hacer una comparación directa.}
+\caption{Comparación de modelos de Deep Learning en la tarea de predicción de región --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no es posible hacer una comparación directa.}
 \label{tab:pan17region}
 \end{table}
 
-Nuevamente se comparan los resultados con los modelos de aprendizaje profundo de PAN17 (tabla \ref{tab:pan17region}). Una combinación de TF-IDF y CNN \parencite{schaetti2017author} logró clasificar de la mejor manera; el modelo propio obtiene la segunda mejor precisión en modelos simples y la tercera considerando el ensamble de modelos CNN y RNN de \textcite{miura2017author}.
+Nuevamente se comparan los resultados con los modelos de Deep Learning de PAN17 (tabla \ref{tab:pan17region}). Una combinación de TF-IDF y CNN \parencite{schaetti2017author} logró clasificar de la mejor manera; el modelo propio obtiene la segunda mejor precisión en modelos simples y la tercera considerando el ensamble de modelos CNN y RNN de \textcite{miura2017author}.
 
 \subsection{Predicción sobre textos formales}
 
@@ -389,7 +389,7 @@ Los mejores resultados obtenidos por \citeauthor{villegas:2014:CACIC} fueron sob
 
 \subsubsection{Resultados}
 
-La tarea definida en el artículo de \textit{SpanText} es la de la predicción ambos el género y la edad del autor del texto formal, esto significa que la precisión reportada es de la proporción de textos sobre los que se predijo ambas características. La cantidad de textos por clase es bastante limitada así como la longitud promedio de los textos, lo cual aumenta la dificultad de la tarea para modelos de aprendizaje profundo.
+La tarea definida en el artículo de \textit{SpanText} es la de la predicción ambos el género y la edad del autor del texto formal, esto significa que la precisión reportada es de la proporción de textos sobre los que se predijo ambas características. La cantidad de textos por clase es bastante limitada así como la longitud promedio de los textos, lo cual aumenta la dificultad de la tarea para modelos de Deep Learning.
 
 \begin{table}
 \centering
@@ -402,7 +402,7 @@ Naïve Bayes; boolean + words \tblshort\parencite{villegas:2014:CACIC} & 61.2 \\
 RNN + Transfer Learning (propio) & \textbf{71.0} \\
 
 \end{tabular}
-\caption{Comparación de modelos en la tarea de clasificación de SpanText. El único modelo de aprendizaje profundo es el propio. El resultado es la precisión de la predicción, por lo que un mayor resultado es mejor.}
+\caption{Comparación de modelos en la tarea de clasificación de SpanText. El único modelo de Deep Learning es el propio. El resultado es la precisión de la predicción, por lo que un mayor resultado es mejor.}
 \label{tab:spantextres}
 \end{table}
 

@@ -3,15 +3,13 @@
 
 \label{Chapter2} % For referencing the chapter elsewhere, use \ref{Chapter1} 
 
-\section{Trasfondo del aprendizaje profundo} % Main chapter title
+\section{Trasfondo de Deep Learning} % Main chapter title
 
-En este capítulo se planteará y se explicará la base teórica del campo del aprendizaje profundo utilizados en este trabajo. Los conceptos descritos a continuación son el fundamento del campo de aprendizaje profundo.
-
-El trasfondo que se compartirá en este trabajo es el fundamento teórico de las técnicas utilizadas; los fundamentos geométricos teóricos \parencite{2018leigeometric} del porqué de la funcionalidad básica de los modelos del campo no se abordarán en esta tesis.
+En este capítulo se planteará y se explicará el fundamento teórico de las técnicas del campo de Deep Learning utilizados en este trabajo. Los fundamentos geométricos teóricos \parencite{2018leigeometric} del porqué de la funcionalidad básica de los modelos del campo no se abordarán en esta tesis.
 
 \section{Aprendizaje supervisado}
 
-En el área de aprendizaje (profundo) artificial existen dos tipos básicos de problema. Este se determina dependiendo de las características de los datos a utilizar para el entrenamiento del modelo \parencite{schmidhuber2015deep}.
+En el área de aprendizaje (profundo) artificial existen dos tipos básicos de problema. Esto se determina dependiendo de las características de los datos a utilizar para el entrenamiento del modelo \parencite{schmidhuber2015deep}.
 
 Cuando los datos --- ya sea información tabulada, imágenes, textos --- no tienen ninguna categoría asociada o ningún valor a predecir y lo que se desea es obtener información no específica, es decir sin tener alguna referencia, se trata de un aprendizaje no supervisado.
 
@@ -19,15 +17,15 @@ Si los datos, por otro lado, tienen una clasificación  --- llamada etiqueta ---
 
 El aprendizaje supervisado puede entonces ser descrito como una función $f : X \to Y$ donde $X$ representa los datos con los que se alimenta la función, es decir las características que utilizará el modelo para inferir, y $Y$ el resultado asignado o a predecir.
 
-Para ilustrar el proceso de aprendizaje profundo se utilizará un caso individual de la función en donde $y$ es el resultado deseado, $f(x) = \hat{y}$ es la función aplicada a un caso específico y $\hat{y}$ representa el resultado obtenido con la función el cual no necesariamente es el resultado deseado o esperado.
+Para ilustrar el proceso de Deep Learning se utilizará un caso individual de la función en donde $y$ es el resultado deseado, $f(x) = \hat{y}$ es la función aplicada a un caso específico y $\hat{y}$ representa el resultado obtenido con la función el cual no necesariamente es el resultado deseado o esperado.
 
 \textbf{El objetivo.} En concreto, buscamos una función $f$ que sea la mejor candidata para poder predecir los resultados deseados. Si definimos una función de costo $L(\hat{y}, y)$ que representa, en un valor escalar, la diferencia cuantitativa entre la evaluación de una función $f$ candidata y el resultado real $y$ podemos concluir que el objetivo es encontrar una $f^*$ que cumpla con:
 
 \[ f^* = \min_{f \in F} \frac{1}{N} \sum_{i = 0}^{N} L(f(x_i), y_i) \]
 
-Donde $N$ es el número de instancias de los datos para entrenar el modelo; $F$ siendo un conjunto de funciones candidatas.
+Donde $N$ es el número de instancias de los datos para entrenar el modelo; y $F$ es un conjunto de funciones candidatas.
 
-\textbf{Definición de las funciones.} La base de todo modelo de aprendizaje profundo es una red neuronal --- cuyo comportamiento será definido en la siguiente sección así como otros detalles relevantes --- y su comportamiento básico puede ser descrito de la siguiente forma:
+\textbf{Definición de las funciones.} La base de todo modelo de Deep Learning es una red neuronal --- cuyo comportamiento será definido en la siguiente sección así como otros detalles relevantes --- y su comportamiento básico puede ser descrito de la siguiente forma:
 
 \[ f(x_i) = w x_i + b \]
 
@@ -37,10 +35,10 @@ Una posible función de pérdida en un problema de clasificación para una predi
 
 \begin{equation}
 \label{eq:crossentropy}
-L(\mathbf{\hat{y}}, \mathbf{y}) = - \frac{1}{C} \sum_{j = 0}^{C} y_j log \left( \hat{y_j} \right)
+L(\mathbf{\hat{y}}, \mathbf{y}) = - \sum_{j}^{C} y_j log \left( \hat{y_j} \right)
 \end{equation}
 
-Donde $C$ es el número de clasificaciones independientes posibles, $\mathbf{y}$ es un vector de dimensión $C$ y con solamente un único valor en $1$ el cual indica la clasificación correcta y $\mathbf{\hat{y}}$ es el vector de predicción de dimensión $C$ el cual contiene las probabilidades para cada posible clasificación. De esto podemos concluir que $\sum_{\mathbf{\hat{y}}} = 1$.
+Donde $C$ es el número de clasificaciones independientes posibles, $\mathbf{y}$ es un vector de dimensión $C$ con solamente un único valor en $1$ el cual indica la clasificación correcta y $\mathbf{\hat{y}}$ es el vector de predicción de dimensión $C$ el cual contiene las probabilidades para cada posible clasificación. De esto podemos concluir que $\sum_{\mathbf{\hat{y}}} = 1$.
 
 Si $C = 2$ se puede simplificar la expresión utilizar solamente un resultado escalar
 \begin{equation}
@@ -68,7 +66,7 @@ Este proceso de utilizar el descenso de gradiente a través de las instancias no
 
 \section{Redes neuronales}
 
-Las redes neuronales son el modelo base para el aprendizaje profundo. Esto debido a que ha sido demostrado que son aproximadores universales \parencite{hornik1989universal} --- es decir que para cualquier función $h$ se tiene la capacidad de encontrar un red neuronal $\hat{H}$ que aproxime a $h$ con cierto grado de precisión --- un error de $\epsilon$ --- dado que se tenga la cantidad de unidades en la red y datos suficientes para entrenar. Formalmente se dice que
+Las redes neuronales son el modelo base para el Deep Learning. Esto debido a que ha sido demostrado que son aproximadores universales \parencite{hornik1989universal} --- es decir que para cualquier función $h$ se tiene la capacidad de encontrar un red neuronal $\hat{H}$ que aproxime a $h$ con cierto grado de precisión --- un error de $\epsilon$ --- dado que se tenga la cantidad de unidades en la red y datos suficientes para entrenar. Formalmente se dice que
 
 \begin{equation}
 \label{eq:universaltheorem}
@@ -124,7 +122,7 @@ Una red neuronal aprende a elegir una función que minimice el costo de evaluar 
 
 \textbf{Cantidad de datos.} La cantidad de datos utilizados para entrenar un modelo influye mucho en su capacidad de generalizar. Mientras más datos se tengan, mayor será la posibilidad de generalizar, esto con la condición que la data sea diversa y representativa del problema real. La explicación de esto se puede ilustrar llevando el concepto a sus extremos y con un ejemplo sencillo: se debe suponer que se quiere aprender a definir el conectivo lógico \textbf{\textit{and}}. Si se provee solamente un ejemplo de cómo funciona este operador, la red no sabrá qué hacer cuando los valores de entrada difieran de ese ejemplo. Por el otro lado si se le alimentan todas las combinaciones posibles, la red deberá ser capaz de aprender todo el contexto del problema.
 
-\textbf{Término de regularización.} Esta técnica es muy esencial cuando se lidia con modelos de aprendizaje profundo. Consisten en agregar un término de regularización a la función de predicción que se está optimizando. La función entonces tendrá la forma siguiente: %hacer referencia a la misma de antes
+\textbf{Término de regularización.} Esta técnica es muy esencial cuando se lidia con modelos de Deep Learning. Consisten en agregar un término de regularización a la función de predicción que se está optimizando. La función entonces tendrá la forma siguiente: %hacer referencia a la misma de antes
 
 \[ f^* = \min_{f \in F} \frac{1}{N} \sum_{i} L(f(x_i), y_i) + \sum_{j} \lambda(w_j^2) \]
 
@@ -133,14 +131,14 @@ Esto funciona ya que limita el crecimiento de los parámetros, el cual desenfren
 \section{Proceso general al aplicar una red neuronal}
 \label{sec:nlpprocess}
 
-Un proyecto de aprendizaje profundo con redes neuronales lleva por lo general el mismo conjunto de pasos para poder llegar a un resultado cercano a lo óptimo. Los pasos a seguir son los siguientes:
+Un proyecto de Deep Learning con redes neuronales lleva por lo general el mismo conjunto de pasos para poder llegar a un resultado cercano a lo óptimo. Los pasos a seguir son los siguientes:
 
 \begin{itemize}
-\item \textbf{Obtención de datos:} Dependiendo del problema a resolver, estos datos podrán tomar distintas formas y los métodos para obtenerlos podrán variar en gran manera. Para que una red neuronal pueda generalizar de forma exitosa lo aprendido durante la fase de entrenamiento es importante tener una muestra representativa del escenario real del problema a resolver y tener una cantidad elevada de datos. Métodos comunes incluyen recolección y etiquetación manual, descarga de \textit{corpora} de internet y \textit{\gls{scraping}} de la web.
+\item \textbf{Obtención de datos:} Dependiendo del problema a resolver, estos datos podrán tomar distintas formas y los métodos para obtenerlos podrán variar en gran manera. Para que una red neuronal pueda generalizar de forma exitosa lo aprendido durante la fase de entrenamiento es importante tener una muestra representativa del escenario real del problema a resolver y tener una cantidad elevada de datos. Métodos comunes incluyen recolección y etiquetación manual, descarga de \textit{\gls{corpora}} de internet y \textit{\gls{scraping}} de la web.
 
 \item \textbf{Análisis y preparación de los datos:} Los datos obtenidos en el primer paso pueden llegar a tener características mínimas no deseadas, las cuales pueden añadir ruido a la representación que estos datos dan. Debido a esto es importante tratar los datos de manera que se eliminen datos que sesguen mucho los posibles modelos, datos faltantes, datos con formato inconsistente, e incluso considerar la posibildad de eliminar características completas. En esta fase también se separarán los datos en distintos segmentos que después serán útiles para determinar la eficacia del modelo resultante. Estos segmentos son los datos de \textit{entrenamiento}, \textit{validación} y \textit{prueba}. La proporción de cada uno de estos puede variar y lo recomendado es que la distribución de cada uno de ellos sea la misma. De no ser posible esto, hacer que al menos los segmentos de validación y prueba tengan la misma distribución.
 
-\item \textbf{Diseño de modelo:} En este campo hay una gran variedad de opciones, en especial si no se limitan estas opciones al aprendizaje profundo ya que existen herramientas de distintos tipos para poder modelar un sistema. En el caso del aprendizaje profundo también se deben tomar decisiones importantes con respecto al modelo a utilizar. En concreto se deberá elegir el tipo de red neuronal a utilizar como también su estructura. En esta fase se definirán de forma preliminar detalles como el número de capas a utilizar en la red y el número de unidades por cada una de las capas.
+\item \textbf{Diseño de modelo:} En este campo hay una gran variedad de opciones, en especial si no se limitan estas opciones al Deep Learning ya que existen herramientas de distintos tipos para poder modelar un sistema. En el caso del Deep Learning también se deben tomar decisiones importantes con respecto al modelo a utilizar. En concreto se deberá elegir el tipo de red neuronal a utilizar como también su estructura. En esta fase se definirán de forma preliminar detalles como el número de capas a utilizar en la red y el número de unidades por cada una de las capas.
 
 \item \textbf{Optimización de hiper-parámetros:} Esta fase estará muy relacionada a la siguiente ya que se utilizan los mismo mecanismos para determinar los resultados preliminares. Para elegir los mejores hiper-parámetros para un modelo en específico se deberá evaluar los datos variando sus valores y obteniendo resultados preliminares. Esto se deberá hacer utilizando una matriz aleatoria para los distintos hiper-parámetros con el fin de optimizar el tiempo de ejecución de esta fase.
 

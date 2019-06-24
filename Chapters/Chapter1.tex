@@ -24,15 +24,15 @@
 
 \section{Introducción}
 
-Los campos de \emph{\gls{machine learning}} (aprendizaje de máquinas o aprendizaje artificial) y \emph{\gls{deep learning}} (\gls{aprendizaje profundo}) \parencite{lecun2015deep} no son para nada nuevos, pero se han vuelto una gran sensación en los últimos años, cada vez ganando más popularidad. Los primeros conceptos desarrollados en el campo tienen décadas de antigüedad. La primer \gls{red neuronal} --- la base del modelo a utilizar en este trabajo y la base del campo del aprendizaje profundo --- fue planteada en los años 80 \parencite{werbos1982applications}. ¿Qué, entonces, ha cambiado en los últimos años que ha generado una explosión en el área? La disponibilidad de los datos y la accesibilidad a poder computacional \parencite{jordan2015machine}. Con el surgimiento y la penetración cada vez más alta del internet se han abierto las puertas a una cantidad de datos nunca antes vista.
+Los campos de \emph{\gls{machine learning}} (aprendizaje de máquinas o aprendizaje artificial) y \textit{\gls{deep learning}} (\gls{aprendizaje profundo}) \parencite{lecun2015deep} no son para nada nuevos, pero se han vuelto una gran sensación en los últimos años, cada vez ganando más popularidad. Los primeros conceptos desarrollados en el campo tienen décadas de antigüedad. La primer \gls{red neuronal} --- la base del modelo a utilizar en este trabajo y la base del campo de Deep Learning --- fue planteada en los años 80 \parencite{werbos1982applications}. ¿Qué, entonces, ha cambiado en los últimos años que ha generado una explosión en el área? La disponibilidad de los datos y la accesibilidad a poder computacional \parencite{jordan2015machine}. Con el surgimiento y la penetración cada vez más alta del internet se han abierto las puertas a una cantidad de datos nunca antes vista.
 
 La revolución de los datos ha llevado a la comunidad científica y a las industrias a recolectar grandes cantidades de datos e información y organizarlos de forma que se puedan interpretar y se pueda obtener valor de la misma.
 
-Los sistemas de aprendizaje profundo necesitan pasar por una fase de aprendizaje (comúnmente llamada fase de \gls{entrenamiento}) y estos modelos tienen la característica de necesitar cantidades masivas de datos para poder generalizar bien lo aprendido. Esto combinado con la explosión de datos ha llevado a que las técnicas tengan un surgimiento en todas las áreas de software, mostrando mucha promesa en algunos campos en específico como \gls{cv} \parencite{hoo2016deep} y en \gls{nlp}.
+Los sistemas de Deep Learning necesitan pasar por una fase de aprendizaje (comúnmente llamada fase de \gls{entrenamiento}) y estos modelos tienen la característica de necesitar cantidades masivas de datos para poder generalizar bien lo aprendido. Esto combinado con la explosión de datos ha llevado a que las técnicas tengan un surgimiento en todas las áreas de software, mostrando mucha promesa en algunos campos en específico como \gls{cv} \parencite{hoo2016deep} y en \gls{nlp}.
 
-Conforme ha avanzado el campo se ha determinado que para algunas tareas en específico no se cuenta con la cantidad necesaria para poder obtener un modelo competente. Esto ha llevado al desarrollo de una técnica llamada transfer learning que permite utilizar conocimiento previamente obtenido al resolver una tarea general y aplicarlo a una tarea relacionada mediante proceso de ajuste. Esta fase requiere de una cantidad de datos considerablemente menor a entrenar un modelo completamente desde cero.
+Conforme ha avanzado el campo se ha determinado que para algunas tareas en específico no se cuenta con la cantidad necesaria para poder obtener un modelo competente. Esto ha llevado al desarrollo de una técnica llamada transfer learning que permite utilizar conocimiento previamente obtenido al resolver una tarea general y aplicarlo a una tarea relacionada mediante proceso de ajuste. Esta fase requiere de una cantidad de datos considerablemente menor, comparado con tener que entrenar un modelo completamente desde cero.
 
-La técnica de transfer learning ha permitido muchos avances en el área de \gls{cv} específicamente \parencite{hoo2016deep}. Este trabajo intenta mostrar la habilidad que se tiene de aplicar este concepto en un área distinta, puntualmente el campo de NLP y específicamente en la tarea de \gls{perfilamiento de autores}.
+La técnica de transfer learning ha permitido muchos avances en el área de \gls{cv} específicamente \parencite{hoo2016deep}. Este trabajo intenta mostrar que se puede aplicar este concepto en un área distinta, puntualmente el campo de NLP y específicamente en la tarea de \gls{perfilamiento de autores}.
 
 \section{Hipótesis}
 
@@ -41,7 +41,7 @@ La hipotesis que este trabajo pretende abordar es la siguiente: \textbf{La aplic
 \begin{itemize}
 \item \textbf{Aplicabilidad de deep learning en la tarea}. La hipótesis se basa en el hecho de que conceptos de deep learning sean aplicables a tareas del campo de NLP. En el campo de NLP se ha tenido mucha duda si deep learning tiene la capacidad de penetrar el campo con soluciones eficaces.
 
-\item \textbf{Transfer learning provee ventaja de desempeño en la tarea}. El hecho de mostrar que hay una ventaja implica poder medir de forma empírica los resultados obtenidos por diferentes técnicas. Con este fin, se utilizarán resultados publicados por investigadores de este campo y se usarán las mismas métricas para que los resultados sean directamente comparables.
+\item \textbf{Transfer learning provee ventaja de desempeño en la tarea}. El hecho de mostrar que hay una ventaja implica medir de forma empírica los resultados obtenidos por diferentes técnicas. Con este fin, se utilizarán resultados publicados por investigadores de este campo y se usarán las mismas métricas para que los resultados sean directamente comparables.
 
 \item \textbf{Diferencia en cantidad de datos disponibles}. Se debe fundamentar que la cantidad de datos necesaria para el uso de deep learning es más elevado del que se necesita si se utiliza transfer learning.
 \end{itemize}
@@ -67,15 +67,9 @@ Aplicar conceptos del estado del arte a un problema que ha recibido poca atenci�
 
 En el área de NLP han existido técnicas poderosas por décadas que abusan de algunas suposiciones que no siempre reflejan la realidad y se basan en simples métodos estadísticos que asignan valores a características del texto \parencite{Edmundson1969, kupiec1995trainable}. El campo también ha dependido de \gls{ingenieria de caracteristicas} en los datos, lo cual significa que se realiza un esfuerzos activo y serio en analizar cada sub-tarea a fondo para determinar cuáles son los mejores determinantes de un resultado deseado, p.e. las características principales que determinan la categoría que se le debe asignar a un texto \parencite{aggarwal2012mining}.
 
-\begin{figure}
-\includegraphics[scale=1.0]{Figures/projectstruct.pdf}
-\caption{Estructura del proyecto planteado en este trabajo de investigación. La figura está diseñada para propósitos ilustrativos. \textit{LM} denota el modelo de lenguaje el cual es pre-entrenado con texto de \textit{Wikipedia}, lo cual es un paso previo.}
-\label{fig:projstruct}
-\end{figure}
+En campos como el mercadeo y las ciencias forenses hay una necesidad de identificar textos escritos a los cuales no se les ha atribuido un autor y obtener características de los mismos para poder catalogarlos de forma automática. Esto con el fin de poder, en el caso del mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropiada \parencite{aggarwal2012mining}; y, en el área forense, identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
 
-En campos como el mercadeo y las ciencias forenses hay una necesidad de identificar textos escritos a los cuales no se les ha atribuido un autor y obtener características de los mismos para poder catalogarlos de forma automática. Esto con el fin de poder, en el caso del mercadeo, orientar mejor la publicidad de ciertos productos a una audiencia apropiada \parencite{aggarwal2012mining}; en el área forense con el fin de identificar a sospechosos vinculados a algún crimen a partir de un texto anónimo obtenido en el contexto del caso.
-
-Existe fundamento lingüístico del hecho de poder identificar a una persona por su lenguaje, ya sea de manera escrita u oral \parencite{coulthard2004author, louwerse2004semantic}. El concepto de \textit{\gls{idiolecto}} y \textit{\gls{sociolecto}} nos permitirá poder realizar predicciones de manera precisa.
+Existe fundamento lingüístico del hecho de poder identificar a una persona por su lenguaje, ya sea de manera escrita u oral \parencite{coulthard2004author, louwerse2004semantic}. El concepto de \textit{\gls{idiolecto}} y \textit{\gls{sociolecto}} nos permitirá realizar predicciones de manera precisa.
 
 Después de analizar lo planteado anteriormente, se ve la necesidad de que un sistema automatizado sea capaz de no sólo extraer información de un texto anónimo de forma precisa y confiable, sino de también hacerlo sin necesidad de un agente experto o realizar una ingeniería de características claves para cada posible parámetro que se quiera obtener de los textos.
 
@@ -88,11 +82,17 @@ A partir de esta conclusión los requisitos para este proyecto son los siguiente
 \item Permitir la automatización de predicciones ofreciendo un servicio web fácil de consultar.
 \end{itemize}
 
+\begin{figure}
+\includegraphics[scale=1.0]{Figures/projectstruct.pdf}
+\caption{Estructura del proyecto planteado en este trabajo de investigación. La figura está diseñada para propósitos ilustrativos. \textit{LM} denota el modelo de lenguaje el cual es pre-entrenado con texto de \textit{Wikipedia}, lo cual es un paso previo.}
+\label{fig:projstruct}
+\end{figure}
+
 La figura \ref{fig:projstruct} muestra la estructura del proyecto planteado, el cual llenaría los requisitos expuestos en esta sección. El flujo de la información tendría la forma ilustrada en la figura y las predicciones mostradas son ejemplos de categorizaciones.
 
 \section{Resumen}
 
-El proyecto deberá tener la flexibilidad de poder adaptarse a las necesidades del caso de uso específico que se le dé y a la vez tener la capacidad predictiva de un modelo del estado del arte. El modelo utilizará tecnologías de aprendizaje profundo por ser la tecnología más prometedora en este campo.
+El proyecto deberá tener la flexibilidad de poder adaptarse a las necesidades del caso de uso específico que se le dé y a la vez tener la capacidad predictiva de un modelo del estado del arte. El modelo utilizará tecnologías de Deep Learning por ser la tecnología más prometedora en este campo.
 
 
 

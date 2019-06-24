@@ -10,7 +10,7 @@
 
 El concepto de \emph{garbage in, garbage out} (basura para adentro, basura para afuera) es muy conocido e indica como un modelo, análisis, etc. es limitado en su capacidad por los datos que se usen para alimentarlo.
 
-En proyectos de aprendizaje artificial se dice que el 80\% del tiempo se deberá usar para la búsqueda, la limpieza y el tratado de datos. Esta proporción no se mantiene en la mayoría de casos cuando se lidia con modelos de aprendizaje profundo pero el principio se conserva: no se debe subestimar la importancia de los datos y su integridad.
+En proyectos de aprendizaje artificial se dice que el 80\% del tiempo se deberá usar para la búsqueda, la limpieza y el tratado de datos. Esta proporción no se mantiene en la mayoría de casos cuando se lidia con modelos de Deep Learning pero el principio se conserva: no se debe subestimar la importancia de los datos y su integridad.
 
 
 \section{Pre-procesamiento de datos}
@@ -31,10 +31,10 @@ $\vdots$ &  & $\ddots$ & & & $\vdots$ \\
 2304 & 18 & F & GT & 2.8k & Q \\
 \end{tabular}
 \label{table:tabulares}
-\caption{Ejemplo de datos tabulares que alimentarán a un modelo ya sea de aprendizaje de máquina o de aprendizaje profundo. En la tabla se ilustran algunos errores de datos (campo \emph{edad}) y datos faltantes (en el campo \emph{Género}). También se aprecian discrepancias en el formato de algunos campos (campo de \emph{Moneda} y \emph{Sueldo}) y campos completamente inservibles para un modelo (campo \emph{CORRELATIVO}.}
+\caption{Ejemplo de datos tabulares que alimentarán a un modelo ya sea de aprendizaje de máquina o de Deep Learning. En la tabla se ilustran algunos errores de datos (campo \emph{edad}) y datos faltantes (en el campo \emph{Género}). También se aprecian discrepancias en el formato de algunos campos (campo de \emph{Moneda} y \emph{Sueldo}) y campos completamente inservibles para un modelo (campo \emph{CORRELATIVO}.}
 \end{table}
 
-La recolección de datos para la alimentación de modelos por lo general es un proceso que involucra obtener información de distintas fuentes con distintos formatos y distintos detalles que esperar. El pre-procesamiento de datos se encarga de darle una forma congruente a los datos para que estos puedan representar el problema de forma adecuada. Este proceso puede involucrar eliminar errores de formato, identificar datos atípicos y lidiar con ellos, identificar características valiosas para un modelo, etc. Estos pasos son más aparentes cuando se lidia con datos tabulares, es decir datos que están separados por categorías o columnas y deben ser tratados de esta manera tratando cada una como una variable.
+La recolección de datos para la alimentación de modelos por lo general es un proceso que involucra obtener información de distintas fuentes con distintos formatos y distintos detalles que esperar. El pre-procesamiento de datos se encarga de darle una forma congruente a los datos para que estos puedan representar el problema de forma adecuada. Este proceso puede involucrar eliminar errores de formato, identificar datos atípicos y lidiar con ellos, identificar características valiosas para un modelo, etc. Estos pasos son más comunes cuando se lidia con datos tabulares, es decir datos que están separados por categorías o columnas y deben ser tratados cada una como una variable.
 
 \subsection{Datos textuales}
 
@@ -45,7 +45,7 @@ En NLP y en este trabajo se lidia con datos en forma de texto y no de forma tabu
 \item \textbf{Limitar \gls{vocabulario}.} Como consecuencia de tener cantidades grandes de datos para la alimentación del modelo se puede terminar con un vocabulario bastante numeroso. Este vocabulario está compuesto de todos los tokens únicos que se encontraron en los datos de entrada. Una técnica común para evitar utilizar tokens encontrados muy pocas veces en la data es limitar el número de tokens a utilizar. Se elige esa cantidad $n$ de datos a utilizar al ordenar los tokens por su frecuencia y tomando los $n$ más comunes.
 \item \textbf{Eliminar palabras con propósito gramático.} Muchas tareas de clasificación en NLP dependen mucho del contenido de los textos. Una técnica común para poder enfatizar el valor semántico de los textos es eliminar tokens cuyo propósito es únicamente gramatical. Se podrían nombrar artículos y preposiciónes como ejemplos.
 \item \textbf{Vectorizar.} Una técnica muy valiosa que consiste en representar las cadenas de caracteres en vectores en un espacio de $d$ dimensión. Mientras más grande $d$, mejores las posibilidades de capturar más el significado de cada token o palabra. En modelos del estado del arte en NLP se utiliza una dimensionalidad generalmente de $d = 300$ o $d = 400$. Algunas técnicas de vectorización son capaces de capturar mucha información semántica, al grado de poder inferir información acerca de incluso tokens no antes vistos.
-\item \textbf{Zero padding.} Esta es una técnica utilizada para dar a los datos de entrada el mismo largo y permitir que el modelo no sufra por la variabilidad de longitud. Esta técnica es más común cuando se utilizan modelos de ML y no DL.
+\item \textbf{Zero padding.} Esta es una técnica utilizada para dar a los datos de entrada el mismo largo y permitir que el modelo no sufra por la variabilidad de longitud. Esta técnica es más común cuando se utilizan modelos de machine learning y no deep learning.
 \item \textbf{Tokens especiales.} Al aplicar técnicas como limitación de vocabulario o zero padding surge la necesidad de usar tokens especiales que le indican al modelo conceptos como un término no antes visto o el final de una secuencia. Estos tokens especiales generalmente son definidos por quien realiza el proceso de tokenización aunque también se pueden incluir previo a esta etapa. Estos tokens especiales generalmente son representados en este estilo \texttt{<unk>} donde \texttt{unk} es generalmente una abreviación del concepto del token especial. 
 \end{itemize}
 

@@ -4,11 +4,11 @@
 
 \label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter1} 
 
-En este capítulo se cubren y se fundamentan las técnicas a utilizar y las decisiones tomadas para el diseño de este proyecto, en particular se fundamenta y se enfatiza el uso de la técnica de transferencia de aprendizaje. Los conceptos cubiertos en este capítulo son los utilizados en el proyecto de clasificación de autores con redes neuronales recurrentes.
+En este capítulo se cubren y se fundamentan las técnicas de transferencia de aprendizaje (transfer learning) usadas y las decisiones tomadas para el diseño del proyecto de clasificación de autores con redes neuronales recurrentes.
 
 \section{Transferencia de aprendizaje} % Main chapter title
 
-Un concepto esencial para este trabajo y para toda el área de aprendizaje profundo es la capacidad de transferir aprendizaje adquirido previamente de un problema poco acotado y poder lograr aprovechar este aprendizaje en problemas más acotados permitiendo así que las demandas de recursos como datos y tiempo de ejecución tengan más holgura. Se obtienen mejores resultados en menos tiempo transfiriendo aprendizaje de un modelo que cuando se inicializan los pesos de los parámetros de la red aleatoriamente \parencite{Erhan:2010:WUP}.
+Un concepto esencial para este trabajo y para toda el área de Deep Learning es la capacidad de transferir aprendizaje adquirido previamente de un problema poco acotado y poder lograr aprovechar este aprendizaje en problemas más acotados permitiendo así que las demandas de recursos como datos y tiempo de ejecución tengan más holgura. Se obtienen mejores resultados en menos tiempo transfiriendo aprendizaje de un modelo que cuando se inicializan los pesos de los parámetros de la red aleatoriamente \parencite{Erhan:2010:WUP}.
 
 \section{Concepto de transferencia}
 
@@ -28,9 +28,9 @@ La información en las primeras capas de una red neuronal de visión artificial 
 
 \section{Aplicación en CV}
 %Incluir trabajos relacionados
-Para tener el contexto acerca de este concepto crucial para este trabajo debemos explorar otras áreas del aprendizaje profundo, en particular el área de visión artificial (computer vision en inglés). Este campo fue el que llevó a la explosión del aprendizaje profundo en el 2012 cuando una red denominada AlexNet dominó la competencia de clasificar el dataset ImageNet \parencite{deng2009imagenet}.
+Para tener el contexto acerca de este concepto crucial para este trabajo debemos explorar otras áreas del Deep Learning, en particular el área de visión artificial (computer vision en inglés). Este campo fue el que llevó a la explosión de Deep Learning en el 2012 cuando una red denominada AlexNet dominó la competencia de clasificar el dataset ImageNet \parencite{deng2009imagenet}.
 
-\textbf{ImageNet.} Este proyecto es una colección masiva de imágenes que están debidamente etiquetadas con cuadros encerrando los objetos detectados en una imagen. Debido a la cantidad exagerada de categorías y objetos encontrados en las imágenes y también la cantidad en sí de imágenes, se organiza un concurso de software todos los años para determinar cuál modelo es el mejor en visión artificial. Cuando en el 2012 una red de aprendizaje profundo ganó el concurso se generó motivación en explorar este campo más a fondo.
+\textbf{ImageNet.} Este proyecto es una colección masiva de imágenes que están debidamente etiquetadas con cuadros encerrando los objetos detectados en una imagen. Debido a la cantidad exagerada de categorías y objetos encontrados en las imágenes y también la cantidad en sí de imágenes, se organiza un concurso de software todos los años para determinar cuál modelo es el mejor en visión artificial. Cuando en el 2012 una red de Deep Learning ganó el concurso se generó motivación en explorar este campo más a fondo.
 
 Esta tarea llegó a ser el estándar para poder determinar si un modelo podía \emph{ver} a nivel general. ¿Qué significa esto? La tarea de ver es una tarea muy basta y bastante general. Hay muchas características por considerar lo cual aumenta la complejidad de este problema.
 
@@ -50,7 +50,7 @@ El modelo de lenguaje es entrenado usando redes neuronales recurrentes en alguna
 
 \subsection{ULMFiT}
 
-Esta técnica expuesta originalmente por \textcite{howard2018} en su curso de aprendizaje profundo fue publicado para plantear el algoritmo de forma más formal y con estudios de ablación demostrar que cada aspecto de los pasos es esencial para obtener los mejores resultados. La técnica de \gls{ulmfit} se divide en dos fases \parencite{howard2018} las cuales se explicarán a continuación.
+Esta técnica expuesta originalmente por \textcite{howard2018} en su curso de Deep Learning fue publicado para plantear el algoritmo de forma más formal y con estudios de ablación demostrar que cada aspecto de los pasos es esencial para obtener los mejores resultados. La técnica de \gls{ulmfit} se divide en dos fases \parencite{howard2018} las cuales se explicarán a continuación.
 
 \subsubsection{Afinación de modelo de lenguaje}
 \label{lmftune}
@@ -82,4 +82,4 @@ Para el afinamiento de este modelo se aplican los conceptos desarrollados en la 
 
 Existe la posibilidad de volver el modelo de lenguaje en un modelo bidireccional \parencite{howard2018}. Esto se puede hacer de forma manual al revertir el orden de los textos en el corpus y entrenar de la misma forma. Al tener ambos modelos listos se pueden promediar los resultados de las predicciones de cada modelo para obtener una predicción final.
 
-Esto ha sido denominado como un modelo bidireccional poco profundo o superficial \parencite{devlin2018bert}. Esto no debido a que no es un modelo de aprendizaje profundo, sino que la representación en ambas direcciones no está presente en el modelo sino se logra con el resultado de dos modelos unidireccionales independientes.
+Esto ha sido denominado como un modelo bidireccional poco profundo o superficial \parencite{devlin2018bert}. Esto no debido a que no es un modelo de Deep Learning, sino que la representación en ambas direcciones no está presente en el modelo sino se logra con el resultado de dos modelos unidireccionales independientes.
