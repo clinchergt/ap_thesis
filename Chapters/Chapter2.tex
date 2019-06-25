@@ -38,7 +38,7 @@ Una posible función de pérdida en un problema de clasificación para una predi
 L(\mathbf{\hat{y}}, \mathbf{y}) = - \sum_{j}^{C} y_j log \left( \hat{y_j} \right)
 \end{equation}
 
-Donde $C$ es el número de clasificaciones independientes posibles, $\mathbf{y}$ es un vector de dimensión $C$ con solamente un único valor en $1$ el cual indica la clasificación correcta y $\mathbf{\hat{y}}$ es el vector de predicción de dimensión $C$ el cual contiene las probabilidades para cada posible clasificación. De esto podemos concluir que $\sum_{\mathbf{\hat{y}}} = 1$.
+Donde $C$ es el número de clasificaciones independientes posibles, $\mathbf{y}$ es un vector de dimensión $C$ con solamente un único valor en $1$ el cual indica la clasificación correcta y $\mathbf{\hat{y}}$ es el vector de predicción de dimensión $C$ el cual contiene las probabilidades para cada posible clasificación. De esto podemos concluir que $\sum \mathbf{\hat{y}} = 1$.
 
 Si $C = 2$ se puede simplificar la expresión utilizar solamente un resultado escalar
 \begin{equation}
