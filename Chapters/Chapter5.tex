@@ -14,7 +14,7 @@
 
 \section{Pre-entrenamiento de modelo de lenguaje}
 
-La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar un tipo de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. \gls{bert} \parencite{devlin2018bert} por otro lado utiliza un \gls{mlm} que consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea. En este trabajo se utiliza un modelo estándar de lenguaje, es decir se predice el próximo token basado en los tokens anteriores como entrada.
+La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar un tipo de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. \gls{bert} \parencite{devlin2018bert}, por otro lado utiliza un \gls{mlm} que consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea. En este trabajo se utiliza un modelo estándar de lenguaje, es decir se predice el próximo token basado en los tokens anteriores como entrada.
 
 \subsection{Modelo de lenguaje de Wikipedia}
 
@@ -87,7 +87,7 @@ AWD LSTM & 3.140521 & \textbf{23.1038} \\
 \label{tab:modresults}
 \end{table}
 
-Se entrenaron dos modelos de RNN, uno fue basado directamente de la arquitectura y estrategias de AWD LSTM  y el otro modelo basado en la arquitectura QRNN. Los resultados se muestran en la tabla \ref{tab:modresults}. Sin embargo esta tabla no cuenta la historia completa. El modelo QRNN demoró menos en su entrenamiento de forma no insignificante tomando 13\% menos en entrenarse con resultados muy comparables a los de la red AWD LSTM.
+Se entrenaron dos modelos de RNN, uno fue basado directamente de la arquitectura y estrategias de AWD LSTM  y el otro modelo basado en la arquitectura QRNN. Los resultados se muestran en la tabla \ref{tab:modresults}. Sin embargo, esta tabla no cuenta la historia completa. El modelo QRNN demoró menos en su entrenamiento de forma no insignificante tomando 13\% menos en entrenarse con resultados muy comparables a los de la red AWD LSTM.
 
 \begin{table}
 \centering
@@ -109,7 +109,7 @@ AWD LSTM (propio) & \textbf{23.1038} \\
 \hline
 
 \end{tabular}
-\caption{Comparación de LMs con modelos del estado del arte en inglés y modelos de referencia para el español. Menor \textit{perplexity} es mejor. Separamos el modelo \textit{Transformer-XL} ya que utiliza otra arquitectura y está presente en la tabla solamente como referencia al mejor resultado al momento de haber escrito este trabajo.}
+\caption{Comparación de LMs con modelos del estado del arte en inglés y modelos de referencia para el español. Menor \textit{perplexity} es mejor. Separamos el modelo \textit{Transformer-XL} ya que utiliza otra arquitectura y está presente en la tabla solamente como referencia al mejor resultado, al momento de haber escrito este trabajo.}
 \label{tab:lmcomp}
 \end{table}
 
@@ -130,7 +130,7 @@ Aunque hay argumentos en contra de usar \textit{perplexity} para comparar LMs de
 \item nVIDIA V100 GPU -- 16 GB de memoria
 \end{itemize}
 
-Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómputo de la GPU. La \textbf{V} en el modelo V100 indica que es de la última generación a la fecha de esta tesis y provee una ventaja significativa comparada con una K80 o P100.
+Lo primordial cuando se trata de entrenamiento de RNNs, es la capacidad de cómputo de la GPU. La \textbf{V} en el modelo V100 indica que es de la última generación a la fecha de esta tesis y provee una ventaja significativa comparada con una K80 o P100.
 
 \textbf{Costo de recursos.} El costo total resultante después de entrenar un modelo inicial y funcional llegó a \$ 60.20 USD. Esto fue cubierto por los créditos iniciales ofrecidos por Google. También se debe considerar que este paso se debe realizar \emph{una sola vez} para cada lenguaje. En caso de querer utilizar el modelo entrenado en este trabajo, se podrá hacerlo y se podrá aplicar a otros problemas de clasificación.
 
@@ -156,7 +156,7 @@ Normalizado & \texttt{xxhashtag igualdad enero y xxhashtag medios comunica xxurl
 \label{tab:pan17preproc}
 \end{table}
 
-\textbf{Pre-procesamiento y tokenización.} El procesamiento constó de normalizar los \textit{tokens} especiales de los textos (ver tabla \ref{tab:pan17preproc}); en particular se normalizaron las menciones de usuario y los \textit{hashtags}. Este proceso consistió en ordenar los \textit{tokens} del vocabulario del modelo pre-entrenado de \textit{Wikipedia} y buscar las instancias encontradas en los \textit{tokens} de interés. Luego de haber hecho esto, anteponer un \textit{token} especial que indique que se encontraba ahí originalmente, por ejemplo \texttt{xxhashtag}. Se tokenizan los datos de la misma manera en que se tokenizaron los datos en la fase de modelo de lenguaje al utilizar\textit{spaCy}.
+\textbf{Pre-procesamiento y tokenización.} El procesamiento constó de normalizar los \textit{tokens} especiales de los textos (ver tabla \ref{tab:pan17preproc}); en particular se normalizaron las menciones de usuario y los \textit{hashtags}. Este proceso consistió en ordenar los \textit{tokens} del vocabulario del modelo pre-entrenado de \textit{Wikipedia} y buscar las instancias encontradas en los \textit{tokens} de interés. Luego de haber hecho esto, anteponer un \textit{token} especial que indique que se encontraba ahí originalmente, por ejemplo \texttt{xxhashtag}. Se tokenizan los datos de la misma manera en que se tokenizaron los datos en la fase de modelo de lenguaje al utilizar \textit{spaCy}.
 
 \textbf{Afinación de LM.} Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM y se afina el modelo para textos de este dominio específico. Sobre la métrica de \textit{perplexity} o la precisión no se pone mayor énfasis, lo importante será que la estructura general de los textos y el vocabulario que se use, refleje los datos reales del problema específico.
 
@@ -182,7 +182,7 @@ resultados en afinamiento de lm aca. grafica? tabla?
 \label{fig:clasepochs}
 \end{figure}
 
-El entrenamiento de un clasificador con pocos datos no deberá tomar mucho tiempo y los resultados deberán ser satisfactorios aplicando los temas expuestos en este trabajo. En la figura \ref{fig:clasepochs} se puede apreciar cómo la evolución de pérdida avanza lentamente a través de las épocas y converge en un valor después de un número de épocas relativamente bajo. Sin embargo, es posible continuar con el entrenamiento hasta lidiar con \textit{overfitting}. Este problema surge cuando se han afinado tanto los parámetros del modelo que el proceso de \textit{backpropagation} empieza a ajustarse conforme solamente los datos de entrenamiento y no el problema en sí. La manera más fácil de detectar este fenómeno es con la comparación de resultados sobre la función de pérdida de los datos de entrenamiento con los datos de evaluación. Si el valor de pérdida para ambos conjuntos de datos disminuye, significa que el entrenamiento se está realizando con éxito. Si en algún momento el valor de pérdida para los datos de entrenamiento continua disminuyendo pero al mismo tiempo el valor de pérdida para los datos de validación aumenta significa que ya no estamos obteniendo resultados que puedan ser generalizados a datos no antes vistos.
+El entrenamiento de un clasificador con pocos datos no deberá tomar mucho tiempo y los resultados deberán ser satisfactorios aplicando los temas expuestos en este trabajo. En la figura \ref{fig:clasepochs} se puede apreciar cómo la evolución de pérdida avanza lentamente a través de las épocas y converge en un valor después de un número de épocas relativamente bajo. Sin embargo, es posible continuar con el entrenamiento hasta lidiar con \textit{overfitting}. Este problema surge cuando se han afinado tanto los parámetros del modelo que el proceso de \textit{backpropagation} empieza a ajustarse conforme solamente los datos de entrenamiento y no el problema en sí. La manera más fácil de detectar este fenómeno es con la comparación de resultados sobre la función de pérdida de los datos de entrenamiento con los datos de evaluación. Si el valor de pérdida para ambos conjuntos de datos disminuye, significa que el entrenamiento se está realizando con éxito. Si en algún momento el valor de pérdida para los datos de entrenamiento continua disminuyendo pero al mismo tiempo el valor de pérdida para los datos de validación aumenta, significa que ya no estamos obteniendo resultados que puedan ser generalizados a datos no antes vistos.
 
 \begin{comment}
 grafica de overfitting
@@ -272,7 +272,7 @@ CNN + RNN + Attention \tblshort\parencite{miura2017author} & \textbf{0.8118} \\
 RNN + Transfer Learning (propio) & 0.7429 \\
 
 \end{tabular}
-\caption{Comparación de modelos de Deep Learning en la tarea de predicción de género --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa, ya que es un ensamble de modelos y no se puede hacer una comparación directa.}
+\caption[Comparación de modelos de Deep Learning en la tarea de predicción de género --- mayor es mejor. El ensamble de modelos se separa, ya que no se puede hacer una comparación directa.]{Comparación de modelos de Deep Learning en la tarea de predicción de género --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa, ya que es un ensamble de modelos y no se puede hacer una comparación directa.}
 \label{tab:pan17gender}
 \end{table}
 
@@ -348,7 +348,7 @@ CNN + RNN(Att.) \tblshort\parencite{miura2017author} & \textbf{0.9271} \\
 RNN + Transfer Learning (propio) & 0.9207 \\
 
 \end{tabular}
-\caption{Comparación de modelos de Deep Learning en la tarea de predicción de región --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa, ya que es un ensamble de modelos y no es posible hacer una comparación directa.}
+\caption[Comparación de modelos de Deep Learning en la tarea de predicción de región --- mayor es mejor. El ensamble de modelos se separa, ya que no es posible hacer una comparación directa.]{Comparación de modelos de Deep Learning en la tarea de predicción de región --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa, ya que es un ensamble de modelos y no es posible hacer una comparación directa.}
 \label{tab:pan17region}
 \end{table}
 

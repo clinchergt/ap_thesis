@@ -22,7 +22,7 @@ Las redes neuronales capturan diferente información en sus capas \parencite{yos
 
 \textbf{Ejemplo ilustrativo.} En una red neuronal, cuya tarea es en el área de visión artificial las primeras capas comienzan a entender conceptos de orillas horizontales o verticales; las siguientes capas podrán entender qué son esquinas circunferencias; las siguientes capas podrán entender límites de objetos; etc.
 
-La información en las primeras capas de una red neuronal de visión artificial puede llegar a ser muy útil, sin importar la tarea final o qué tan acotada esté. Por esta razón es posible tomar un modelo pre-entrenado en una tarea general, remover su capa final --- que determina el resultado final de esa tarea en específico --- y continuar con el proceso de entrenamiento con datos de la tarea más acotada y permitir que las nuevas capas no entrenadas aprovechen los conceptos de las capas anteriores para que ellas tengan el poder de predecir al usar esa información y los resultados correctos.
+La información en las primeras capas de una red neuronal de visión artificial puede llegar a ser muy útil, sin importar la tarea final o qué tan acotada esté. Por esta razón es posible tomar un modelo pre-entrenado en una tarea general, remover su capa final --- la que determina el resultado final de esa tarea en específico --- y continuar con el proceso de entrenamiento con datos de la tarea más acotada y permitir que las nuevas capas no entrenadas aprovechen los conceptos de las capas anteriores para que ellas tengan el poder de predecir al usar esa información y los resultados correctos.
 
 
 
@@ -64,7 +64,7 @@ Esta fase de la técnica consiste en tomar el modelo de lenguaje general y afina
 \theta_t^l = \theta_{t-1}^l - \gamma^l \nabla_{\theta} L(\theta)
 \end{equation}
 
-\textbf{Tasa de aprendizaje en triangulo inclinado.} Llamado \emph{slanted triangle learning rates} en el artículo original. Durante el recorrido a través de los datos se varía la tasa de aprendizaje tal que su valor aumente durante las primeras $cut$ instancias donde,
+\textbf{Tasa de aprendizaje en triangulo inclinado.} Llamado \emph{slanted triangle learning rates} en el artículo original. Durante el recorrido a través de los datos se varía la tasa de aprendizaje tal, que su valor aumente durante las primeras $cut$ instancias donde,
 
 $$ cut = \lfloor T \cdot cut\_frac \rfloor$$
 
