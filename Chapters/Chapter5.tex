@@ -4,7 +4,7 @@
 
 \label{Chapter5} % For referencing the chapter elsewhere, use \ref{Chapter5} 
 
-\gls{lefty} es el nombre designado para referirse al trabajo actual. Esta solución propuesta emplea el concepto de \textit{transfer learning} para poder permitir entrenar con gran capacidad tareas que no tienen muchos ejemplos etiquetados. Se propone este sistema para la tarea de perfilación de autores. Utiliza una RNN como base del modelo y las características base obtenidas fueron:
+\gls{lefty} es el nombre designado para referirse al trabajo actual. Esta solución propuesta emplea el concepto de \textit{transfer learning} para permitir entrenar con gran capacidad tareas que no tienen muchos ejemplos etiquetados. Se propone este sistema para la tarea de perfilación de autores. Utiliza una RNN como base del modelo y las características base obtenidas fueron:
 
 \begin{itemize}
 \item \textbf{Edad.}
@@ -14,15 +14,15 @@
 
 \section{Pre-entrenamiento de modelo de lenguaje}
 
-La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar un tipo de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. \gls{bert} \parencite{devlin2018bert} por otro lado utiliza un \gls{mlm} el cual consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea. En este trabajo se utiliza un modelo estándar de lenguaje, es decir se predice el próximo token basado en los tokens anteriores como entrada.
+La fase de pre-entrenamiento en el contexto de NLP consiste en entrenar un tipo de modelo de lenguaje. En el artículo original de ULMFiT \parencite{howard2018}, se utiliza un modelo estándar en donde se predice el siguiente token basado en una cadena de tokens. \gls{bert} \parencite{devlin2018bert} por otro lado utiliza un \gls{mlm} que consiste en predecir el 15\% de los tokens dado todo el contexto que los rodea. En este trabajo se utiliza un modelo estándar de lenguaje, es decir se predice el próximo token basado en los tokens anteriores como entrada.
 
 \subsection{Modelo de lenguaje de Wikipedia}
 
-El diseño base para este modelo de lenguaje es una red denominada \gls{awdlstm} \parencite{merityRegOpt}, la cual emplea una modificación agresiva al método de regularización \textit{dropout}. En el artículo se sugiere utilizar un concepto denominado \textit{DropConnect} y difiere en \textit{dropout} en que las funciones de activación no son las que toman el valor cero, sino los pesos. También se utilizan los conceptos de usar \textit{dropout} en la capa de vectorización de palabras --- esto no aporta a la regularización pero sí disminuye el tamaño de los vectores representantes de los vectores. Se instancian los distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $r_f$ únicamente el cual le da escala a los pesos recomendados y definidos por ellos.
+El diseño base para este modelo de lenguaje es una red denominada \gls{awdlstm} \parencite{merityRegOpt}, la que emplea una modificación agresiva al método de regularización \textit{dropout}. En el artículo se sugiere utilizar un concepto denominado \textit{DropConnect} y difiere en \textit{dropout} en que las funciones de activación no son las que toman el valor cero, sino los pesos. También se usan los conceptos de usar \textit{dropout} en la capa de vectorización de palabras --- esto no aporta a la regularización pero sí disminuye el tamaño de los vectores representantes de los vectores. Se instancian los distintos tipos de \textit{dropout} con pesos asignados a cada uno. En el artículo se recomiendan usar ciertos pesos base y optimizar un hiperparámetro $r_f$ únicamente le da escala a los pesos recomendados y definidos por ellos.
 
 En el capítulo \ref{Chapter4} se explica el pre-procesamiento que se le da a los datos de \textit{Wikipedia}. Se detallará ese proceso a continuación.
 
-Para realizar este procedimiento se utilizaron los recursos de \emph{Google Colaboratory} (Colab), los cuales ofrecen un ambiente de \textit{Notebooks} de IPython y la habilidad de ejecutar comandos de \*nix.
+Para realizar este procedimiento se utilizaron los recursos de \emph{Google Colaboratory} (Colab), que ofrecen un ambiente de \textit{Notebooks} de IPython y la habilidad de ejecutar comandos de \*nix.
 
 \begin{figure}
 \centering
@@ -32,9 +32,9 @@ Para realizar este procedimiento se utilizaron los recursos de \emph{Google Cola
 \end{figure}
 
 
-\textbf{Obtención de datos.} El corpus de Wikipedia fue obtenido del sitio oficial (\url{https://dumps.wikimedia.org/eswiki/}). El corpus obtenido fue del mes de noviembre del año 2018. Estos archivos tienen una estructura específica y la forma recomendada de extraer sus contenidos es utilizando \emph{WikiExtractor} (\url{https://github.com/attardi/wikiextractor}). Esta herramienta permite realizar una extracción que filtra por un parámetro de mínimo de longitud del artículo. Se utilizó este parámetro para filtrar todos los artículos con menos de 10,000 caracteres.
+\textbf{Obtención de datos.} El corpus de Wikipedia fue obtenido del sitio oficial (\url{https://dumps.wikimedia.org/eswiki/}). El corpus obtenido fue del mes de noviembre del año 2018. Estos archivos tienen una estructura específica y la forma recomendada de extraer sus contenidos es utilizando \emph{WikiExtractor} (\url{https://github.com/attardi/wikiextractor}). Esta herramienta permite realizar una extracción que filtra por un parámetro de mínimo de longitud del artículo. Se usó este parámetro para filtrar todos los artículos con menos de 10,000 caracteres.
 
-Una vez finaliza la extracción del archivo --- la cual demora una cantidad no despreciable de horas --- se procede a leer y filtrar los documentos. En el caso de este trabajo se ignoraron todos los documentos después de haber acumulado 100 millones de tokens en los textos procesados. Se conservaron 10 millones de tokens adicionales para la validación de resultados.
+Una vez finaliza la extracción del archivo --- que demora cantidad no despreciable de horas --- se procede a leer y filtrar los documentos. En el caso de este trabajo se ignoraron todos los documentos después de haber acumulado 100 millones de tokens en los textos procesados. Se conservaron 10 millones de tokens adicionales para la validación de resultados.
 
 \begin{table}
 \begin{tabular}{| l | l |}
@@ -48,13 +48,13 @@ Mis audífonos son Sennheiser & \texttt{xxbos xxmaj mis audífonos son xxunk} \\
 \hline
 
 \end{tabular}
-\caption{Muestras de tokenización utilizando \textit{spaCy} y técnicas de \textit{fastai}}
+\caption{Muestras de tokenización al utilzar \textit{spaCy} y técnicas de \textit{fastai}}
 \label{tab:tokens}
 \end{table}
 
-\textbf{Tokenización.} La herramienta utilizada para este proceso fue spaCy (\url{https://spacy.io/}). Esta herramienta tiene soporte para más de 34 idiomas, entre los cuales se incluye el español. Además de esta herramienta se emplean técnicas adicionales como codificar caracteres repetidos o codificar palabras en mayúsculas --- ver tabla \ref{tab:tokens}.
+\textbf{Tokenización.} La herramienta utilizada para este proceso fue spaCy (\url{https://spacy.io/}). Esta herramienta tiene soporte para más de 34 idiomas, entre los que se incluye el español. Además de esta herramienta se emplean técnicas adicionales como codificar caracteres repetidos o codificar palabras en mayúsculas --- ver tabla \ref{tab:tokens}.
 
-\textbf{Definición de vocabulario.} Unos tokens son codificados como \texttt{xxunk} (token desconocido), esto es debido a la limitación de palabras únicas a codificar. El vocabulario fue limitado a 30,000 tokens únicos.
+\textbf{Definición de vocabulario.} Unos tokens son codificados como \texttt{xxunk} (token desconocido), debido a la limitación de palabras únicas a codificar. El vocabulario fue limitado a 30,000 tokens únicos.
 
 \begin{figure}
 \centering
@@ -63,11 +63,11 @@ Mis audífonos son Sennheiser & \texttt{xxbos xxmaj mis audífonos son xxunk} \\
 \label{fig:lrfind}
 \end{figure}
 
-\textbf{Entrenamiento.} Luego tener los datos en el formato adecuado para entrenar el modelo se aplican las técnicas descritas en el capítulo \ref{Chapter3} sobre una red AWD LSTM. Previo a esto se encuentra un $ \gamma $ ideal y eso se hace aprovechando el método \texttt{lr\_find} (figura \ref{fig:lrfind}) de la librería de \emph{fastai} (\url{https://github.com/fastai/fastai}) que emplea el método descrito por \textcite{smith2017convergence}. Se aumenta $\gamma$ a medida que se recorren los ejemplos a entrenar. Si en algún momento diverge el aprendizaje se detiene el método y se imprime la gráfica. Se deberá querer elegir un $\gamma$ que no tenga riesgo de divergir el aprendizaje y que tampoco disminuya la velocidad del proceso. La elección adecuada de este hiper-parámetro en esta etapa es crucial para obtener un modelo en un tiempo razonable, ya que este modelo es el más grande --- en términos de parámetros y datos a procesar --- que requerirá entrenamiento. Vale la pena enfatizar que este proceso se realiza una \emph{única} vez y la definición de modelos clasificadores en un futuro podrá hacer uso del modelo entrenado originalmente.
+\textbf{Entrenamiento.} Luego tener los datos en el formato adecuado para entrenar el modelo, se aplican las técnicas descritas en el capítulo \ref{Chapter3} sobre una red AWD LSTM. Previo a esto se encuentra un $ \gamma $ ideal y eso se hace aprovechando el método \texttt{lr\_find} (figura \ref{fig:lrfind}) de la librería de \emph{fastai} (\url{https://github.com/fastai/fastai}) que emplea el método descrito por \textcite{smith2017convergence}. Se aumenta $\gamma$ a medida que se recorren los ejemplos a entrenar. Si en algún momento diverge el aprendizaje, se detiene el método y se imprime la gráfica. Se deberá elegir un $\gamma$ que no tenga riesgo de divergir el aprendizaje y que tampoco disminuya la velocidad del proceso. La elección adecuada de este hiper-parámetro en esta etapa es crucial para obtener un modelo en un tiempo razonable, ya que este modelo es el más grande --- en términos de parámetros y datos a procesar --- que requerirá entrenamiento. Vale la pena enfatizar que este proceso se realiza una \emph{única} vez y la definición de modelos clasificadores en un futuro podrá hacer uso del modelo entrenado originalmente.
 
 \subsubsection{Resultados}
 
-Para medir y reportar errores sobre \glspl{lm} se utiliza la métrica de \textit{perplexity} \parencite{jurafsky2014speech}, la cual es análoga a la entropía. La entropía representa la cantidad de información que se tiene; \textit{perplexity} se puede ver como la cantidad de opciones que se tiene. ¿Qué significa esto? Que mientras menos opciones considere nuestro LM, más estable es y por lo tanto que modela mejor el lenguaje. Se calcula de la siguiente manera:
+Para medir y reportar errores sobre \glspl{lm} se utiliza la métrica de \textit{perplexity} \parencite{jurafsky2014speech}, que es análoga a la entropía. La entropía representa la cantidad de información que se tiene; \textit{perplexity} se puede ver como la cantidad de opciones que se tiene. ¿Qué significa esto? Que mientras menos opciones considere nuestro LM, más estable es y, por lo tanto, que modela mejor el lenguaje. Se calcula de la siguiente manera:
 
 $$ perplexity = e^{loss} $$
 
@@ -83,7 +83,7 @@ QRNN & 3.193912 & 24.2884 \\
 AWD LSTM & 3.140521 & \textbf{23.1038} \\
 \hline
 \end{tabular}
-\caption{Resultados de los modelos entrenados. La métrica que se utiliza para comparar entre los modelos es \textit{perplexity} la cual indica y representa qué tantas opciones se tienen para la siguiente palabra.}
+\caption{Resultados de los modelos entrenados. La métrica que se utiliza para comparar entre los modelos es \textit{perplexity} que indica y representa qué tantas opciones se tienen para la siguiente palabra.}
 \label{tab:modresults}
 \end{table}
 
@@ -113,14 +113,14 @@ AWD LSTM (propio) & \textbf{23.1038} \\
 \label{tab:lmcomp}
 \end{table}
 
-En la tabla \ref{tab:lmcomp} se aprecian distintos LMs los cuales fueron entrenados en distintos datasets. El modelo Transformer-XL \parencite{dai2019} utiliza la nueva tendencia de finales del 2018 y principios de 2019 de usar transformadores en lugar de RNNs, así como propone Google con BERT. El modelo de \textit{Activation Memory} \parencite{rae2018} es un modelo de referencia que utiliza la arquitectura de una RNN simplificando un sub-conjunto de sus parámetros. Los otros dos modelos han sido modelos previamente entrenados con el propósito de ser usados para tareas clasificación en español con ULMFiT. Los datos presentados para los modelos propios fueron el valor de pérdida en un set de validación de 100 millones de tokens elegidos al azar de \textit{Wikiepedia}.
+En la tabla \ref{tab:lmcomp} se aprecian distintos LMs que fueron entrenados en distintos datasets. El modelo Transformer-XL \parencite{dai2019} utiliza la nueva tendencia de finales del 2018 y principios de 2019 de usar transformadores en lugar de RNNs, así como propone Google con BERT. El modelo de \textit{Activation Memory} \parencite{rae2018} es de referencia que utiliza la arquitectura de una RNN simplificando un sub-conjunto de sus parámetros. Los otros dos modelos han sido modelos previamente entrenados con el propósito de ser usados para tareas clasificación en español con ULMFiT. Los datos presentados para los modelos propios fueron el valor de pérdida en un set de validación de 100 millones de tokens elegidos al azar de \textit{Wikiepedia}.
 
 Aunque hay argumentos en contra de usar \textit{perplexity} para comparar LMs de distintos lenguajes o que usan distintos vocabularios \parencite{chen1998evaluation}, se debe tener un marco de referencia. Los modelos con propósitos de usar ULMFiT fueron entrenados de una forma muy similar al propio y son las comparaciones más directas por ser LMs del idioma español.
 
 
 \subsubsection{Recursos utilizados para entrenamiento}
 
-\textbf{Costo monetario.} Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com}) los cuales son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar una instance de cómputo \emph{n1-highmem-4} (\url{https://cloud.google.com/compute/docs/machine-types}) la cual cuenta con	el siguiente hardware para el entrenamiento:
+\textbf{Costo monetario.} Para esta fase de entrenamiento se recurre a los servicios de \textit{Google Cloud} (\href{https://cloud.google.com/free}{https://cloud.google.com}) que son ofrecidos con un beneficio de 300 USD para utilizar durante el primer año. No es necesario ser estudiante o profesor para gozar de este beneficio. Teniendo estos recursos disponibles se optó por utilizar una instance de cómputo \emph{n1-highmem-4} (\url{https://cloud.google.com/compute/docs/machine-types}) que cuenta con	el siguiente hardware para el entrenamiento:
 
 %\pagebreak
 
@@ -138,7 +138,7 @@ Lo primordial cuando se trata de entrenamiento de RNNs es la capacidad de cómpu
 
 \subsection{Modelos clasificadores}
 
-\textbf{Procesamiento de datos.} El conjunto de datos principales que se utilizó fue el de PAN17 \parencite{rangel2017overview}. Este conjunto de datos no es típico ya que consta de tuits de un grupo de usuarios. Cada uno de estos tuits --- 100 por usuario --- tiene asociado su usuario el cual tiene las etiquetas de edad y región asignadas. Por lo tanto se puede abordar el problema de distintas formas; se puede tomar cada tuit individual y predecir el género y la región individualmente, sumando después las probabilidades para obtener un veredicto final para el autor o se pueden concatenar los tuits del autor y realizar una solo predicción sobre ese texto completo del autor. Para este trabajo se utilizó cada tuit individual con el fin de poder tener un alcance mayor sobre la tarea de perfilación de autores sobre textos informales.
+\textbf{Procesamiento de datos.} El conjunto de datos principales que se utilizó fue el de PAN17 \parencite{rangel2017overview}. Este conjunto de datos no es típico, ya que consta de tuits de un grupo de usuarios. Cada uno de estos tuits --- 100 por usuario --- tiene asociado su usuario que tiene las etiquetas de edad y región asignadas. Por lo tanto se puede abordar el problema de distintas formas; se puede tomar cada tuit individual y predecir el género y la región individualmente, sumando después las probabilidades para obtener un veredicto final para el autor o se pueden concatenar los tuits del autor y realizar una solo predicción sobre ese texto completo del autor. Para este trabajo se utilizó cada tuit individual con el fin de tener un alcance mayor sobre la tarea de perfilación de autores sobre textos informales.
 
 \begin{table}
 \centering
@@ -152,13 +152,13 @@ Sin normalizar & \texttt{xxunk xxunk y xxunk xxunk xxunk} \\
 Normalizado & \texttt{xxhashtag igualdad enero y xxhashtag medios comunica xxurl} \\
 \hline
 \end{tabular}
-\caption{Ejemplificación de normalización de textos informales obtenidos del dataset PAN17 para la tarea de perfilación de autores. El proceso de normalización permite extraer información de los \textit{tokens} que son menciones de usuario y \textit{hashtags}. En la tabla se aprecia un ejemplo real con drásticos cambios dependiendo de procesamiento.}
+\caption{Ejemplificación de normalización de textos informales obtenidos del dataset PAN17 para la tarea de perfilación de autores. El proceso de normalización permite extraer información de los \textit{tokens} que son menciones de usuario y \textit{hashtags}. En la tabla se aprecia un ejemplo real con drásticos cambios que depende del procesamiento.}
 \label{tab:pan17preproc}
 \end{table}
 
-\textbf{Pre-procesamiento y tokenización.} El procesamiento constó de normalizar los \textit{tokens} especiales de los textos (ver tabla \ref{tab:pan17preproc}); en particular se normalizaron las menciones de usuario y los \textit{hashtags}. Este proceso consistió en ordenar los \textit{tokens} del vocabulario del modelo pre-entrenado de \textit{Wikipedia} y buscar las instancias encontradas en los \textit{tokens} de interés. Luego de haber hecho esto, anteponer un \textit{token} especial que indique que se encontraba ahí originalmente, por ejemplo \texttt{xxhashtag}. Se tokenizan los datos de la misma manera en que se tokenizaron los datos en la fase de modelo de lenguaje; utilizando \textit{spaCy}.
+\textbf{Pre-procesamiento y tokenización.} El procesamiento constó de normalizar los \textit{tokens} especiales de los textos (ver tabla \ref{tab:pan17preproc}); en particular se normalizaron las menciones de usuario y los \textit{hashtags}. Este proceso consistió en ordenar los \textit{tokens} del vocabulario del modelo pre-entrenado de \textit{Wikipedia} y buscar las instancias encontradas en los \textit{tokens} de interés. Luego de haber hecho esto, anteponer un \textit{token} especial que indique que se encontraba ahí originalmente, por ejemplo \texttt{xxhashtag}. Se tokenizan los datos de la misma manera en que se tokenizaron los datos en la fase de modelo de lenguaje al utilizar\textit{spaCy}.
 
-\textbf{Afinación de LM.} Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para poder afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM y se afina el modelo para textos de este dominio específico. Sobre la métrica de \textit{perplexity} o la precisión no se pone mayor énfasis, lo importante será que la estructura general de los textos y el vocabulario que se use refleje los datos reales del problema específico.
+\textbf{Afinación de LM.} Después de haber entrenado el modelo de lenguaje se procede a una fase de afinación \parencite{howard2018}. Se emplean las técnicas descritas en el capítulo \ref{Chapter3} para afinar el modelo. Este proceso se realiza con los datos de la tarea en específico. Se adapta el formato de los datos de clasificación a datos para entrenamiento de un LM y se afina el modelo para textos de este dominio específico. Sobre la métrica de \textit{perplexity} o la precisión no se pone mayor énfasis, lo importante será que la estructura general de los textos y el vocabulario que se use, refleje los datos reales del problema específico.
 
 \begin{comment}
 resultados en afinamiento de lm aca. grafica? tabla?
@@ -173,7 +173,7 @@ resultados en afinamiento de lm aca. grafica? tabla?
 \label{fig:claslr}
 \end{figure}
 
-\textbf{Entrenamiento del clasificador.} Antes de comenzar con el entrenamiento se deben elegir los hiper-parámetros adecuados. Primero se eligió un peso para los parámetros de \textit{dropout} (basado en pruebas empíricas) y después se eligió un $\gamma$ óptimo basado en la herramienta de \texttt{lr\_find} (figura \ref{fig:claslr}). Los valores elegidos fueron \texttt{dropout = 0.3} y un $\gamma$ inicial con valor de \texttt{1e-2}. Se habla de un $\gamma$ inicial ya que en el entrenamiento del modelo clasificador se aplica el concepto de usar un $\gamma$ cíclico \parencite{smith2017convergence} abordado en el capítulo \ref{Chapter3}.
+\textbf{Entrenamiento del clasificador.} Antes de comenzar con el entrenamiento se deben elegir los hiper-parámetros adecuados. Primero se eligió un peso para los parámetros de \textit{dropout} (basado en pruebas empíricas) y después se eligió un $\gamma$ óptimo basado en la herramienta de \texttt{lr\_find} (figura \ref{fig:claslr}). Los valores elegidos fueron \texttt{dropout = 0.3} y un $\gamma$ inicial, con valor de \texttt{1e-2}. Se habla de un $\gamma$ inicial ya que en el entrenamiento del modelo clasificador se aplica el concepto de usar un $\gamma$ cíclico \parencite{smith2017convergence} abordado en el capítulo \ref{Chapter3}.
 
 \begin{figure}
 \centering
@@ -182,7 +182,7 @@ resultados en afinamiento de lm aca. grafica? tabla?
 \label{fig:clasepochs}
 \end{figure}
 
-El entrenamiento de un clasificador con pocos datos no deberá tomar mucho tiempo y los resultados deberán ser satisfactorios aplicando los temas expuestos en este trabajo. En la figura \ref{fig:clasepochs} se puede apreciar como la evolución de pérdida avanza lentamente a través de las épocas y converge en un valor después de un número de épocas relativamente bajo. Sin embargo, es posible continuar con el entrenamiento hasta lidiar con \textit{overfitting}. Este problema surge cuando se han afinado tanto los parámetros del modelo que el proceso de \textit{backpropagation} empieza a ajustarse conforme solamente los datos de entrenamiento y no el problema en sí. La manera más fácil de detectar este fenómeno es con la comparación de resultados sobre la función de pérdida de los datos de entrenamiento con los datos de evaluación. Si el valor de pérdida para ambos conjuntos de datos disminuye significa que el entrenamiento se está realizando con éxito. Si en algún momento el valor de pérdida para los datos de entrenamiento continua disminuyendo pero al mismo tiempo el valor de pérdida para los datos de validación aumenta significa que ya no estamos obteniendo resultados que puedan ser generalizados a datos no antes vistos.
+El entrenamiento de un clasificador con pocos datos no deberá tomar mucho tiempo y los resultados deberán ser satisfactorios aplicando los temas expuestos en este trabajo. En la figura \ref{fig:clasepochs} se puede apreciar cómo la evolución de pérdida avanza lentamente a través de las épocas y converge en un valor después de un número de épocas relativamente bajo. Sin embargo, es posible continuar con el entrenamiento hasta lidiar con \textit{overfitting}. Este problema surge cuando se han afinado tanto los parámetros del modelo que el proceso de \textit{backpropagation} empieza a ajustarse conforme solamente los datos de entrenamiento y no el problema en sí. La manera más fácil de detectar este fenómeno es con la comparación de resultados sobre la función de pérdida de los datos de entrenamiento con los datos de evaluación. Si el valor de pérdida para ambos conjuntos de datos disminuye, significa que el entrenamiento se está realizando con éxito. Si en algún momento el valor de pérdida para los datos de entrenamiento continua disminuyendo pero al mismo tiempo el valor de pérdida para los datos de validación aumenta significa que ya no estamos obteniendo resultados que puedan ser generalizados a datos no antes vistos.
 
 \begin{comment}
 grafica de overfitting
@@ -192,7 +192,7 @@ grafica de overfitting
 
 \section{Resultados}
 
-Se ha dicho que para RNNs y técnicas de Deep Learning no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de Deep Learning tiene al aprender la cantidad de parámetros inmensa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es por lo tanto ideal para poder determinar la capacidad real la transferencia de aprendizaje en NLP y sobre todo cuando las instancias de aprendizaje son limitadas.
+Se ha dicho que para RNNs y técnicas de Deep Learning no han tenido el mismo éxito que en otras tareas debido a la dificultad que un modelo de Deep Learning tiene al aprender la cantidad de parámetros inmensa con pocos datos \parencite{zampieri2017, malmasi2016discriminating}. Esta tarea es, por lo tanto, ideal para determinar la capacidad real la transferencia de aprendizaje en NLP y, sobre todo, cuando las instancias de aprendizaje son limitadas.
 
 \subsection{Predicción sobre textos informales}
 
@@ -211,11 +211,11 @@ Para estos resultados se utiliza la métrica usada en la competencia PAN17 la cu
 
 $$ Acc_{cat} = \frac{Predicciones\: correctas}{Total\: de\: predicciones} $$
 
-Donde $cat$ es la categoría sobre la cual se está prediciendo. Las predicciones son aplicadas sobre los datos de validación, los cuales fueron segmentados por el equipo organizador de PAN17 los cuales cuenta con 2,800 autores, cada uno asociado a 100 tuits.
+Donde $cat$ es la categoría sobre la que se está prediciendo. Las predicciones son aplicadas sobre los datos de validación, que fueron segmentados por el equipo organizador de PAN17 y cuenta con 2,800 autores, cada uno asociado a 100 tuits.
 
 \subsubsection{Predicción de género}
 
-La predicción de género sobre un texto anónimo se realizó basado en datos de tuits. La clasificación se llevó a cabo en dos niveles. Se realizó una predicción a nivel de tuit individual y una predicción a nivel de autor.
+La predicción de género sobre un texto anónimo se efectuó basado en datos de tuits. La clasificación se llevó a cabo en dos niveles. Se efectuó una predicción a nivel de tuit individual y una predicción a nivel de autor.
 
 \begin{table}
 \centering
@@ -251,10 +251,10 @@ La predicción sobre los autores es basada en las predicciones sobre tuits indiv
 \[ \phantom{,}\hat{p}_a (\mathbf{X}) = \max \sum_{n = 1}^{100} p(X_n), \]
 donde $\mathbf{X}$ representa una matriz de probabilidades; las filas representan tuits individuales y las columnas las probabilidades de que el tuit pertenezca a la categoría de esa columna (p.e. el género femenino).
 
-Dada la anterior tenemos la tabla \ref{tab:gender_authtweet} y un resultado de
+Dada la anterior, tenemos la tabla \ref{tab:gender_authtweet} y un resultado de
 \[ \phantom{.}Acc_{gender} = 0\text{.}7429. \]
 
-La sumatoria ponderada resulta en un sistema similar a un ensamble de modelos los cuales toman prioridad según la confianza que tengan en su predicción. Debido a esto, el resultado aumenta en la métrica considerablemente.
+La sumatoria ponderada resulta en un sistema similar a un ensamble de modelos que toman prioridad según la confianza que tengan en su predicción. Debido a esto, el resultado aumenta en la métrica considerablemente.
 
 \begin{table}
 \centering
@@ -272,15 +272,15 @@ CNN + RNN + Attention \tblshort\parencite{miura2017author} & \textbf{0.8118} \\
 RNN + Transfer Learning (propio) & 0.7429 \\
 
 \end{tabular}
-\caption{Comparación de modelos de Deep Learning en la tarea de predicción de género --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no se puede hacer una comparación directa.}
+\caption{Comparación de modelos de Deep Learning en la tarea de predicción de género --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa, ya que es un ensamble de modelos y no se puede hacer una comparación directa.}
 \label{tab:pan17gender}
 \end{table}
 
-Al comparar el modelo propio con los modelos de Deep Learning presentados en la competencia PAN17 (tabla \ref{tab:pan17gender}) se puede apreciar que los resultados obtenidos son del estado del arte para RNN, siendo solamente superado por un AVG DNN y un ensamble de CNN, RNN y elementos de atención.
+Al comparar el modelo propio con los modelos de Deep Learning presentados en la competencia PAN17 (tabla \ref{tab:pan17gender}), se puede apreciar que los resultados obtenidos son del estado del arte para RNN, siendo solamente superado por un AVG DNN y un ensamble de CNN, RNN y elementos de atención.
 
 \subsubsection{Predicción de región}
 
-La predicción de región sobre un texto anónimo se realizó basado en datos de tuits. Al igual que en la clasificación de género, se realiza una predicción a nivel de tuit individual y una predicción a nivel de autor.
+La predicción de región sobre un texto anónimo se efectuó basado en datos de tuits. Al igual que en la clasificación de género, se efectúa una predicción a nivel de tuit individual y una predicción a nivel de autor.
 
 \begin{table}
 \centering
@@ -328,8 +328,8 @@ La predicción sobre los autores basada en la suma ponderada tenemos la tabla \r
 La sumatoria ponderada resulta en un resultado mucho mayor que el de las predicciones individuales. Esto puede deberse a dos cosas:
 
 \begin{itemize}
-\item Muchos tuits son muy limitados en su número de caracteres por lo que algunos no revelarán mucha información acerca del autor por sí solos.
-\item La cobertura de vocabulario con palabras regionales disminuye por lo que algunos tuits individuales con palabras claves no proveen mucha información.
+\item Muchos tuits son muy limitados en su número de caracteres, por lo que algunos no revelarán mucha información acerca del autor por sí solos.
+\item La cobertura de vocabulario con palabras regionales disminuye, por lo que algunos tuits individuales con palabras claves no proveen mucha información.
 \end{itemize}
 
 \begin{table}
@@ -348,20 +348,20 @@ CNN + RNN(Att.) \tblshort\parencite{miura2017author} & \textbf{0.9271} \\
 RNN + Transfer Learning (propio) & 0.9207 \\
 
 \end{tabular}
-\caption{Comparación de modelos de Deep Learning en la tarea de predicción de región --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa ya que es un ensamble de modelos y no es posible hacer una comparación directa.}
+\caption{Comparación de modelos de Deep Learning en la tarea de predicción de región --- mayor es mejor. El modelo de \tblshort\textcite{miura2017author} se separa, ya que es un ensamble de modelos y no es posible hacer una comparación directa.}
 \label{tab:pan17region}
 \end{table}
 
-Nuevamente se comparan los resultados con los modelos de Deep Learning de PAN17 (tabla \ref{tab:pan17region}). Una combinación de TF-IDF y CNN \parencite{schaetti2017author} logró clasificar de la mejor manera; el modelo propio obtiene la segunda mejor precisión en modelos simples y la tercera considerando el ensamble de modelos CNN y RNN de \textcite{miura2017author}.
+Nuevamente se comparan los resultados con los modelos de Deep Learning de PAN17 (tabla \ref{tab:pan17region}). Una combinación de TF-IDF y CNN \parencite{schaetti2017author} logró clasificar de la mejor manera; el modelo propio obtiene la segunda mejor precisión en modelos simples y la tercera al considerar el ensamble de modelos CNN y RNN de \textcite{miura2017author}.
 
 \subsection{Predicción sobre textos formales}
 
-Los experimentos se repiten sobre textos formales usando los datos de SpanText \parencite{villegas:2014:CACIC}. Los datos de referencia y comparación se obtuvieron directamente de la publicación del conjunto de datos.
+Los experimentos se repiten sobre textos formales al usar los datos de SpanText \parencite{villegas:2014:CACIC}. Los datos de referencia y comparación se obtuvieron directamente de la publicación del conjunto de datos.
 
 El corpus de \textit{SpanText} está compuesto por un dos subconjuntos de datos:
 
 \begin{itemize}
-\item \textbf{Dataset balanceado}, es decir las distintas clases de textos que conforman el conjunto están repartidas equitativamente, es decir que p.e. por cada texto que sea de una persona de género masculino, hay un texto de un autor femenino.
+\item \textbf{Dataset balanceado}, es decir las distintas clases de textos que conforman el conjunto están repartidas equitativamente, es decir que p.e. por cada texto que sea de una persona de género masculino, hay un texto de autor femenino.
 \item \textbf{Dataset desbalanceado}. Este dataset se creó con el propósito de emular la distribución encontrada en los datos de la competencia PAN y así permitir una comparación más directa en términos de resultados \parencite{villegas:2014:CACIC}.
 \end{itemize}
 
@@ -385,11 +385,11 @@ El corpus de \textit{SpanText} está compuesto por un dos subconjuntos de datos:
 \label{tab:spantextdist}
 \end{table}
 
-Los mejores resultados obtenidos por \citeauthor{villegas:2014:CACIC} fueron sobre el dataset desbalanceado por lo que sobre esos se hará la comparación con el modelo propio. La distribución de los datos desbalanceados se muestra en la table \ref{tab:spantextdist}.
+Los mejores resultados obtenidos por \citeauthor{villegas:2014:CACIC} fueron sobre el dataset desbalanceado, por lo que sobre esos se hará la comparación con el modelo propio. La distribución de los datos desbalanceados se muestra en la table \ref{tab:spantextdist}.
 
 \subsubsection{Resultados}
 
-La tarea definida en el artículo de \textit{SpanText} es la de la predicción ambos el género y la edad del autor del texto formal, esto significa que la precisión reportada es de la proporción de textos sobre los que se predijo ambas características. La cantidad de textos por clase es bastante limitada así como la longitud promedio de los textos, lo cual aumenta la dificultad de la tarea para modelos de Deep Learning.
+La tarea definida en el artículo de \textit{SpanText} es la de la predicción ambos el género y la edad del autor del texto formal, esto significa que la precisión reportada es de la proporción de textos sobre los que se predijo ambas características. La cantidad de textos por clase es bastante limitada, así como la longitud promedio de los textos, que aumenta la dificultad de la tarea para modelos de Deep Learning.
 
 \begin{table}
 \centering
@@ -406,7 +406,7 @@ RNN + Transfer Learning (propio) & \textbf{71.0} \\
 \label{tab:spantextres}
 \end{table}
 
-Para la tarea de clasificación, \citeauthor{villegas:2014:CACIC} propusieron dos diferentes modelos de clasificación junto con distintas formas de representar los tokens de alimentación al modelo. Se eligieron los dos mejores modelos --- uno por el tipo de modelo \textit{LIBLINEAR} y otro para el tipo de modelo \textit{Naïve Bayes} --- para realizar la comparación con el modelo proprio. Los resultados se pueden apreciar en la tabla \ref{tab:spantextres}.
+Para la tarea de clasificación, \citeauthor{villegas:2014:CACIC} propusieron dos diferentes modelos de clasificación, junto con distintas formas de representar los tokens de alimentación al modelo. Se eligieron los dos mejores modelos --- uno por el tipo de modelo \textit{LIBLINEAR} y otro para el tipo de modelo \textit{Naïve Bayes} --- para realizar la comparación con el modelo propio. Los resultados se pueden apreciar en la tabla \ref{tab:spantextres}.
 
 
 
