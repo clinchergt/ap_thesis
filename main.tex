@@ -62,7 +62,11 @@ table,
 
 \setcounter{secnumdepth}{3} % Para que las subsubsections tengan número
 
+%\setboolean{@twoside}{false}
+
 \usepackage[automake,toc]{glossaries}
+
+\usepackage[final]{pdfpages}
 
 \makeatletter
 \newcommand{\tblshort}{\let\blx@imc@ifciteseen\@firstoftwo}
@@ -306,7 +310,7 @@ table,
 \vspace{1.5cm}
 
 {\scshape\Large \univname\par}
-{\scshape\Large Facultad de Ingeniería en Sistemas,}
+{\scshape\Large Facultad de Ingeniería de Sistemas,}
 {\scshape\Large Informática y Ciencias de la Computación\par}
 {\scshape \Large \bfseries \par Guatemala, \the\year}
 
@@ -315,6 +319,12 @@ table,
 \vfill
 \end{center}
 \end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%    UNI LETTERS
+%----------------------------------------------------------------------------------------
+
+\includepdf[pages=-, offset=0 0]{Res/letters.pdf}
 
 %----------------------------------------------------------------------------------------
 %	DECLARATION PAGE
